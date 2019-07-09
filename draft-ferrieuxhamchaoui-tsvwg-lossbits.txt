@@ -255,8 +255,9 @@ Internet-Draft                  loss-bits                      July 2019
 
    The Q Period needs to be chosen carefully, since the observation
    could become too unreliable in case of packet reordering and loss if
-   Q Period is too small.  However, when Q Period is too large, short
-   connections may not yield a useful upstream loss measurement.
+   Q Period is too small.  However, when Q Period is too large,
+   connections that send fewer than half Q Period packets do not yield a
+   useful upstream loss measurement.
 
    The observer needs to differentiate packets as belonging to different
    connections, since they use independent counters.
@@ -273,7 +274,6 @@ Internet-Draft                  loss-bits                      July 2019
 
    The connection RTT can sometimes be estimated by timing protocol
    handshake messages.  This RTT estimate can be greatly improved by
-
 
 
 

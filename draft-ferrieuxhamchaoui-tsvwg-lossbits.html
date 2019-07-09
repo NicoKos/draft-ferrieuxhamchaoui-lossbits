@@ -474,7 +474,7 @@ ul.toc li {
 </h1>
 <p id="rfc.section.4.2.p.1">Blocks of N (half of Q Period) consecutive packets are sent with the same value of the Q bit, followed by another block of N packets with inverted value of the Q bit. Hence, knowing the value of N, an on-path observer can estimate the amount of upstream loss after observing at least N packets. If <samp>p</samp> is the average number of packets in a block of packets with the same Q value, then the upstream loss is <samp>1-p/N</samp>.</p>
 <p id="rfc.section.4.2.p.2">The observer needs to be able to tolerate packet reordering that can blur the edges of the square signal.</p>
-<p id="rfc.section.4.2.p.3">The Q Period needs to be chosen carefully, since the observation could become too unreliable in case of packet reordering and loss if Q Period is too small. However, when Q Period is too large, short connections may not yield a useful upstream loss measurement.</p>
+<p id="rfc.section.4.2.p.3">The Q Period needs to be chosen carefully, since the observation could become too unreliable in case of packet reordering and loss if Q Period is too small. However, when Q Period is too large, connections that send fewer than half Q Period packets do not yield a useful upstream loss measurement.</p>
 <p id="rfc.section.4.2.p.4">The observer needs to differentiate packets as belonging to different connections, since they use independent counters.</p>
 <h1 id="rfc.section.4.3">
 <a href="#rfc.section.4.3">4.3.</a> <a href="#losscorrelation" id="losscorrelation">Correlating End-to-End and Upstream Loss</a>
