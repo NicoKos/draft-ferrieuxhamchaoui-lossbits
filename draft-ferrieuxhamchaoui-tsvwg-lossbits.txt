@@ -5,9 +5,9 @@
 TSVWG                                                        A. Ferrieux
 Internet-Draft                                              I. Hamchaoui
 Intended status: Informational                               Orange Labs
-Expires: January 9, 2020                                     I. Lubashev
+Expires: January 10, 2020                                    I. Lubashev
                                                      Akamai Technologies
-                                                            July 8, 2019
+                                                            July 9, 2019
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 9, 2020.
+   This Internet-Draft will expire on January 10, 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Ferrieux, et al.         Expires January 9, 2020                [Page 1]
+Ferrieux, et al.        Expires January 10, 2020                [Page 1]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -76,15 +76,15 @@ Table of Contents
      4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   5
      4.4.  Downstream Loss . . . . . . . . . . . . . . . . . . . . .   6
      4.5.  Observer Loss . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  Ossification Considerations . . . . . . . . . . . . . . . . .   6
+   5.  Ossification Considerations . . . . . . . . . . . . . . . . .   7
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
    7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   7
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   7
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
+   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   8
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
      10.1.  Normative References . . . . . . . . . . . . . . . . . .   8
      10.2.  Informative References . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Ferrieux, et al.         Expires January 9, 2020                [Page 2]
+Ferrieux, et al.        Expires January 10, 2020                [Page 2]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -165,7 +165,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.         Expires January 9, 2020                [Page 3]
+Ferrieux, et al.        Expires January 10, 2020                [Page 3]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -221,7 +221,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.         Expires January 9, 2020                [Page 4]
+Ferrieux, et al.        Expires January 10, 2020                [Page 4]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -245,9 +245,10 @@ Internet-Draft                  loss-bits                      July 2019
    Blocks of N (half of Q Period) consecutive packets are sent with the
    same value of the Q bit, followed by another block of N packets with
    inverted value of the Q bit.  Hence, knowing the value of N, an on-
-   path observer can estimate the amount of loss after observing at
-   least N packets.  The upstream loss rate is an average number of
-   packets in a block of packets with the same Q value divided by N.
+   path observer can estimate the amount of upstream loss after
+   observing at least N packets.  If "p" is the average number of
+   packets in a block of packets with the same Q value, then the
+   upstream loss is "1-p/N".
 
    The observer needs to be able to tolerate packet reordering that can
    blur the edges of the square signal.
@@ -272,15 +273,17 @@ Internet-Draft                  loss-bits                      July 2019
 
    The connection RTT can sometimes be estimated by timing protocol
    handshake messages.  This RTT estimate can be greatly improved by
-   observing a dedicated protocol mechanism for conveying RTT
-   information, such as the Latency Spin bit of [QUIC-TRANSPORT].
 
 
 
-Ferrieux, et al.         Expires January 9, 2020                [Page 5]
+
+Ferrieux, et al.        Expires January 10, 2020                [Page 5]
 
 Internet-Draft                  loss-bits                      July 2019
 
+
+   observing a dedicated protocol mechanism for conveying RTT
+   information, such as the Latency Spin bit of [QUIC-TRANSPORT].
 
    Whenever the observer needs to perform a computation that uses both
    upstream and end-to-end loss rate measurements, it SHOULD use
@@ -324,19 +327,22 @@ Internet-Draft                  loss-bits                      July 2019
    adjustment and the entirety of the upstream loss measured in
    Section 4.2.
 
+
+
+
+
+
+
+Ferrieux, et al.        Expires January 10, 2020                [Page 6]
+
+Internet-Draft                  loss-bits                      July 2019
+
+
 5.  Ossification Considerations
 
    Accurate loss information is not critical to the operation of any
    protocol, though its presence for a sufficient number of connections
    is important for the operation of the networks.
-
-
-
-
-Ferrieux, et al.         Expires January 9, 2020                [Page 6]
-
-Internet-Draft                  loss-bits                      July 2019
-
 
    The loss bits are amenable to "greasing" described in [GREASE], if
    the protocol designers are not ready to dedicate (and ossify) bits
@@ -366,14 +372,27 @@ Internet-Draft                  loss-bits                      July 2019
    For example, [QUIC-TRANSPORT] allows changing Connection IDs in the
    middle of a connection to reduce the likelihood of a passive observer
    linking old and new subflows to the same device.  A QUIC
-   implementation would need to reset all counters when it changes
-   Connection ID used for outgoing packets.  It would also need to avoid
-   incrementing Unreported Loss counter for loss of packets sent with a
-   different Connection ID.
+   implementation would need to reset all counters when it changes the
+   destination (IP address or UDP port) or the Connection ID used for
+   outgoing packets.  It would also need to avoid incrementing
+   Unreported Loss counter for loss of packets sent to a different
+   destinatoin or with a different Connection ID.
 
 8.  IANA Considerations
 
    This document makes no request of IANA.
+
+
+
+
+
+
+
+
+Ferrieux, et al.        Expires January 10, 2020                [Page 7]
+
+Internet-Draft                  loss-bits                      July 2019
+
 
 9.  Acknowledgments
 
@@ -381,18 +400,6 @@ Internet-Draft                  loss-bits                      July 2019
    proposals for loss measurement.
 
 10.  References
-
-
-
-
-
-
-
-
-Ferrieux, et al.         Expires January 9, 2020                [Page 7]
-
-Internet-Draft                  loss-bits                      July 2019
-
 
 10.1.  Normative References
 
@@ -421,8 +428,8 @@ Internet-Draft                  loss-bits                      July 2019
 
    [QUIC-TRANSPORT]
               Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", draft-ietf-quic-transport-20 (work
-              in progress), April 2019.
+              and Secure Transport", draft-ietf-quic-transport-21 (work
+              in progress), July 2019.
 
    [RFC7285]  Alimi, R., Ed., Penno, R., Ed., Yang, Y., Ed., Kiesel, S.,
               Previdi, S., Roome, W., Shalunov, S., and R. Woundy,
@@ -436,18 +443,19 @@ Internet-Draft                  loss-bits                      July 2019
               of the Internet", draft-ietf-tsvwg-transport-encrypt-07
               (work in progress), July 2019.
 
+
+
+Ferrieux, et al.        Expires January 10, 2020                [Page 8]
+
+Internet-Draft                  loss-bits                      July 2019
+
+
 Authors' Addresses
 
    Alexandre Ferrieux
    Orange Labs
 
    EMail: alexandre.ferrieux@orange.com
-
-
-
-Ferrieux, et al.         Expires January 9, 2020                [Page 8]
-
-Internet-Draft                  loss-bits                      July 2019
 
 
    Isabelle Hamchaoui
@@ -493,12 +501,4 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-
-
-
-
-
-
-
-
-Ferrieux, et al.         Expires January 9, 2020                [Page 9]
+Ferrieux, et al.        Expires January 10, 2020                [Page 9]

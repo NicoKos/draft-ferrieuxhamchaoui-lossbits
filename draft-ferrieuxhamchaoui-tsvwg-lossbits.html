@@ -309,7 +309,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Ferrieux, A., Hamchaoui, I., and I. Lubashev" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ferrieuxhamchaoui-tsvwg-lossbits-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-08" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-09" />
   <meta name="dct.abstract" content="This document describes a protocol-independent method that employs two bits to allow endpoints to signal packet loss in a way that can be used by network devices to measure and locate the source of the loss. The signaling method applies to all protocols with a protocol-specific way to identify packet loss. The method is especially valuable when applied to protocols that encrypt transport header and do not allow an alternative method for loss detection." />
   <meta name="description" content="This document describes a protocol-independent method that employs two bits to allow endpoints to signal packet loss in a way that can be used by network devices to measure and locate the source of the loss. The signaling method applies to all protocols with a protocol-specific way to identify packet loss. The method is especially valuable when applied to protocols that encrypt transport header and do not allow an alternative method for loss detection." />
 
@@ -333,7 +333,7 @@ ul.toc li {
 <td class="right">Orange Labs</td>
 </tr>
 <tr>
-<td class="left">Expires: January 9, 2020</td>
+<td class="left">Expires: January 10, 2020</td>
 <td class="right">I. Lubashev</td>
 </tr>
 <tr>
@@ -342,7 +342,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">July 8, 2019</td>
+<td class="right">July 9, 2019</td>
 </tr>
 
     	
@@ -358,7 +358,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on January 9, 2020.</p>
+<p>This Internet-Draft will expire on January 10, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -472,7 +472,7 @@ ul.toc li {
 <h1 id="rfc.section.4.2">
 <a href="#rfc.section.4.2">4.2.</a> <a href="#upstreamloss" id="upstreamloss">Upstream Loss</a>
 </h1>
-<p id="rfc.section.4.2.p.1">Blocks of N (half of Q Period) consecutive packets are sent with the same value of the Q bit, followed by another block of N packets with inverted value of the Q bit. Hence, knowing the value of N, an on-path observer can estimate the amount of loss after observing at least N packets. The upstream loss rate is an average number of packets in a block of packets with the same Q value divided by N.</p>
+<p id="rfc.section.4.2.p.1">Blocks of N (half of Q Period) consecutive packets are sent with the same value of the Q bit, followed by another block of N packets with inverted value of the Q bit. Hence, knowing the value of N, an on-path observer can estimate the amount of upstream loss after observing at least N packets. If <samp>p</samp> is the average number of packets in a block of packets with the same Q value, then the upstream loss is <samp>1-p/N</samp>.</p>
 <p id="rfc.section.4.2.p.2">The observer needs to be able to tolerate packet reordering that can blur the edges of the square signal.</p>
 <p id="rfc.section.4.2.p.3">The Q Period needs to be chosen carefully, since the observation could become too unreliable in case of packet reordering and loss if Q Period is too small. However, when Q Period is too large, short connections may not yield a useful upstream loss measurement.</p>
 <p id="rfc.section.4.2.p.4">The observer needs to differentiate packets as belonging to different connections, since they use independent counters.</p>
@@ -506,7 +506,7 @@ ul.toc li {
 <a href="#rfc.section.7">7.</a> <a href="#privacy-considerations" id="privacy-considerations">Privacy Considerations</a>
 </h1>
 <p id="rfc.section.7.p.1">Guarding user&#8217;s privacy is an important goal for modern protocols and protocol extensions per <a href="#RFC7285" class="xref">[RFC7285]</a>.  While an explicit loss signal &#8211; a preferred way to share loss information per <a href="#RFC8558" class="xref">[RFC8558]</a> &#8211; helps to minimize unintentional exposure of additional information, implementations of loss reporting must ensure that loss information does not compromise protocol&#8217;s privacy goals.</p>
-<p id="rfc.section.7.p.2">For example, <a href="#QUIC-TRANSPORT" class="xref">[QUIC-TRANSPORT]</a> allows changing Connection IDs in the middle of a connection to reduce the likelihood of a passive observer linking old and new subflows to the same device. A QUIC implementation would need to reset all counters when it changes Connection ID used for outgoing packets. It would also need to avoid incrementing Unreported Loss counter for loss of packets sent with a different Connection ID.</p>
+<p id="rfc.section.7.p.2">For example, <a href="#QUIC-TRANSPORT" class="xref">[QUIC-TRANSPORT]</a> allows changing Connection IDs in the middle of a connection to reduce the likelihood of a passive observer linking old and new subflows to the same device. A QUIC implementation would need to reset all counters when it changes the destination (IP address or UDP port) or the Connection ID used for outgoing packets. It would also need to avoid incrementing Unreported Loss counter for loss of packets sent to a different destinatoin or with a different Connection ID.</p>
 <h1 id="rfc.section.8">
 <a href="#rfc.section.8">8.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
 </h1>
@@ -552,7 +552,7 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="QUIC-TRANSPORT">[QUIC-TRANSPORT]</b></td>
 <td class="top">
-<a>Iyengar, J.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-quic-transport-20">QUIC: A UDP-Based Multiplexed and Secure Transport</a>", Internet-Draft draft-ietf-quic-transport-20, April 2019.</td>
+<a>Iyengar, J.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-quic-transport-21">QUIC: A UDP-Based Multiplexed and Secure Transport</a>", Internet-Draft draft-ietf-quic-transport-21, July 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC7285">[RFC7285]</b></td>
