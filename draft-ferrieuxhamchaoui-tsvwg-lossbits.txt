@@ -5,9 +5,9 @@
 TSVWG                                                        A. Ferrieux
 Internet-Draft                                              I. Hamchaoui
 Intended status: Informational                               Orange Labs
-Expires: January 10, 2020                                    I. Lubashev
+Expires: January 11, 2020                                    I. Lubashev
                                                      Akamai Technologies
-                                                            July 9, 2019
+                                                           July 10, 2019
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 10, 2020.
+   This Internet-Draft will expire on January 11, 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Ferrieux, et al.        Expires January 10, 2020                [Page 1]
+Ferrieux, et al.        Expires January 11, 2020                [Page 1]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -80,10 +80,12 @@ Table of Contents
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
    7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   7
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   8
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .   8
-     10.2.  Informative References . . . . . . . . . . . . . . . . .   8
+   9.  Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     9.1.  Since version 00  . . . . . . . . . . . . . . . . . . . .   8
+   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   8
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .   8
+     11.2.  Informative References . . . . . . . . . . . . . . . . .   8
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
@@ -103,17 +105,18 @@ Table of Contents
    encrypted and passive packet loss observation is not possible, as
    described in [TRANSPORT-ENCRYPT].
 
-   Since encrypted protocols could be routed by the network differently,
-   and the fraction of Internet traffic delivered using encrypted
-   protocols is increasing every year, it is imperative to measure
 
 
 
-Ferrieux, et al.        Expires January 10, 2020                [Page 2]
+
+Ferrieux, et al.        Expires January 11, 2020                [Page 2]
 
 Internet-Draft                  loss-bits                      July 2019
 
 
+   Since encrypted protocols could be routed by the network differently,
+   and the fraction of Internet traffic delivered using encrypted
+   protocols is increasing every year, it is imperative to measure
    packet loss experienced by encrypted protocol users directly instead
    of relying on measuring TCP loss between similar endpoints.
 
@@ -122,9 +125,10 @@ Internet-Draft                  loss-bits                      July 2019
    clear portion of the protocol headers to restore network operators'
    ability to maintain high QoS for users of encrypted protocols.  These
    bits can be added to an unencrypted portion of a header belonging to
-   any protocol layer, e.g. two most significant its of the TTL field in
-   IP (see [IP]) and IPv6 (see [IPv6]) headers or reserved bits in a
-   QUIC v1 header (see [QUIC-TRANSPORT]).
+   any protocol layer, e.g.  IP (see [IP]) and IPv6 (see [IPv6]) headers
+   or extensions, UDP surplus space (see [UDP-OPTIONS] and
+   [UDP-SURPLUS]), reserved bits in a QUIC v1 header (see
+   [QUIC-TRANSPORT]).
 
 2.  Notational Conventions
 
@@ -156,20 +160,20 @@ Internet-Draft                  loss-bits                      July 2019
 
    The sQuare Value is initialized to the Initial Q Value (0 or 1) and
    is reflected in the Q bit of every outgoing packet.  The sQuare value
-   is inverted after sending every N packets (Q Period is 2*N).
+   is inverted after sending every N packets (Q Period is 2*N).  The Q
+   bit represents "packet color" as defined by [RFC8321].
+
+
+
+Ferrieux, et al.        Expires January 11, 2020                [Page 3]
+
+Internet-Draft                  loss-bits                      July 2019
+
 
    The choice of the Initial Q Value and Q Period is determined by the
    protocol containing Q and L bits.  For example, the values can be
    protocol constants (e.g "Initial Q Value" is 0, and "Q Period" is
    128), or they can be set explicitly for each connection (e.g.
-
-
-
-Ferrieux, et al.        Expires January 10, 2020                [Page 3]
-
-Internet-Draft                  loss-bits                      July 2019
-
-
    "Initial Q Value" is whatever value the initial packet has, and "Q
    Period" is set per a dedicated TCP option on SYN and SYN/ACK).
 
@@ -217,11 +221,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-
-
-
-
-Ferrieux, et al.        Expires January 10, 2020                [Page 4]
+Ferrieux, et al.        Expires January 11, 2020                [Page 4]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -277,7 +277,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 10, 2020                [Page 5]
+Ferrieux, et al.        Expires January 11, 2020                [Page 5]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -333,7 +333,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 10, 2020                [Page 6]
+Ferrieux, et al.        Expires January 11, 2020                [Page 6]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -389,19 +389,27 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 10, 2020                [Page 7]
+Ferrieux, et al.        Expires January 11, 2020                [Page 7]
 
 Internet-Draft                  loss-bits                      July 2019
 
 
-9.  Acknowledgments
+9.  Change Log
 
-   The sQuare Bit was originally specified by Kazuho Oku in early
+9.1.  Since version 00
+
+   -  Addressed review comments
+
+   -  Improved guidelines for privacy protections for QIUC
+
+10.  Acknowledgments
+
+   The sQuare bit was originally suggested by Kazuho Oku in early
    proposals for loss measurement.
 
-10.  References
+11.  References
 
-10.1.  Normative References
+11.1.  Normative References
 
    [IP]       Postel, J., "Internet Protocol", STD 5, RFC 791,
               DOI 10.17487/RFC0791, September 1981,
@@ -421,15 +429,26 @@ Internet-Draft                  loss-bits                      July 2019
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/info/rfc8558>.
 
-10.2.  Informative References
+11.2.  Informative References
 
    [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility",
               draft-ietf-tls-grease-02 (work in progress), January 2019.
 
    [QUIC-TRANSPORT]
               Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", draft-ietf-quic-transport-21 (work
+              and Secure Transport", draft-ietf-quic-transport-22 (work
               in progress), July 2019.
+
+
+
+
+
+
+
+Ferrieux, et al.        Expires January 11, 2020                [Page 8]
+
+Internet-Draft                  loss-bits                      July 2019
+
 
    [RFC7285]  Alimi, R., Ed., Penno, R., Ed., Yang, Y., Ed., Kiesel, S.,
               Previdi, S., Roome, W., Shalunov, S., and R. Woundy,
@@ -437,18 +456,25 @@ Internet-Draft                  loss-bits                      July 2019
               RFC 7285, DOI 10.17487/RFC7285, September 2014,
               <https://www.rfc-editor.org/info/rfc7285>.
 
+   [RFC8321]  Fioccola, G., Ed., Capello, A., Cociglio, M., Castaldelli,
+              L., Chen, M., Zheng, L., Mirsky, G., and T. Mizrahi,
+              "Alternate-Marking Method for Passive and Hybrid
+              Performance Monitoring", RFC 8321, DOI 10.17487/RFC8321,
+              January 2018, <https://www.rfc-editor.org/info/rfc8321>.
+
    [TRANSPORT-ENCRYPT]
               Fairhurst, G. and C. Perkins, "The Impact of Transport
               Header Confidentiality on Network Operation and Evolution
               of the Internet", draft-ietf-tsvwg-transport-encrypt-07
               (work in progress), July 2019.
 
+   [UDP-OPTIONS]
+              Touch, J., "Transport Options for UDP", draft-ietf-tsvwg-
+              udp-options-07 (work in progress), March 2019.
 
-
-Ferrieux, et al.        Expires January 10, 2020                [Page 8]
-
-Internet-Draft                  loss-bits                      July 2019
-
+   [UDP-SURPLUS]
+              Herbert, T., "UDP Surplus Header", draft-herbert-udp-
+              space-hdr-01 (work in progress), July 2019.
 
 Authors' Addresses
 
@@ -475,30 +501,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Ferrieux, et al.        Expires January 10, 2020                [Page 9]
+Ferrieux, et al.        Expires January 11, 2020                [Page 9]

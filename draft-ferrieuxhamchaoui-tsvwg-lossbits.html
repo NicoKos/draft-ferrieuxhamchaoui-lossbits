@@ -297,10 +297,12 @@ ul.toc li {
 <link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations">
 <link href="#rfc.section.7" rel="Chapter" title="7 Privacy Considerations">
 <link href="#rfc.section.8" rel="Chapter" title="8 IANA Considerations">
-<link href="#rfc.section.9" rel="Chapter" title="9 Acknowledgments">
-<link href="#rfc.references" rel="Chapter" title="10 References">
-<link href="#rfc.references.1" rel="Chapter" title="10.1 Normative References">
-<link href="#rfc.references.2" rel="Chapter" title="10.2 Informative References">
+<link href="#rfc.section.9" rel="Chapter" title="9 Change Log">
+<link href="#rfc.section.9.1" rel="Chapter" title="9.1 Since version 00">
+<link href="#rfc.section.10" rel="Chapter" title="10 Acknowledgments">
+<link href="#rfc.references" rel="Chapter" title="11 References">
+<link href="#rfc.references.1" rel="Chapter" title="11.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="11.2 Informative References">
 <link href="#rfc.authors" rel="Chapter">
 
 
@@ -309,7 +311,7 @@ ul.toc li {
 
   <meta name="dct.creator" content="Ferrieux, A., Hamchaoui, I., and I. Lubashev" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ferrieuxhamchaoui-tsvwg-lossbits-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2019-09" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-10" />
   <meta name="dct.abstract" content="This document describes a protocol-independent method that employs two bits to allow endpoints to signal packet loss in a way that can be used by network devices to measure and locate the source of the loss. The signaling method applies to all protocols with a protocol-specific way to identify packet loss. The method is especially valuable when applied to protocols that encrypt transport header and do not allow an alternative method for loss detection." />
   <meta name="description" content="This document describes a protocol-independent method that employs two bits to allow endpoints to signal packet loss in a way that can be used by network devices to measure and locate the source of the loss. The signaling method applies to all protocols with a protocol-specific way to identify packet loss. The method is especially valuable when applied to protocols that encrypt transport header and do not allow an alternative method for loss detection." />
 
@@ -333,7 +335,7 @@ ul.toc li {
 <td class="right">Orange Labs</td>
 </tr>
 <tr>
-<td class="left">Expires: January 10, 2020</td>
+<td class="left">Expires: January 11, 2020</td>
 <td class="right">I. Lubashev</td>
 </tr>
 <tr>
@@ -342,7 +344,7 @@ ul.toc li {
 </tr>
 <tr>
 <td class="left"></td>
-<td class="right">July 9, 2019</td>
+<td class="right">July 10, 2019</td>
 </tr>
 
     	
@@ -358,7 +360,7 @@ ul.toc li {
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on January 10, 2020.</p>
+<p>This Internet-Draft will expire on January 11, 2020.</p>
 <h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
 <p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
@@ -398,13 +400,17 @@ ul.toc li {
 </li>
 <li>8.   <a href="#rfc.section.8">IANA Considerations</a>
 </li>
-<li>9.   <a href="#rfc.section.9">Acknowledgments</a>
+<li>9.   <a href="#rfc.section.9">Change Log</a>
 </li>
-<li>10.   <a href="#rfc.references">References</a>
+<ul><li>9.1.   <a href="#rfc.section.9.1">Since version 00</a>
 </li>
-<ul><li>10.1.   <a href="#rfc.references.1">Normative References</a>
+</ul><li>10.   <a href="#rfc.section.10">Acknowledgments</a>
 </li>
-<li>10.2.   <a href="#rfc.references.2">Informative References</a>
+<li>11.   <a href="#rfc.references">References</a>
+</li>
+<ul><li>11.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>11.2.   <a href="#rfc.references.2">Informative References</a>
 </li>
 </ul><li><a href="#rfc.authors">Authors' Addresses</a>
 </li>
@@ -418,7 +424,7 @@ ul.toc li {
 <p id="rfc.section.1.p.1">Packet loss is a pervasive problem of day-to-day network operation, and proactively detecting, measuring, and locating it is crucial to maintaining high QoS and timely resolution of crippling end-to-end throughput issues. To this effect, in a TCP-dominated world, network operators have been heavily relying on information present in the clear in TCP headers: sequence and acknowledgment numbers, and SACK when enabled. These allow for quantitative estimation of packet loss by passive on-path observation, and the lossy segment (upstream or downstream from the observation point) can be quickly identified by moving the passive observer around.</p>
 <p id="rfc.section.1.p.2">With encrypted protocols, the equivalent transport headers are encrypted and passive packet loss observation is not possible, as described in <a href="#TRANSPORT-ENCRYPT" class="xref">[TRANSPORT-ENCRYPT]</a>.</p>
 <p id="rfc.section.1.p.3">Since encrypted protocols could be routed by the network differently, and the fraction of Internet traffic delivered using encrypted protocols is increasing every year, it is imperative to measure packet loss experienced by encrypted protocol users directly instead of relying on measuring TCP loss between similar endpoints.</p>
-<p id="rfc.section.1.p.4">Following the recommendation in <a href="#RFC8558" class="xref">[RFC8558]</a> of making path signals explicit, this document proposes adding two explicit loss bits to the clear portion of the protocol headers to restore network operators&#8217; ability to maintain high QoS for users of encrypted protocols. These bits can be added to an unencrypted portion of a header belonging to any protocol layer, e.g. two most significant its of the TTL field in IP (see <a href="#IP" class="xref">[IP]</a>) and IPv6 (see <a href="#IPv6" class="xref">[IPv6]</a>) headers or reserved bits in a QUIC v1 header (see <a href="#QUIC-TRANSPORT" class="xref">[QUIC-TRANSPORT]</a>).</p>
+<p id="rfc.section.1.p.4">Following the recommendation in <a href="#RFC8558" class="xref">[RFC8558]</a> of making path signals explicit, this document proposes adding two explicit loss bits to the clear portion of the protocol headers to restore network operators&#8217; ability to maintain high QoS for users of encrypted protocols. These bits can be added to an unencrypted portion of a header belonging to any protocol layer, e.g. IP (see <a href="#IP" class="xref">[IP]</a>) and IPv6 (see <a href="#IPv6" class="xref">[IPv6]</a>) headers or extensions, UDP surplus space (see <a href="#UDP-OPTIONS" class="xref">[UDP-OPTIONS]</a> and <a href="#UDP-SURPLUS" class="xref">[UDP-SURPLUS]</a>), reserved bits in a QUIC v1 header (see <a href="#QUIC-TRANSPORT" class="xref">[QUIC-TRANSPORT]</a>).</p>
 <h1 id="rfc.section.2">
 <a href="#rfc.section.2">2.</a> <a href="#conventions" id="conventions">Notational Conventions</a>
 </h1>
@@ -438,7 +444,7 @@ ul.toc li {
 <h1 id="rfc.section.3.1">
 <a href="#rfc.section.3.1">3.1.</a> <a href="#squarebit" id="squarebit">Setting the sQuare Bit on Outgoing Packets</a>
 </h1>
-<p id="rfc.section.3.1.p.1">The sQuare Value is initialized to the Initial Q Value (0 or 1) and is reflected in the Q bit of every outgoing packet. The sQuare value is inverted after sending every N packets (Q Period is 2*N).</p>
+<p id="rfc.section.3.1.p.1">The sQuare Value is initialized to the Initial Q Value (0 or 1) and is reflected in the Q bit of every outgoing packet. The sQuare value is inverted after sending every N packets (Q Period is 2*N). The Q bit represents &#8220;packet color&#8221; as defined by <a href="#RFC8321" class="xref">[RFC8321]</a>.</p>
 <p id="rfc.section.3.1.p.2">The choice of the Initial Q Value and Q Period is determined by the protocol containing Q and L bits. For example, the values can be protocol constants (e.g &#8220;Initial Q Value&#8221; is 0, and &#8220;Q Period&#8221; is 128), or they can be set explicitly for each connection (e.g. &#8220;Initial Q Value&#8221; is whatever value the initial packet has, and &#8220;Q Period&#8221; is set per a dedicated TCP option on SYN and SYN/ACK).</p>
 <p id="rfc.section.3.1.p.3">Observation points can estimate the upstream losses by counting the number of packets during a half period of the square signal, as described in <a href="#usage" class="xref">Section 4</a>.</p>
 <h1 id="rfc.section.3.2">
@@ -512,13 +518,25 @@ ul.toc li {
 </h1>
 <p id="rfc.section.8.p.1">This document makes no request of IANA.</p>
 <h1 id="rfc.section.9">
-<a href="#rfc.section.9">9.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
+<a href="#rfc.section.9">9.</a> <a href="#change-log" id="change-log">Change Log</a>
 </h1>
-<p id="rfc.section.9.p.1">The sQuare Bit was originally specified by Kazuho Oku in early proposals for loss measurement.</p>
+<h1 id="rfc.section.9.1">
+<a href="#rfc.section.9.1">9.1.</a> <a href="#since-version-00" id="since-version-00">Since version 00</a>
+</h1>
+<p></p>
+
+<ul>
+<li>Addressed review comments</li>
+<li>Improved guidelines for privacy protections for  QIUC</li>
+</ul>
+<h1 id="rfc.section.10">
+<a href="#rfc.section.10">10.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
+</h1>
+<p id="rfc.section.10.p.1">The sQuare bit was originally suggested by Kazuho Oku in early proposals for loss measurement.</p>
 <h1 id="rfc.references">
-<a href="#rfc.references">10.</a> References</h1>
+<a href="#rfc.references">11.</a> References</h1>
 <h1 id="rfc.references.1">
-<a href="#rfc.references.1">10.1.</a> Normative References</h1>
+<a href="#rfc.references.1">11.1.</a> Normative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="IP">[IP]</b></td>
@@ -542,7 +560,7 @@ ul.toc li {
 </tr>
 </tbody></table>
 <h1 id="rfc.references.2">
-<a href="#rfc.references.2">10.2.</a> Informative References</h1>
+<a href="#rfc.references.2">11.2.</a> Informative References</h1>
 <table><tbody>
 <tr>
 <td class="reference"><b id="GREASE">[GREASE]</b></td>
@@ -552,7 +570,7 @@ ul.toc li {
 <tr>
 <td class="reference"><b id="QUIC-TRANSPORT">[QUIC-TRANSPORT]</b></td>
 <td class="top">
-<a>Iyengar, J.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-quic-transport-21">QUIC: A UDP-Based Multiplexed and Secure Transport</a>", Internet-Draft draft-ietf-quic-transport-21, July 2019.</td>
+<a>Iyengar, J.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-quic-transport-22">QUIC: A UDP-Based Multiplexed and Secure Transport</a>", Internet-Draft draft-ietf-quic-transport-22, July 2019.</td>
 </tr>
 <tr>
 <td class="reference"><b id="RFC7285">[RFC7285]</b></td>
@@ -560,9 +578,24 @@ ul.toc li {
 <a>Alimi, R.</a>, <a>Penno, R.</a>, <a>Yang, Y.</a>, <a>Kiesel, S.</a>, <a>Previdi, S.</a>, <a>Roome, W.</a>, <a>Shalunov, S.</a> and <a>R. Woundy</a>, "<a href="https://tools.ietf.org/html/rfc7285">Application-Layer Traffic Optimization (ALTO) Protocol</a>", RFC 7285, DOI 10.17487/RFC7285, September 2014.</td>
 </tr>
 <tr>
+<td class="reference"><b id="RFC8321">[RFC8321]</b></td>
+<td class="top">
+<a>Fioccola, G.</a>, <a>Capello, A.</a>, <a>Cociglio, M.</a>, <a>Castaldelli, L.</a>, <a>Chen, M.</a>, <a>Zheng, L.</a>, <a>Mirsky, G.</a> and <a>T. Mizrahi</a>, "<a href="https://tools.ietf.org/html/rfc8321">Alternate-Marking Method for Passive and Hybrid Performance Monitoring</a>", RFC 8321, DOI 10.17487/RFC8321, January 2018.</td>
+</tr>
+<tr>
 <td class="reference"><b id="TRANSPORT-ENCRYPT">[TRANSPORT-ENCRYPT]</b></td>
 <td class="top">
 <a>Fairhurst, G.</a> and <a>C. Perkins</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tsvwg-transport-encrypt-07">The Impact of Transport Header Confidentiality on Network Operation and Evolution of the Internet</a>", Internet-Draft draft-ietf-tsvwg-transport-encrypt-07, July 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="UDP-OPTIONS">[UDP-OPTIONS]</b></td>
+<td class="top">
+<a>Touch, J.</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tsvwg-udp-options-07">Transport Options for UDP</a>", Internet-Draft draft-ietf-tsvwg-udp-options-07, March 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="UDP-SURPLUS">[UDP-SURPLUS]</b></td>
+<td class="top">
+<a>Herbert, T.</a>, "<a href="https://tools.ietf.org/html/draft-herbert-udp-space-hdr-01">UDP Surplus Header</a>", Internet-Draft draft-herbert-udp-space-hdr-01, July 2019.</td>
 </tr>
 </tbody></table>
 <h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
