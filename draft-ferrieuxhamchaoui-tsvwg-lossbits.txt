@@ -5,9 +5,9 @@
 TSVWG                                                        A. Ferrieux
 Internet-Draft                                              I. Hamchaoui
 Intended status: Informational                               Orange Labs
-Expires: January 11, 2020                                    I. Lubashev
+Expires: January 12, 2020                                    I. Lubashev
                                                      Akamai Technologies
-                                                           July 10, 2019
+                                                           July 11, 2019
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 11, 2020.
+   This Internet-Draft will expire on January 12, 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 1]
+Ferrieux, et al.        Expires January 12, 2020                [Page 1]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -95,11 +95,11 @@ Table of Contents
    maintaining high QoS and timely resolution of crippling end-to-end
    throughput issues.  To this effect, in a TCP-dominated world, network
    operators have been heavily relying on information present in the
-   clear in TCP headers: sequence and acknowledgment numbers, and SACK
-   when enabled.  These allow for quantitative estimation of packet loss
-   by passive on-path observation, and the lossy segment (upstream or
-   downstream from the observation point) can be quickly identified by
-   moving the passive observer around.
+   clear in TCP headers: sequence and acknowledgment numbers and SACKs
+   when enabled (see [RFC8517]).  These allow for quantitative
+   estimation of packet loss by passive on-path observation, and the
+   lossy segment (upstream or downstream from the observation point) can
+   be quickly identified by moving the passive observer around.
 
    With encrypted protocols, the equivalent transport headers are
    encrypted and passive packet loss observation is not possible, as
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 2]
+Ferrieux, et al.        Expires January 12, 2020                [Page 2]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -165,7 +165,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 3]
+Ferrieux, et al.        Expires January 12, 2020                [Page 3]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -221,7 +221,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 4]
+Ferrieux, et al.        Expires January 12, 2020                [Page 4]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -277,7 +277,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 5]
+Ferrieux, et al.        Expires January 12, 2020                [Page 5]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -333,7 +333,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 6]
+Ferrieux, et al.        Expires January 12, 2020                [Page 6]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -389,7 +389,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 7]
+Ferrieux, et al.        Expires January 12, 2020                [Page 7]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -445,7 +445,7 @@ Internet-Draft                  loss-bits                      July 2019
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 8]
+Ferrieux, et al.        Expires January 12, 2020                [Page 8]
 
 Internet-Draft                  loss-bits                      July 2019
 
@@ -461,6 +461,12 @@ Internet-Draft                  loss-bits                      July 2019
               "Alternate-Marking Method for Passive and Hybrid
               Performance Monitoring", RFC 8321, DOI 10.17487/RFC8321,
               January 2018, <https://www.rfc-editor.org/info/rfc8321>.
+
+   [RFC8517]  Dolson, D., Ed., Snellman, J., Boucadair, M., Ed., and C.
+              Jacquenet, "An Inventory of Transport-Centric Functions
+              Provided by Middleboxes: An Operator Perspective",
+              RFC 8517, DOI 10.17487/RFC8517, February 2019,
+              <https://www.rfc-editor.org/info/rfc8517>.
 
    [TRANSPORT-ENCRYPT]
               Fairhurst, G. and C. Perkins, "The Impact of Transport
@@ -490,6 +496,16 @@ Authors' Addresses
    EMail: isabelle.hamchaoui@orange.com
 
 
+
+
+
+
+
+Ferrieux, et al.        Expires January 12, 2020                [Page 9]
+
+Internet-Draft                  loss-bits                      July 2019
+
+
    Igor Lubashev
    Akamai Technologies
    150 Broadway
@@ -501,4 +517,44 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.        Expires January 11, 2020                [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ferrieux, et al.        Expires January 12, 2020               [Page 10]
