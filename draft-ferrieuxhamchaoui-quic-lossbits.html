@@ -1,0 +1,641 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>Packet Loss Signaling for Encrypted Protocols</title>
+
+  
+<style type="text/css">/*<![CDATA[*/
+
+body {
+  font: 16px "Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  color: #333;
+  font-size-adjust: 0.5;
+  line-height: 24px;
+  margin: 75px auto;
+  max-width: 624px;
+  padding: 0 5px;
+}
+
+.title, .filename, h1, h2, h3, h4, h5 {
+  font: 16px "Roboto Condensed","Helvetica Neue","Open Sans",Helvetica,Calibri,sans-serif;
+  font-size-adjust: 0.5;
+  font-weight: bold;
+  color: #333;
+  line-height: 100%;
+  margin: 1.2em 0 0.3em;
+}
+.title, #rfc\.title h1 { font-size: 32px; }
+h1, section h1, h2, section h2, section h3, nav h2 { font-size: 20px; }
+h3, section h4, h4, section h5 { font-size: 16px; }
+h1 a[href], h2 a[href], h3 a[href], h4 a[href] {
+  color: #333;
+}
+
+table {
+  margin-left: 0em;
+  border-collapse: collapse;
+}
+th {
+  text-align: left;
+  border-bottom: 2px solid #ddd;
+}
+td {
+  border-top: 1px solid #ddd;
+  vertical-align: top;
+}
+tr:nth-child(2n+1) > td,
+tr:nth-child(2n+1) > th {
+  background-color: #f9f9f9;
+}
+td.reference {
+  max-width: 200px;
+  border-top: none;
+  padding-right: 1em;
+}
+.right {
+  text-align: right;
+}
+
+
+table.header, table#rfc\.headerblock {
+  width: 100%;
+}
+table.header td, table#rfc\.headerblock td {
+  border: none;
+  background-color: transparent;
+  color: black;
+  padding: 0;
+}
+.filename {
+  display: block;
+  color: rgb(119, 119, 119);
+  font-size: 20px;
+  font-weight: normal;
+  line-height: 100%;
+  margin: 10px 0 32px;
+}
+#rfc\.abstract+p, #rfc\.abstract+p code, #rfc\.abstract+p samp, #rfc\.abstract+p tt {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+samp, tt, code, pre, span.tt {
+  font-size: 13.5px;
+  font-family: Consolas, monospace;
+  font-size-adjust: none;
+}
+pre {
+  background-color: #eee;
+  border: 1px solid #ddd;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 5px;
+}
+.figure, caption {
+  font-style: italic;
+  margin: 0 1.5em;
+  text-align: left;
+}
+
+address {
+  margin: 16px 2px;
+  line-height: 20px;
+}
+.vcard {
+  font-style: normal;
+}
+.vcardline {
+  display: block;
+}
+.vcardline .fn, address b {
+  font-weight: normal;
+}
+.vcardline .hidden {
+  display: none;
+}
+
+dl {
+  margin-left: 1em;
+}
+dl.dl-horizontal: {
+  margin-left: 0;
+}
+dl > dt {
+  float: left;
+  margin-right: 1em;
+}
+dl.nohang > dt {
+  float: none;
+}
+dl > dd {
+  margin-bottom: .5em;
+}
+dl.compact > dd {
+  margin-bottom: 0em;
+}
+dl > dd > dl {
+  margin-top: 0.5em;
+  margin-bottom: 0em;
+}
+ul.empty {
+  list-style-type: none;
+}
+ul.empty li {
+  margin-top: .5em;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+}
+hr.noprint {
+  display: none;
+}
+
+a {
+  text-decoration: none;
+}
+a[href] {
+  color: #2a6496;
+}
+a[href]:hover {
+  background-color: #eee;
+}
+
+p, ol, ul, li {
+  padding: 0;
+}
+p {
+  margin: 0.5em 0;
+}
+ol, ul {
+  margin: 0.2em 0 0.2em 2em;
+}
+li {
+  margin: 0.2em 0;
+}
+address {
+  font-style: normal;
+}
+
+ul.toc ul {
+  margin: 0 0 0 2em;
+}
+ul.toc li {
+  list-style: none;
+  margin: 0;
+}
+
+@media screen and (min-width: 924px) {
+  body {
+    padding-right: 350px;
+  }
+  body>ul.toc, body>#rfc\.toc {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    right: calc(50vw - 500px);
+    width: 300px;
+    z-index: 1;
+    overflow: auto;
+    overscroll-behavior: contain;
+  }
+  body>#rfc\.toc {
+    top: 55px;
+  }
+  body>ul.toc {
+    top: 100px;
+  }
+
+  ul.toc {
+    margin: 0 0 0 4px;
+    font-size: 12px;
+    line-height: 20px;
+  }
+  ul.toc ul {
+    margin-left: 1.2em;
+  }
+}
+
+.github-fork-ribbon-wrapper {
+  display: none;
+}
+@media screen and (min-width: 800px) {
+  /* "Fork me on GitHub" CSS ribbon based on
+   * https://github.com/simonwhitaker/github-fork-ribbon-css
+   */
+  .github-fork-ribbon {
+    position: absolute;
+    padding: 2px 0;
+    background-color: #a00;
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15));
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.5);
+    font: 700 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+    pointer-events: auto;
+
+    top: 38px;
+    right: -45px;
+
+    transform: rotate(45deg);
+  }
+
+  .github-fork-ribbon a[href],
+  .github-fork-ribbon a[href]:hover {
+    color: #fff;
+    background-color: transparent;
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, 0.5);
+    text-align: center;
+
+    width: 190px;
+    line-height: 18px;
+
+    display: inline-block;
+    padding: 2px 0;
+
+    border: 1.5px dotted #fff;
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .github-fork-ribbon-wrapper {
+    display: block;
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    overflow: hidden;
+    top: 0; right: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .github-fork-ribbon-wrapper {
+    position: fixed;
+  }
+  /*]]>*/</style>
+  <meta name="viewport" content="initial-scale=1.0">
+
+
+  <link href="#rfc.toc" rel="Contents">
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction">
+<link href="#rfc.section.2" rel="Chapter" title="2 Notational Conventions">
+<link href="#rfc.section.3" rel="Chapter" title="3 Loss Bits">
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Setting the sQuare Bit on Outgoing Packets">
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Setting the Loss Event Bit on Outgoing Packets">
+<link href="#rfc.section.4" rel="Chapter" title="4 Using the Loss Bits for Passive Loss Measurement">
+<link href="#rfc.section.4.1" rel="Chapter" title="4.1 End-To-End Loss">
+<link href="#rfc.section.4.2" rel="Chapter" title="4.2 Upstream Loss">
+<link href="#rfc.section.4.3" rel="Chapter" title="4.3 Correlating End-to-End and Upstream Loss">
+<link href="#rfc.section.4.4" rel="Chapter" title="4.4 Downstream Loss">
+<link href="#rfc.section.4.5" rel="Chapter" title="4.5 Observer Loss">
+<link href="#rfc.section.5" rel="Chapter" title="5 Ossification Considerations">
+<link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations">
+<link href="#rfc.section.7" rel="Chapter" title="7 Privacy Considerations">
+<link href="#rfc.section.8" rel="Chapter" title="8 IANA Considerations">
+<link href="#rfc.section.9" rel="Chapter" title="9 Acknowledgments">
+<link href="#rfc.references" rel="Chapter" title="10 References">
+<link href="#rfc.references.1" rel="Chapter" title="10.1 Normative References">
+<link href="#rfc.references.2" rel="Chapter" title="10.2 Informative References">
+<link href="#rfc.authors" rel="Chapter">
+
+
+  <meta name="generator" content="xml2rfc version 2.32.0 - https://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Ferrieux, A., Ed., Hamchaoui, I., Ed., and I. Lubashev, Ed." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ferrieuxhamchaoui-quic-lossbits-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2019-10" />
+  <meta name="dct.abstract" content="This    draft   adapts    the   general    technique   described    in draft-ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC v1 header.  It describes a  method that employs two bits to allow endpoints to signal packet  loss in a way that can  be used by network devices to measure and locate the source of the loss." />
+  <meta name="description" content="This    draft   adapts    the   general    technique   described    in draft-ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC v1 header.  It describes a  method that employs two bits to allow endpoints to signal packet  loss in a way that can  be used by network devices to measure and locate the source of the loss." />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+<td class="left">TSVWG</td>
+<td class="right">A. Ferrieux, Ed.</td>
+</tr>
+<tr>
+<td class="left">Internet-Draft</td>
+<td class="right">I. Hamchaoui, Ed.</td>
+</tr>
+<tr>
+<td class="left">Intended status: Informational</td>
+<td class="right">Orange Labs</td>
+</tr>
+<tr>
+<td class="left">Expires: April 12, 2020</td>
+<td class="right">I. Lubashev, Ed.</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">Akamai Technologies</td>
+</tr>
+<tr>
+<td class="left"></td>
+<td class="right">October 10, 2019</td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">Packet Loss Signaling for Encrypted Protocols<br />
+  <span class="filename">draft-ferrieuxhamchaoui-quic-lossbits-latest</span></p>
+  
+  <h1 id="rfc.abstract"><a href="#rfc.abstract">Abstract</a></h1>
+<p>This    draft   adapts    the   general    technique   described    in draft-ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC v1 header.  It describes a  method that employs two bits to allow endpoints to signal packet  loss in a way that can  be used by network devices to measure and locate the source of the loss.</p>
+<h1 id="rfc.status"><a href="#rfc.status">Status of This Memo</a></h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at https://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on April 12, 2020.</p>
+<h1 id="rfc.copyrightnotice"><a href="#rfc.copyrightnotice">Copyright Notice</a></h1>
+<p>Copyright (c) 2019 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (https://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a>
+</li>
+<li>2.   <a href="#rfc.section.2">Notational Conventions</a>
+</li>
+<li>3.   <a href="#rfc.section.3">Loss Bits</a>
+</li>
+<ul><li>3.1.   <a href="#rfc.section.3.1">Setting the sQuare Bit on Outgoing Packets</a>
+</li>
+<li>3.2.   <a href="#rfc.section.3.2">Setting the Loss Event Bit on Outgoing Packets</a>
+</li>
+</ul><li>4.   <a href="#rfc.section.4">Using the Loss Bits for Passive Loss Measurement</a>
+</li>
+<ul><li>4.1.   <a href="#rfc.section.4.1">End-To-End Loss</a>
+</li>
+<li>4.2.   <a href="#rfc.section.4.2">Upstream Loss</a>
+</li>
+<li>4.3.   <a href="#rfc.section.4.3">Correlating End-to-End and Upstream Loss</a>
+</li>
+<li>4.4.   <a href="#rfc.section.4.4">Downstream Loss</a>
+</li>
+<li>4.5.   <a href="#rfc.section.4.5">Observer Loss</a>
+</li>
+</ul><li>5.   <a href="#rfc.section.5">Ossification Considerations</a>
+</li>
+<li>6.   <a href="#rfc.section.6">Security Considerations</a>
+</li>
+<li>7.   <a href="#rfc.section.7">Privacy Considerations</a>
+</li>
+<li>8.   <a href="#rfc.section.8">IANA Considerations</a>
+</li>
+<li>9.   <a href="#rfc.section.9">Acknowledgments</a>
+</li>
+<li>10.   <a href="#rfc.references">References</a>
+</li>
+<ul><li>10.1.   <a href="#rfc.references.1">Normative References</a>
+</li>
+<li>10.2.   <a href="#rfc.references.2">Informative References</a>
+</li>
+</ul><li><a href="#rfc.authors">Authors' Addresses</a>
+</li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1">
+<a href="#rfc.section.1">1.</a> <a href="#introduction" id="introduction">Introduction</a>
+</h1>
+<p id="rfc.section.1.p.1">Packet  loss is  a hard  and pervasive  problem of  day-to-day network operation, and  proactively detecting,  measuring, and locating  it is crucial to  maintaining high  QoS and  timely resolution  of crippling end-to-end  throughput  issues. To  this  effect,  in a  TCP-dominated world,  network operators  have  been heavily  relying on  information present  in the  clear  in TCP  headers:  sequence and  acknowledgment numbers,  and   SACK  when  enabled.  These   allow  for  quantitative estimation     of      packet     loss     by      passive     on-path observation. Additionally,  the lossy segment (upstream  or downstream from the  observation point) can  be quickly identified by  moving the passive observer around.</p>
+<p id="rfc.section.1.p.2">With QUIC, the equivalent transport  headers are encrypted and passive packet   loss   observation  is   not   possible,   as  described   in <a href="#TRANSPORT-ENCRYPT" class="xref">[TRANSPORT-ENCRYPT]</a>.</p>
+<p id="rfc.section.1.p.3">QUIC could  be routed by the  network differently and the  fraction of Internet   traffic   delivered   using  QUIC   is   increasing   every year. Therefore, is  it imperative to measure  packet loss experienced by  QUIC users  directly  instead  of relying  on  measuring TCP  loss between similar endpoints.</p>
+<p id="rfc.section.1.p.4">Since  explicit  path  signals  are preferred  by  <a href="#RFC8558" class="xref">[RFC8558]</a>,  this document proposes adding  two explicit loss bits to  the clear portion of short  headers to  restore network  operators&#8217; ability  to maintain high QoS for QUIC users.</p>
+<h1 id="rfc.section.2">
+<a href="#rfc.section.2">2.</a> <a href="#conventions" id="conventions">Notational Conventions</a>
+</h1>
+<p id="rfc.section.2.p.1">The key  words &#8220;MUST&#8221;, &#8220;MUST  NOT&#8221;, &#8220;REQUIRED&#8221;, &#8220;SHALL&#8221;,  &#8220;SHALL NOT&#8221;, &#8220;SHOULD&#8221;, &#8220;SHOULD  NOT&#8221;, &#8220;RECOMMENDED&#8221;, &#8220;MAY&#8221;, and  &#8220;OPTIONAL&#8221; in this document are to be interpreted as described in <a href="#RFC2119" class="xref">[RFC2119]</a>.</p>
+<h1 id="rfc.section.3">
+<a href="#rfc.section.3">3.</a> <a href="#loss-bits" id="loss-bits">Loss Bits</a>
+</h1>
+<p id="rfc.section.3.p.1">The proposal  introduces two bits  that are  to be present  in packets with a short header.  Therefore, only  loss of short header packets is reported  using  loss bits.   Whenever  this  specification refers  to packets, it is referring only to packets with short headers.</p>
+<p></p>
+
+<ul>
+<li>Q: The  &#8220;sQuare signal&#8221; bit is  toggled every N outgoing  packets as explained below in <a href="#squarebit" class="xref">Section 3.1</a>.</li>
+<li>L: The &#8220;Loss event&#8221; bit is set to 0 or 1 according to the Unreported Loss counter, as explained below in <a href="#lossbit" class="xref">Section 3.2</a>.</li>
+</ul>
+<p id="rfc.section.3.p.3">Each  endpoint   maintains  appropriate  counters   independently  and separately for each connection 4-tuple and destination Connection ID.</p>
+<h1 id="rfc.section.3.1">
+<a href="#rfc.section.3.1">3.1.</a> <a href="#squarebit" id="squarebit">Setting the sQuare Bit on Outgoing Packets</a>
+</h1>
+<p id="rfc.section.3.1.p.1">The sQuare Value is initialized to the Initial Q Value (0 or 1) and is reflected in the  Q bit of every outgoing packet.  The sQuare value is inverted after sending every N packets (Q Period is 2*N), where N is a parameter of the method, discussed below.</p>
+<p id="rfc.section.3.1.p.2">Observation points  can estimate the  upstream losses by  counting the number  of packets  during  a half  period of  the  square signal,  as described in <a href="#usage" class="xref">Section 4</a>.</p>
+<h1 id="rfc.section.3.2">
+<a href="#rfc.section.3.2">3.2.</a> <a href="#lossbit" id="lossbit">Setting the Loss Event Bit on Outgoing Packets</a>
+</h1>
+<p id="rfc.section.3.2.p.1">The Unreported  Loss counter  is initialized  to 0, and  the L  bit of every outgoing packet indicates whether the Unreported Loss counter is positive (L=1 if the counter is positive, and L=0 otherwise).</p>
+<p id="rfc.section.3.2.p.2">The value of  the Unreported Loss counter is decremented  every time a packet with L=1 is sent.</p>
+<p id="rfc.section.3.2.p.3">The  value of  the Unreported  Loss counter  is incremented  for every packet that  the protocol  declares lost,  using QUIC&#8217;s  existing loss detection machinery.</p>
+<p id="rfc.section.3.2.p.4">Observation points can estimate the  end-to-end loss, as determined by the upstream endpoint&#8217;s loss  detection machinery, by counting packets in this direction with a L bit equal to 1, as described in <a href="#usage" class="xref">Section 4</a>.</p>
+<h1 id="rfc.section.4">
+<a href="#rfc.section.4">4.</a> <a href="#usage" id="usage">Using the Loss Bits for Passive Loss Measurement</a>
+</h1>
+<p id="rfc.section.4.p.1">There are three sources of observable loss:</p>
+<p></p>
+
+<ul>
+<li>
+<em>upstream loss</em> - loss between  the sender and the observation point (<a href="#upstreamloss" class="xref">Section 4.2</a>)</li>
+<li>
+<em>downstream  loss</em> -  loss  between the  observation  point and  the destination (<a href="#downstreamloss" class="xref">Section 4.4</a>)</li>
+<li>
+<em>observer loss</em>  - loss by the  observer itself that does  not cause downstream loss (<a href="#observerloss" class="xref">Section 4.5</a>)</li>
+</ul>
+<p id="rfc.section.4.p.3">The upstream and downstream loss together constitute <em>end-to-end loss</em> (<a href="#endtoendloss" class="xref">Section 4.1</a>).</p>
+<p id="rfc.section.4.p.4">The Q and L bits allow detection  and measurement of the types of loss listed above.</p>
+<h1 id="rfc.section.4.1">
+<a href="#rfc.section.4.1">4.1.</a> <a href="#endtoendloss" id="endtoendloss">End-To-End Loss</a>
+</h1>
+<p id="rfc.section.4.1.p.1">The Loss Event bit allows an observer to calculate the end-to-end loss rate by  counting packets  with L  bit value of  0 and  1 for  a given connection. The end-to-end  loss rate is the fraction  of packets with L=1.</p>
+<p id="rfc.section.4.1.p.2">The simplifying assumption here is  that upstream loss affects packets with L=0 and  L=1 equally. This may be a  simplification, if some loss is caused by  tail-drop in a network device. If  the sender congestion controller reduces  the packet send  rate after  loss, there may  be a sufficient  delay before  sending packets  with L=1  that they  have a greater chance of arriving at the observer.</p>
+<h1 id="rfc.section.4.2">
+<a href="#rfc.section.4.2">4.2.</a> <a href="#upstreamloss" id="upstreamloss">Upstream Loss</a>
+</h1>
+<p id="rfc.section.4.2.p.1">Blocks of N  (half of Q Period) consecutive packets  are sent with the same value of the  Q bit, followed by another block  of N packets with inverted value of the Q bit. Hence, knowing the value of N, an on-path observer can  estimate the amount of  loss after observing at  least N packets. The  upstream loss rate  is one  minus the average  number of packets in a block of packets with the same Q value divided by N.</p>
+<p id="rfc.section.4.2.p.2">The observer needs  to be able to tolerate packet  reordering that can blur the edges of the square signal.</p>
+<p id="rfc.section.4.2.p.3">The  observer also  needs  to differentiate  packets  as belonging  to different connections, since they use independent counters.</p>
+<p id="rfc.section.4.2.p.4">The choice of N strikes a compromise: the observation could become too unreliable in  case of packet reordering  and loss if N  is too small; and when  N is  too large,  short connections may  not yield  a useful upstream loss measurement.</p>
+<p id="rfc.section.4.2.p.5">To leave  some room for  adaptation, we  only constrain the  sender to select an N that is (1) constant  for a given connection and (2) equal to a  power of two.  The latter allows  on-path observers to  derive N after  a  few  periods.  It  is thus  also  acceptable  for  a  simple implementation to choose a global  constant; N=64 has been extensively tried in large-scale field tests and yielded good results.</p>
+<h1 id="rfc.section.4.3">
+<a href="#rfc.section.4.3">4.3.</a> <a href="#losscorrelation" id="losscorrelation">Correlating End-to-End and Upstream Loss</a>
+</h1>
+<p id="rfc.section.4.3.p.1">Upstream loss is  calculated by observing the actual  packets that did not suffer the upstream loss.  End-to-end loss, however, is calculated by observing  subsequent packets after the  sender&#8217;s protocol detected the loss.  Hence,  end-to-end loss is generally observed  with a delay of  between   1  RTT   (loss  declared   due  to   multiple  duplicate acknowledgments) and 1  RTO (loss declared due to  a timeout) relative to the upstream loss.</p>
+<p id="rfc.section.4.3.p.2">The  connection RTT  can  sometimes be  estimated  by timing  protocol handshake  messages. This  RTT  estimate can  be  greatly improved  by observing   a  dedicated   protocol   mechanism   for  conveying   RTT information, such as the Latency Spin bit of <a href="#QUIC-TRANSPORT" class="xref">[QUIC-TRANSPORT]</a>.</p>
+<p id="rfc.section.4.3.p.3">Whenever the  observer needs to  perform a computation that  uses both upstream and end-to-end loss rate measurements, it SHOULD use upstream loss rate leading the end-to-end loss  rate by approximately 1 RTT. If the observer  is unable to estimate  RTT of the connection,  it should accumulate loss measurements over time periods of at least 4 times the typical RTT for the observed connections.</p>
+<p id="rfc.section.4.3.p.4">If the calculated upstream loss  rate exceeds the end-to-end loss rate calculated in <a href="#endtoendloss" class="xref">Section 4.1</a>, then either  the Q Period is too short for  the  amount of  packet  reordering  or  there is  observer  loss, described in  <a href="#observerloss" class="xref">Section 4.5</a>. If  this happens, the  observer SHOULD adjust  the calculated  upstream loss  rate to  match end-to-end  loss rate.</p>
+<h1 id="rfc.section.4.4">
+<a href="#rfc.section.4.4">4.4.</a> <a href="#downstreamloss" id="downstreamloss">Downstream Loss</a>
+</h1>
+<p id="rfc.section.4.4.p.1">Because downstream loss affects only those packets that did not suffer upstream loss, the end-to-end loss  rate (<samp>e</samp>) relates to the upstream loss    rate   (<samp>u</samp>)    and    downstream   loss    rate   (<samp>d</samp>)    as <samp>(1-u)(1-d)=1-e</samp>. Hence, <samp>d=(e-u)/(1-u)</samp>.</p>
+<h1 id="rfc.section.4.5">
+<a href="#rfc.section.4.5">4.5.</a> <a href="#observerloss" id="observerloss">Observer Loss</a>
+</h1>
+<p id="rfc.section.4.5.p.1">A  typical  deployment of  a  passive  observation system  includes  a network  tap device  that mirrors  network  packets of  interest to  a device  that  performs  analysis   and  measurement  on  the  mirrored packets. The observer loss is the loss that occurs on the mirror path.</p>
+<p id="rfc.section.4.5.p.2">Observer loss affects  upstream loss rate measurement  since it causes the observer  to account for fewer  packets in a block  of identical Q bit   values  (see   {{upstreamloss)}).  The   end-to-end  loss   rate measurement, however, is unaffected by  the observer loss, since it is a measurement of the fraction of packets with the set L bit value, and the   observer   loss   would   affect  all   packets   equally   (see <a href="#endtoendloss" class="xref">Section 4.1</a>).</p>
+<p id="rfc.section.4.5.p.3">The need  to adjust the  upstream loss  rate down to  match end-to-end loss rate as  described in <a href="#losscorrelation" class="xref">Section 4.3</a> is  a strong indication of the  observer loss, whose magnitude  is between the amount  of such adjustment  and  the  entirety  of   the  upstream  loss  measured  in <a href="#upstreamloss" class="xref">Section 4.2</a>.</p>
+<h1 id="rfc.section.5">
+<a href="#rfc.section.5">5.</a> <a href="#ossification-considerations" id="ossification-considerations">Ossification Considerations</a>
+</h1>
+<p id="rfc.section.5.p.1">Accurate  loss information  is not  critical to  the operation  of any protocol, though its  presence for a sufficient  number of connections is important for the operation of the networks.</p>
+<p id="rfc.section.5.p.2">The loss bits  are amenable to &#8220;greasing&#8221; described  in <a href="#GREASE" class="xref">[GREASE]</a>, if the protocol  designers are  not ready to  dedicate (and  ossify) bits used  for loss  reporting  to  this function.  The  greasing could  be accomplished   similarly  to   the  Latency   Spin  bit   greasing  in <a href="#QUIC-TRANSPORT" class="xref">[QUIC-TRANSPORT]</a>.  Namely,  implementations   could  decide  that  a fraction of connections should not encode loss information in the loss bits and,  instead, the  bits would  be set  to arbitrary  values. The observers  would need  to be  ready  to ignore  connections with  loss information more resembling noise than the expected signal.</p>
+<h1 id="rfc.section.6">
+<a href="#rfc.section.6">6.</a> <a href="#security-considerations" id="security-considerations">Security Considerations</a>
+</h1>
+<p id="rfc.section.6.p.1">Passive loss observation has been a part of the network operations for a long time, so exposing loss  information to the network does not add new security concerns.</p>
+<h1 id="rfc.section.7">
+<a href="#rfc.section.7">7.</a> <a href="#privacy-considerations" id="privacy-considerations">Privacy Considerations</a>
+</h1>
+<p id="rfc.section.7.p.1">Guarding user&#8217;s privacy is an  important goal for modern protocols and protocol extensions  per <a href="#RFC7285" class="xref">[RFC7285]</a>.  While an  explicit loss signal &#8211; a preferred way to share loss information per <a href="#RFC8558" class="xref">[RFC8558]</a> &#8211; helps to   minimize  unintentional   exposure  of   additional  information, implementations of  loss reporting  must ensure that  loss information does not compromise protocol&#8217;s privacy goals.</p>
+<p id="rfc.section.7.p.2">For example, <a href="#QUIC-TRANSPORT" class="xref">[QUIC-TRANSPORT]</a> allows  changing Connection IDs in the middle of a connection to reduce  the likelihood of a passive observer linking old and new subflows to the same device. A QUIC implementation would need  to reset all counters  when it changes Connection  ID used for  outgoing  packets.  It  would also  need  to  avoid  incrementing Unreported  Loss counter  for loss  of packets  sent with  a different Connection ID.</p>
+<h1 id="rfc.section.8">
+<a href="#rfc.section.8">8.</a> <a href="#iana-considerations" id="iana-considerations">IANA Considerations</a>
+</h1>
+<p id="rfc.section.8.p.1">This document makes no request of IANA.</p>
+<h1 id="rfc.section.9">
+<a href="#rfc.section.9">9.</a> <a href="#acknowledgments" id="acknowledgments">Acknowledgments</a>
+</h1>
+<p id="rfc.section.9.p.1">The  sQuare  Bit was  originally  specified  by  Kazuho Oku  in  early proposals for loss  measurement, and is an instance  of the &#8220;alternate marking&#8221; as defined in <a href="#RFC8321" class="xref">[RFC8321]</a>.</p>
+<h1 id="rfc.references">
+<a href="#rfc.references">10.</a> References</h1>
+<h1 id="rfc.references.1">
+<a href="#rfc.references.1">10.1.</a> Normative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="IP">[IP]</b></td>
+<td class="top">
+<a>Postel, J.</a>, "<a href="https://tools.ietf.org/html/rfc791">Internet Protocol</a>", STD 5, RFC 791, DOI 10.17487/RFC0791, September 1981.</td>
+</tr>
+<tr>
+<td class="reference"><b id="IPv6">[IPv6]</b></td>
+<td class="top">
+<a>Deering, S.</a> and <a>R. Hinden</a>, "<a href="https://tools.ietf.org/html/rfc8200">Internet Protocol, Version 6 (IPv6) Specification</a>", STD 86, RFC 8200, DOI 10.17487/RFC8200, July 2017.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC2119">[RFC2119]</b></td>
+<td class="top">
+<a>Bradner, S.</a>, "<a href="https://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, DOI 10.17487/RFC2119, March 1997.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8321">[RFC8321]</b></td>
+<td class="top">
+<a>Fioccola, G.</a>, <a>Capello, A.</a>, <a>Cociglio, M.</a>, <a>Castaldelli, L.</a>, <a>Chen, M.</a>, <a>Zheng, L.</a>, <a>Mirsky, G.</a> and <a>T. Mizrahi</a>, "<a href="https://tools.ietf.org/html/rfc8321">Alternate-Marking Method for Passive and Hybrid Performance Monitoring</a>", RFC 8321, DOI 10.17487/RFC8321, January 2018.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC8558">[RFC8558]</b></td>
+<td class="top">
+<a>Hardie, T.</a>, "<a href="https://tools.ietf.org/html/rfc8558">Transport Protocol Path Signals</a>", RFC 8558, DOI 10.17487/RFC8558, April 2019.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.references.2">
+<a href="#rfc.references.2">10.2.</a> Informative References</h1>
+<table><tbody>
+<tr>
+<td class="reference"><b id="GREASE">[GREASE]</b></td>
+<td class="top">
+<a>Benjamin, D.</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tls-grease-04">Applying GREASE to TLS Extensibility</a>", Internet-Draft draft-ietf-tls-grease-04, August 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="QUIC-TRANSPORT">[QUIC-TRANSPORT]</b></td>
+<td class="top">
+<a>Iyengar, J.</a> and <a>M. Thomson</a>, "<a href="https://tools.ietf.org/html/draft-ietf-quic-transport-23">QUIC: A UDP-Based Multiplexed and Secure Transport</a>", Internet-Draft draft-ietf-quic-transport-23, September 2019.</td>
+</tr>
+<tr>
+<td class="reference"><b id="RFC7285">[RFC7285]</b></td>
+<td class="top">
+<a>Alimi, R.</a>, <a>Penno, R.</a>, <a>Yang, Y.</a>, <a>Kiesel, S.</a>, <a>Previdi, S.</a>, <a>Roome, W.</a>, <a>Shalunov, S.</a> and <a>R. Woundy</a>, "<a href="https://tools.ietf.org/html/rfc7285">Application-Layer Traffic Optimization (ALTO) Protocol</a>", RFC 7285, DOI 10.17487/RFC7285, September 2014.</td>
+</tr>
+<tr>
+<td class="reference"><b id="TRANSPORT-ENCRYPT">[TRANSPORT-ENCRYPT]</b></td>
+<td class="top">
+<a>Fairhurst, G.</a> and <a>C. Perkins</a>, "<a href="https://tools.ietf.org/html/draft-ietf-tsvwg-transport-encrypt-08">The Impact of Transport Header Confidentiality on Network Operation and Evolution of the Internet</a>", Internet-Draft draft-ietf-tsvwg-transport-encrypt-08, August 2019.</td>
+</tr>
+</tbody></table>
+<h1 id="rfc.authors"><a href="#rfc.authors">Authors' Addresses</a></h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Alexandre Ferrieux</span> (editor)
+	  <span class="n hidden">
+		<span class="family-name">Ferrieux</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Orange Labs</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:alexandre.ferrieux@orange.com">alexandre.ferrieux@orange.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Isabelle Hamchaoui</span> (editor)
+	  <span class="n hidden">
+		<span class="family-name">Hamchaoui</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Orange Labs</span>
+	<span class="adr">
+	  
+	  <span class="vcardline">
+		<span class="locality"></span> 
+		<span class="region"></span>
+		<span class="code"></span>
+	  </span>
+	  <span class="country-name vcardline"></span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:isabelle.hamchaoui@orange.com">isabelle.hamchaoui@orange.com</a></span>
+
+  </address>
+</div><div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Igor Lubashev</span> (editor)
+	  <span class="n hidden">
+		<span class="family-name">Lubashev</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Akamai Technologies</span>
+	<span class="adr">
+	  <span class="vcardline">150 Broadway</span>
+
+	  <span class="vcardline">
+		<span class="locality">Cambridge</span>,  
+		<span class="region">MA</span> 
+		<span class="code">1122</span>
+	  </span>
+	  <span class="country-name vcardline">USA</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:ilubashe@akamai.com">ilubashe@akamai.com</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
+
