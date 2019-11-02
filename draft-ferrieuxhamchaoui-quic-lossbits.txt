@@ -5,9 +5,9 @@
 TSVWG                                                   A. Ferrieux, Ed.
 Internet-Draft                                         I. Hamchaoui, Ed.
 Intended status: Informational                               Orange Labs
-Expires: April 12, 2020                                 I. Lubashev, Ed.
+Expires: May 5, 2020                                    I. Lubashev, Ed.
                                                      Akamai Technologies
-                                                        October 10, 2019
+                                                        November 2, 2019
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -16,10 +16,10 @@ Expires: April 12, 2020                                 I. Lubashev, Ed.
 Abstract
 
    This draft adapts the general technique described in draft-
-   ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC
-   v1 header.  It describes a method that employs two bits to allow
-   endpoints to signal packet loss in a way that can be used by network
-   devices to measure and locate the source of the loss.
+   ferrieuxhamchaoui-tsvwg-lossbits ([LOSSBITS]) for QUIC using reserved
+   bits in QUIC v1 header.  It describes a method that employs two bits
+   to allow endpoints to signal packet loss in a way that can be used by
+   network devices to measure and locate the source of the loss.
 
 Status of This Memo
 
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 12, 2020.
+   This Internet-Draft will expire on May 5, 2020.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Ferrieux, et al.         Expires April 12, 2020                 [Page 1]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 1]
 
-Internet-Draft                  loss-bits                   October 2019
+Internet-Draft                  loss-bits                  November 2019
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -82,7 +82,7 @@ Table of Contents
    10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
      10.1.  Normative References . . . . . . . . . . . . . . . . . .   7
      10.2.  Informative References . . . . . . . . . . . . . . . . .   8
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   8
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
 1.  Introduction
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Ferrieux, et al.         Expires April 12, 2020                 [Page 2]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 2]
 
-Internet-Draft                  loss-bits                   October 2019
+Internet-Draft                  loss-bits                  November 2019
 
 
    QUIC users directly instead of relying on measuring TCP loss between
@@ -165,9 +165,9 @@ Internet-Draft                  loss-bits                   October 2019
 
 
 
-Ferrieux, et al.         Expires April 12, 2020                 [Page 3]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 3]
 
-Internet-Draft                  loss-bits                   October 2019
+Internet-Draft                  loss-bits                  November 2019
 
 
    The value of the Unreported Loss counter is decremented every time a
@@ -221,9 +221,9 @@ Internet-Draft                  loss-bits                   October 2019
 
 
 
-Ferrieux, et al.         Expires April 12, 2020                 [Page 4]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 4]
 
-Internet-Draft                  loss-bits                   October 2019
+Internet-Draft                  loss-bits                  November 2019
 
 
 4.2.  Upstream Loss
@@ -277,9 +277,9 @@ Internet-Draft                  loss-bits                   October 2019
 
 
 
-Ferrieux, et al.         Expires April 12, 2020                 [Page 5]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 5]
 
-Internet-Draft                  loss-bits                   October 2019
+Internet-Draft                  loss-bits                  November 2019
 
 
    it should accumulate loss measurements over time periods of at least
@@ -333,9 +333,9 @@ Internet-Draft                  loss-bits                   October 2019
 
 
 
-Ferrieux, et al.         Expires April 12, 2020                 [Page 6]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 6]
 
-Internet-Draft                  loss-bits                   October 2019
+Internet-Draft                  loss-bits                  November 2019
 
 
    [QUIC-TRANSPORT].  Namely, implementations could decide that a
@@ -389,9 +389,9 @@ Internet-Draft                  loss-bits                   October 2019
 
 
 
-Ferrieux, et al.         Expires April 12, 2020                 [Page 7]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 7]
 
-Internet-Draft                  loss-bits                   October 2019
+Internet-Draft                  loss-bits                  November 2019
 
 
    [IPv6]     Deering, S. and R. Hinden, "Internet Protocol, Version 6
@@ -419,6 +419,12 @@ Internet-Draft                  loss-bits                   October 2019
    [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility",
               draft-ietf-tls-grease-04 (work in progress), August 2019.
 
+   [LOSSBITS]
+              Ferrieux, A., Hamchaoui, I., and I. Lubashev, "Packet Loss
+              Signaling for Encrypted Protocols", draft-
+              ferrieuxhamchaoui-tsvwg-lossbits-01 (work in progress),
+              July 2019.
+
    [QUIC-TRANSPORT]
               Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
               and Secure Transport", draft-ietf-quic-transport-23 (work
@@ -436,18 +442,20 @@ Internet-Draft                  loss-bits                   October 2019
               of the Internet", draft-ietf-tsvwg-transport-encrypt-08
               (work in progress), August 2019.
 
+
+
+
+Ferrieux, et al.           Expires May 5, 2020                  [Page 8]
+
+Internet-Draft                  loss-bits                  November 2019
+
+
 Authors' Addresses
 
    Alexandre Ferrieux (editor)
    Orange Labs
 
    EMail: alexandre.ferrieux@orange.com
-
-
-
-Ferrieux, et al.         Expires April 12, 2020                 [Page 8]
-
-Internet-Draft                  loss-bits                   October 2019
 
 
    Isabelle Hamchaoui (editor)
@@ -493,12 +501,4 @@ Internet-Draft                  loss-bits                   October 2019
 
 
 
-
-
-
-
-
-
-
-
-Ferrieux, et al.         Expires April 12, 2020                 [Page 9]
+Ferrieux, et al.           Expires May 5, 2020                  [Page 9]
