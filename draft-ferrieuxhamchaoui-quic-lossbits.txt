@@ -5,9 +5,9 @@
 TSVWG                                                   A. Ferrieux, Ed.
 Internet-Draft                                         I. Hamchaoui, Ed.
 Intended status: Informational                               Orange Labs
-Expires: May 5, 2020                                    I. Lubashev, Ed.
+Expires: 8 June 2020                                    I. Lubashev, Ed.
                                                      Akamai Technologies
-                                                        November 2, 2019
+                                                         6 December 2019
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -16,10 +16,11 @@ Expires: May 5, 2020                                    I. Lubashev, Ed.
 Abstract
 
    This draft adapts the general technique described in draft-
-   ferrieuxhamchaoui-tsvwg-lossbits ([LOSSBITS]) for QUIC using reserved
-   bits in QUIC v1 header.  It describes a method that employs two bits
-   to allow endpoints to signal packet loss in a way that can be used by
-   network devices to measure and locate the source of the loss.
+   ferrieuxhamchaoui-tsvwg-lossbits draft-ferrieuxhamchaoui-tsvwg-
+   lossbits for QUIC using reserved bits in QUIC v1 header.  It
+   describes a method that employs two bits to allow endpoints to signal
+   packet loss in a way that can be used by network devices to measure
+   and locate the source of the loss.
 
 Status of This Memo
 
@@ -36,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 5, 2020.
+   This Internet-Draft will expire on 8 June 2020.
 
 Copyright Notice
 
@@ -44,22 +45,21 @@ Copyright Notice
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
+   extracted from this document must include Simplified BSD License text
 
 
 
-Ferrieux, et al.           Expires May 5, 2020                  [Page 1]
+Ferrieux, et al.           Expires 8 June 2020                  [Page 1]
 
-Internet-Draft                  loss-bits                  November 2019
+Internet-Draft                  loss-bits                  December 2019
 
 
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
+   as described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Simplified BSD License.
 
 Table of Contents
 
@@ -67,20 +67,23 @@ Table of Contents
    2.  Notational Conventions  . . . . . . . . . . . . . . . . . . .   3
    3.  Loss Bits . . . . . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  Setting the sQuare Bit on Outgoing Packets  . . . . . . .   3
-     3.2.  Setting the Loss Event Bit on Outgoing Packets  . . . . .   3
+       3.1.1.  Q Period Selection  . . . . . . . . . . . . . . . . .   4
+     3.2.  Setting the Loss Event Bit on Outgoing Packets  . . . . .   4
    4.  Using the Loss Bits for Passive Loss Measurement  . . . . . .   4
-     4.1.  End-To-End Loss . . . . . . . . . . . . . . . . . . . . .   4
+     4.1.  End-To-End Loss . . . . . . . . . . . . . . . . . . . . .   5
      4.2.  Upstream Loss . . . . . . . . . . . . . . . . . . . . . .   5
-     4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   5
+     4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   6
      4.4.  Downstream Loss . . . . . . . . . . . . . . . . . . . . .   6
      4.5.  Observer Loss . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  Ossification Considerations . . . . . . . . . . . . . . . . .   6
+   5.  Ossification Considerations . . . . . . . . . . . . . . . . .   7
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
    7.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   7
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
-   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   7
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .   7
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   8
+     8.1.  Since version 01  . . . . . . . . . . . . . . . . . . . .   8
+     8.2.  Since version 00  . . . . . . . . . . . . . . . . . . . .   8
+   9.  Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   8
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   8
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .   8
      10.2.  Informative References . . . . . . . . . . . . . . . . .   8
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .   9
 
@@ -102,18 +105,18 @@ Table of Contents
    packet loss observation is not possible, as described in
    [TRANSPORT-ENCRYPT].
 
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 2]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
    QUIC could be routed by the network differently and the fraction of
    Internet traffic delivered using QUIC is increasing every year.
    Therefore, is it imperative to measure packet loss experienced by
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 2]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
    QUIC users directly instead of relying on measuring TCP loss between
    similar endpoints.
 
@@ -135,10 +138,10 @@ Internet-Draft                  loss-bits                  November 2019
    reported using loss bits.  Whenever this specification refers to
    packets, it is referring only to packets with short headers.
 
-   -  Q: The "sQuare signal" bit is toggled every N outgoing packets as
+   *  Q: The "sQuare signal" bit is toggled every N outgoing packets as
       explained below in Section 3.1.
 
-   -  L: The "Loss event" bit is set to 0 or 1 according to the
+   *  L: The "Loss event" bit is set to 0 or 1 according to the
       Unreported Loss counter, as explained below in Section 3.2.
 
    Each endpoint maintains appropriate counters independently and
@@ -155,27 +158,47 @@ Internet-Draft                  loss-bits                  November 2019
    number of packets during a half period of the square signal, as
    described in Section 4.
 
+
+
+
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 3]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
+3.1.1.  Q Period Selection
+
+   The sender is expected to choose Q Period based on the expected
+   amount of loss and reordering on the path (see Section 4.2).  The Q
+   Period value MUST be at least 128 and be a power of 2.  This
+   requirement allows an Observer to infer the Q Period by obsering one
+   period of the square signal.  It also allows the Observer to identify
+   flows that set the loss bits to arbitrary values (see Section 5).
+
+   If the sender does not have sufficient information to make an
+   informed decision about Q Period, the sender SHOULD use Q Period of
+   128.
+
 3.2.  Setting the Loss Event Bit on Outgoing Packets
 
    The Unreported Loss counter is initialized to 0, and the L bit of
    every outgoing packet indicates whether the Unreported Loss counter
-   is positive (L=1 if the counter is positive, and L=0 otherwise).
-
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 3]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
-   The value of the Unreported Loss counter is decremented every time a
+   is positive (L=1 if the counter is positive, and L=0 otherwise).  The
+   value of the Unreported Loss counter is decremented every time a
    packet with L=1 is sent.
 
    The value of the Unreported Loss counter is incremented for every
    packet that the protocol declares lost, using QUIC's existing loss
    detection machinery.
+
+   This loss signaling is similar to loss signaling in [RFC7713], except
+   the Loss Event bit is reporting the exact number of lost packets,
+   whereas Echo Loss bit in [RFC7713] is reporting an approximate number
+   of lost bytes.
 
    Observation points can estimate the end-to-end loss, as determined by
    the upstream endpoint's loss detection machinery, by counting packets
@@ -185,14 +208,23 @@ Internet-Draft                  loss-bits                  November 2019
 
    There are three sources of observable loss:
 
-   -  _upstream loss_ - loss between the sender and the observation
+   *  _upstream loss_ - loss between the sender and the observation
       point (Section 4.2)
 
-   -  _downstream loss_ - loss between the observation point and the
+   *  _downstream loss_ - loss between the observation point and the
       destination (Section 4.4)
 
-   -  _observer loss_ - loss by the observer itself that does not cause
+   *  _observer loss_ - loss by the observer itself that does not cause
       downstream loss (Section 4.5)
+
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 4]
+
+Internet-Draft                  loss-bits                  December 2019
+
 
    The upstream and downstream loss together constitute _end-to-end
    loss_ (Section 4.1).
@@ -213,18 +245,6 @@ Internet-Draft                  loss-bits                  November 2019
    controller reduces the packet send rate after loss, there may be a
    sufficient delay before sending packets with L=1 that they have a
    greater chance of arriving at the observer.
-
-
-
-
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 4]
-
-Internet-Draft                  loss-bits                  November 2019
-
 
 4.2.  Upstream Loss
 
@@ -254,6 +274,14 @@ Internet-Draft                  loss-bits                  November 2019
    implementation to choose a global constant; N=64 has been extensively
    tried in large-scale field tests and yielded good results.
 
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 5]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
 4.3.  Correlating End-to-End and Upstream Loss
 
    Upstream loss is calculated by observing the actual packets that did
@@ -273,15 +301,6 @@ Internet-Draft                  loss-bits                  November 2019
    upstream and end-to-end loss rate measurements, it SHOULD use
    upstream loss rate leading the end-to-end loss rate by approximately
    1 RTT.  If the observer is unable to estimate RTT of the connection,
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 5]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
    it should accumulate loss measurements over time periods of at least
    4 times the typical RTT for the observed connections.
 
@@ -311,6 +330,14 @@ Internet-Draft                  loss-bits                  November 2019
    bit values (see {{upstreamloss)}).  The end-to-end loss rate
    measurement, however, is unaffected by the observer loss, since it is
    a measurement of the fraction of packets with the set L bit value,
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 6]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
    and the observer loss would affect all packets equally (see
    Section 4.1).
 
@@ -330,14 +357,6 @@ Internet-Draft                  loss-bits                  November 2019
    the protocol designers are not ready to dedicate (and ossify) bits
    used for loss reporting to this function.  The greasing could be
    accomplished similarly to the Latency Spin bit greasing in
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 6]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
    [QUIC-TRANSPORT].  Namely, implementations could decide that a
    fraction of connections should not encode loss information in the
    loss bits and, instead, the bits would be set to arbitrary values.
@@ -353,7 +372,7 @@ Internet-Draft                  loss-bits                  November 2019
 7.  Privacy Considerations
 
    Guarding user's privacy is an important goal for modern protocols and
-   protocol extensions per [RFC7285].  While an explicit loss signal - a
+   protocol extensions per [RFC7258].  While an explicit loss signal - a
    preferred way to share loss information per [RFC8558] - helps to
    minimize unintentional exposure of additional information,
    implementations of loss reporting must ensure that loss information
@@ -367,37 +386,35 @@ Internet-Draft                  loss-bits                  November 2019
    incrementing Unreported Loss counter for loss of packets sent with a
    different Connection ID.
 
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 7]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
 8.  IANA Considerations
 
    This document makes no request of IANA.
 
+8.1.  Since version 01
+
+   *  Add reference to RFC7713
+
+8.2.  Since version 00
+
+   *  Rewrote to base this draft on [LOSSBITS]
+
 9.  Acknowledgments
 
    The sQuare Bit was originally specified by Kazuho Oku in early
-   proposals for loss measurement, and is an instance of the "alternate
+   proposals for loss measurement and is an instance of the "alternate
    marking" as defined in [RFC8321].
 
 10.  References
 
 10.1.  Normative References
-
-   [IP]       Postel, J., "Internet Protocol", STD 5, RFC 791,
-              DOI 10.17487/RFC0791, September 1981,
-              <https://www.rfc-editor.org/info/rfc791>.
-
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 7]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
-   [IPv6]     Deering, S. and R. Hinden, "Internet Protocol, Version 6
-              (IPv6) Specification", STD 86, RFC 8200,
-              DOI 10.17487/RFC8200, July 2017,
-              <https://www.rfc-editor.org/info/rfc8200>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -416,71 +433,80 @@ Internet-Draft                  loss-bits                  November 2019
 
 10.2.  Informative References
 
-   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility",
-              draft-ietf-tls-grease-04 (work in progress), August 2019.
+   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility", Work
+              in Progress, Internet-Draft, draft-ietf-tls-grease-04, 22
+              August 2019, <http://www.ietf.org/internet-drafts/draft-
+              ietf-tls-grease-04.txt>.
 
-   [LOSSBITS]
-              Ferrieux, A., Hamchaoui, I., and I. Lubashev, "Packet Loss
-              Signaling for Encrypted Protocols", draft-
-              ferrieuxhamchaoui-tsvwg-lossbits-01 (work in progress),
-              July 2019.
+   [LOSSBITS] Ferrieux, A., Hamchaoui, I., and I. Lubashev, "Packet Loss
+              Signaling for Encrypted Protocols", Work in Progress,
+              Internet-Draft, draft-ferrieuxhamchaoui-tsvwg-lossbits-02,
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 8]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
+              4 November 2019, <http://www.ietf.org/internet-drafts/
+              draft-ferrieuxhamchaoui-tsvwg-lossbits-02.txt>.
 
    [QUIC-TRANSPORT]
               Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", draft-ietf-quic-transport-23 (work
-              in progress), September 2019.
+              and Secure Transport", Work in Progress, Internet-Draft,
+              draft-ietf-quic-transport-24, 3 November 2019,
+              <http://www.ietf.org/internet-drafts/draft-ietf-quic-
+              transport-24.txt>.
 
-   [RFC7285]  Alimi, R., Ed., Penno, R., Ed., Yang, Y., Ed., Kiesel, S.,
-              Previdi, S., Roome, W., Shalunov, S., and R. Woundy,
-              "Application-Layer Traffic Optimization (ALTO) Protocol",
-              RFC 7285, DOI 10.17487/RFC7285, September 2014,
-              <https://www.rfc-editor.org/info/rfc7285>.
+   [RFC7258]  Farrell, S. and H. Tschofenig, "Pervasive Monitoring Is an
+              Attack", BCP 188, RFC 7258, DOI 10.17487/RFC7258, May
+              2014, <https://www.rfc-editor.org/info/rfc7258>.
+
+   [RFC7713]  Mathis, M. and B. Briscoe, "Congestion Exposure (ConEx)
+              Concepts, Abstract Mechanism, and Requirements", RFC 7713,
+              DOI 10.17487/RFC7713, December 2015,
+              <https://www.rfc-editor.org/info/rfc7713>.
 
    [TRANSPORT-ENCRYPT]
-              Fairhurst, G. and C. Perkins, "The Impact of Transport
-              Header Confidentiality on Network Operation and Evolution
-              of the Internet", draft-ietf-tsvwg-transport-encrypt-08
-              (work in progress), August 2019.
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 8]
-
-Internet-Draft                  loss-bits                  November 2019
-
+              Fairhurst, G. and C. Perkins, "Considerations around
+              Transport Header Confidentiality, Network Operations, and
+              the Evolution of Internet Transport Protocols", Work in
+              Progress, Internet-Draft, draft-ietf-tsvwg-transport-
+              encrypt-09, 3 November 2019, <http://www.ietf.org/
+              internet-drafts/draft-ietf-tsvwg-transport-encrypt-
+              09.txt>.
 
 Authors' Addresses
 
    Alexandre Ferrieux (editor)
    Orange Labs
 
-   EMail: alexandre.ferrieux@orange.com
+   Email: alexandre.ferrieux@orange.com
 
 
    Isabelle Hamchaoui (editor)
    Orange Labs
 
-   EMail: isabelle.hamchaoui@orange.com
+   Email: isabelle.hamchaoui@orange.com
 
 
    Igor Lubashev (editor)
    Akamai Technologies
    150 Broadway
-   Cambridge, MA  1122
-   USA
-
-   EMail: ilubashe@akamai.com
+   Cambridge, MA 1122
+   United States of America
 
 
 
 
+Ferrieux, et al.           Expires 8 June 2020                  [Page 9]
+
+Internet-Draft                  loss-bits                  December 2019
 
 
-
-
-
-
+   Email: ilubashe@akamai.com
 
 
 
@@ -501,4 +527,34 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.           Expires May 5, 2020                  [Page 9]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                 [Page 10]

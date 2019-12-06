@@ -5,9 +5,9 @@
 TSVWG                                                        A. Ferrieux
 Internet-Draft                                              I. Hamchaoui
 Intended status: Informational                               Orange Labs
-Expires: May 5, 2020                                         I. Lubashev
+Expires: 8 June 2020                                         I. Lubashev
                                                      Akamai Technologies
-                                                        November 2, 2019
+                                                         6 December 2019
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 5, 2020.
+   This Internet-Draft will expire on 8 June 2020.
 
 Copyright Notice
 
@@ -46,22 +46,21 @@ Copyright Notice
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents
-   (https://trustee.ietf.org/license-info) in effect on the date of
-   publication of this document.  Please review these documents
-   carefully, as they describe your rights and restrictions with respect
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
+   Please review these documents carefully, as they describe your rights
+   and restrictions with respect to this document.  Code Components
 
 
 
-Ferrieux, et al.           Expires May 5, 2020                  [Page 1]
+Ferrieux, et al.           Expires 8 June 2020                  [Page 1]
 
-Internet-Draft                  loss-bits                  November 2019
+Internet-Draft                  loss-bits                  December 2019
 
 
-   to this document.  Code Components extracted from this document must
-   include Simplified BSD License text as described in Section 4.e of
-   the Trust Legal Provisions and are provided without warranty as
-   described in the Simplified BSD License.
+   extracted from this document must include Simplified BSD License text
+   as described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Simplified BSD License.
 
 Table of Contents
 
@@ -73,24 +72,26 @@ Table of Contents
      3.2.  Setting the Loss Event Bit on Outgoing Packets  . . . . .   4
    4.  Using the Loss Bits for Passive Loss Measurement  . . . . . .   5
      4.1.  End-To-End Loss . . . . . . . . . . . . . . . . . . . . .   5
-     4.2.  Upstream Loss . . . . . . . . . . . . . . . . . . . . . .   5
+     4.2.  Upstream Loss . . . . . . . . . . . . . . . . . . . . . .   6
      4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   6
-     4.4.  Downstream Loss . . . . . . . . . . . . . . . . . . . . .   6
+     4.4.  Downstream Loss . . . . . . . . . . . . . . . . . . . . .   7
      4.5.  Observer Loss . . . . . . . . . . . . . . . . . . . . . .   7
    5.  ECN-Echo Event Bit  . . . . . . . . . . . . . . . . . . . . .   7
-     5.1.  Setting the ECN-Echo Event Bit on Outgoing Packets  . . .   7
-   6.  Using E Bit for Passive ECN-Reported Congestion Measurement .   8
-   7.  Protocol Ossification Considerations  . . . . . . . . . . . .   8
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-   9.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   8
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
-   11. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     11.1.  Since version 00 . . . . . . . . . . . . . . . . . . . .   9
-   12. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .   9
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .   9
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  10
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+     5.1.  Setting the ECN-Echo Event Bit on Outgoing Packets  . . .   8
+     5.2.  Using E Bit for Passive ECN-Reported Congestion
+           Measurement . . . . . . . . . . . . . . . . . . . . . . .   8
+   6.  Protocol Ossification Considerations  . . . . . . . . . . . .   8
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
+   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   10. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .   9
+     10.1.  Since version 01 . . . . . . . . . . . . . . . . . . . .   9
+     10.2.  Since version 00 . . . . . . . . . . . . . . . . . . . .   9
+   11. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
+   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  10
+     12.2.  Informative References . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -108,10 +109,9 @@ Table of Contents
 
 
 
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 2]
+Ferrieux, et al.           Expires 8 June 2020                  [Page 2]
 
-Internet-Draft                  loss-bits                  November 2019
+Internet-Draft                  loss-bits                  December 2019
 
 
    With encrypted protocols, the equivalent transport headers are
@@ -150,10 +150,10 @@ Internet-Draft                  loss-bits                  November 2019
    Whenever this specification refers to packets, it is referring only
    to packets capable of loss reporting.
 
-   -  Q: The "sQuare signal" bit is toggled every N outgoing packets as
+   *  Q: The "sQuare signal" bit is toggled every N outgoing packets as
       explained below in Section 3.1.
 
-   -  L: The "Loss event" bit is set to 0 or 1 according to the
+   *  L: The "Loss event" bit is set to 0 or 1 according to the
       Unreported Loss counter, as explained below in Section 3.2.
 
    Each endpoint maintains appropriate counters independently and
@@ -165,9 +165,9 @@ Internet-Draft                  loss-bits                  November 2019
 
 
 
-Ferrieux, et al.           Expires May 5, 2020                  [Page 3]
+Ferrieux, et al.           Expires 8 June 2020                  [Page 3]
 
-Internet-Draft                  loss-bits                  November 2019
+Internet-Draft                  loss-bits                  December 2019
 
 
 3.1.  Setting the sQuare Bit on Outgoing Packets
@@ -184,7 +184,7 @@ Internet-Draft                  loss-bits                  November 2019
    "Initial Q Value" is whatever value the initial packet has, and "Q
    Period" is set per a dedicated TCP option on SYN and SYN/ACK), or
    they can be included with every packet (e.g.  ConEx IPv6 Destination
-   Option of [RFC7837]).
+   Option of [ConEx-IPv6]).
 
    Observation points can estimate the upstream losses by counting the
    number of packets during a half period of the square signal, as
@@ -199,7 +199,7 @@ Internet-Draft                  loss-bits                  November 2019
    least 128 and be a power of 2.  This requirement allows an Observer
    to infer the Q Period by obsering one period of the square signal.
    It also allows the Observer to identify flows that set the loss bits
-   to arbitrary values (see Section 7).
+   to arbitrary values (see Section 6).
 
 3.2.  Setting the Loss Event Bit on Outgoing Packets
 
@@ -215,19 +215,26 @@ Internet-Draft                  loss-bits                  November 2019
    the loss determination later, the Unreported Loss counter SHOULD NOT
    be decremented due to the rescission.
 
-   This loss signaling is similar to loss signaling in [RFC7713], except
+   This loss signaling is similar to loss signaling in [ConEx], except
    the Loss Event bit is reporting the exact number of lost packets,
 
 
 
 
-Ferrieux, et al.           Expires May 5, 2020                  [Page 4]
+Ferrieux, et al.           Expires 8 June 2020                  [Page 4]
 
-Internet-Draft                  loss-bits                  November 2019
+Internet-Draft                  loss-bits                  December 2019
 
 
-   whereas [RFC7713]'s Echo Loss bit is reporting an approximate number
+   whereas Echo Loss bit in [ConEx] is reporting an approximate number
    of lost bytes.
+
+   For protocols, such as TCP ([TCP]), that allow network devices to
+   change data segmentation, it is possible that only a part of the
+   packet is lost.  In these cases, the sender MUST increment Unreported
+   Loss counter by the fraction of the packet data lost (so Unreported
+   Loss counter may become negative when a packet with L=1 is sent after
+   a partial packet has been lost).
 
    Observation points can estimate the end-to-end loss, as determined by
    the upstream endpoint's loss detection machinery, by counting packets
@@ -237,13 +244,13 @@ Internet-Draft                  loss-bits                  November 2019
 
    There are three sources of observable loss:
 
-   -  _upstream loss_ - loss between the sender and the observation
+   *  _upstream loss_ - loss between the sender and the observation
       point (Section 4.2)
 
-   -  _downstream loss_ - loss between the observation point and the
+   *  _downstream loss_ - loss between the observation point and the
       destination (Section 4.4)
 
-   -  _observer loss_ - loss by the observer itself that does not cause
+   *  _observer loss_ - loss by the observer itself that does not cause
       downstream loss (Section 4.5)
 
    The upstream and downstream loss together constitute _end-to-end
@@ -266,6 +273,15 @@ Internet-Draft                  loss-bits                  November 2019
    sufficient delay before sending packets with L=1 that they have a
    greater chance of arriving at the observer.
 
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 5]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
 4.2.  Upstream Loss
 
    Blocks of N (half of Q Period) consecutive packets are sent with the
@@ -273,15 +289,6 @@ Internet-Draft                  loss-bits                  November 2019
    inverted value of the Q bit.  Hence, knowing the value of N, an on-
    path observer can estimate the amount of upstream loss after
    observing at least N packets.  If "p" is the average number of
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 5]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
    packets in a block of packets with the same Q value, then the
    upstream loss is "1-p/N".
 
@@ -322,6 +329,15 @@ Internet-Draft                  loss-bits                  November 2019
    If the calculated upstream loss rate exceeds the end-to-end loss rate
    calculated in Section 4.1, then either the Q Period is too short for
    the amount of packet reordering or there is observer loss, described
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 6]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
    in Section 4.5.  If this happens, the observer SHOULD adjust the
    calculated upstream loss rate to match end-to-end loss rate.
 
@@ -329,15 +345,6 @@ Internet-Draft                  loss-bits                  November 2019
 
    Because downstream loss affects only those packets that did not
    suffer upstream loss, the end-to-end loss rate ("e") relates to the
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 6]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
    upstream loss rate ("u") and downstream loss rate ("d") as
    "(1-u)(1-d)=1-e".  Hence, "d=(e-u)/(1-u)".
 
@@ -366,18 +373,26 @@ Internet-Draft                  loss-bits                  November 2019
 5.  ECN-Echo Event Bit
 
    While the primary focus of the draft is on exposing packet loss,
-   modern network can report congestion events before they have to drop
-   packets due to congestion, as described in [ECN].  When transport
-   protocols communicate ECN-Echo feedback under encryption, this signal
-   cannot be observed by the network operators.  When tasked with
-   diagnosing a network performance problem, knowledge of a congestion
-   downstream of an observation point can be intrumental.
+   modern networks can report congestion before they are forced to drop
+   packets, as described in [ECN].  When transport protocols keep ECN-
+   Echo feedback under encryption, this signal cannot be observed by the
+   network operators.  When tasked with diagnosing network performance
+   problems, knowledge of a congestion downstream of an observation
+   point can be intrumental.
 
    If downstream congestion information is desired, this information can
    be signaled with an additinal bit.
 
-   -  E: The "ECN-Echo Event" bit is set to 0 or 1 according to the
+   *  E: The "ECN-Echo Event" bit is set to 0 or 1 according to the
       Unreported ECN Echo counter, as explained below in Section 5.1.
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 7]
+
+Internet-Draft                  loss-bits                  December 2019
+
 
 5.1.  Setting the ECN-Echo Event Bit on Outgoing Packets
 
@@ -386,17 +401,13 @@ Internet-Draft                  loss-bits                  November 2019
    network with CE markings, according to the ECN-Echo feedback from the
    receiver.
 
+   This ECN-Echo signaling is similar to ECN signaling in [ConEx].  ECN-
+   Echo mechanism in QUIC provides the number of packets received with
+   CE marks.  For protocols like TCP, the method described in
+   [ConEx-TCP] can be employed.  As stated in [ConEx-TCP], such feedback
+   can be further improved using a method described in [ACCURATE].
 
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 7]
-
-Internet-Draft                  loss-bits                  November 2019
-
-
-   This ECN-Echo signaling is similar to ECN signaling in [RFC7713].
-
-6.  Using E Bit for Passive ECN-Reported Congestion Measurement
+5.2.  Using E Bit for Passive ECN-Reported Congestion Measurement
 
    A network observer can count packets with CE codepoint and determine
    the upstream CE-marking rate directly.
@@ -411,7 +422,7 @@ Internet-Draft                  loss-bits                  November 2019
    estimates of upstream and downstream CE-markings in case the flow
    contains packets that are not ECN-capable.
 
-7.  Protocol Ossification Considerations
+6.  Protocol Ossification Considerations
 
    Accurate loss information is not critical to the operation of any
    protocol, though its presence for a sufficient number of connections
@@ -427,28 +438,32 @@ Internet-Draft                  loss-bits                  November 2019
    The observers would need to be ready to ignore connections with loss
    information more resembling noise than the expected signal.
 
-8.  Security Considerations
+
+
+
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 8]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
+7.  Security Considerations
 
    Passive loss observation has been a part of the network operations
    for a long time, so exposing loss information to the network does not
    add new security concerns.
 
-9.  Privacy Considerations
+8.  Privacy Considerations
 
    Guarding user's privacy is an important goal for modern protocols and
-   protocol extensions per [RFC7285].  While an explicit loss signal - a
+   protocol extensions per [RFC7258].  While an explicit loss signal - a
    preferred way to share loss information per [RFC8558] - helps to
    minimize unintentional exposure of additional information,
    implementations of loss reporting must ensure that loss information
    does not compromise protocol's privacy goals.
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                  [Page 8]
-
-Internet-Draft                  loss-bits                  November 2019
-
 
    For example, [QUIC-TRANSPORT] allows changing Connection IDs in the
    middle of a connection to reduce the likelihood of a passive observer
@@ -459,26 +474,64 @@ Internet-Draft                  loss-bits                  November 2019
    Unreported Loss counter for loss of packets sent to a different
    destinatoin or with a different Connection ID.
 
-10.  IANA Considerations
+9.  IANA Considerations
 
    This document makes no request of IANA.
 
-11.  Change Log
+10.  Change Log
 
-11.1.  Since version 00
+10.1.  Since version 01
 
-   -  Addressed review comments
+   *  Clarified Q Period selection
 
-   -  Improved guidelines for privacy protections for QIUC
+   *  Added an optional E (ECN-Echo Event) bit
 
-12.  Acknowledgments
+   *  Clarified L bit calculation for protocols that allow partial data
+      loss due to a change in segmentation (such as TCP)
+
+10.2.  Since version 00
+
+   *  Addressed review comments
+
+   *  Improved guidelines for privacy protections for QIUC
+
+
+
+
+
+
+
+Ferrieux, et al.           Expires 8 June 2020                  [Page 9]
+
+Internet-Draft                  loss-bits                  December 2019
+
+
+11.  Acknowledgments
 
    The sQuare bit was originally suggested by Kazuho Oku in early
-   proposals for loss measurement.
+   proposals for loss measurement and is an instance of the "alternate
+   marking" as defined in [RFC8321].
 
-13.  References
+12.  References
 
-13.1.  Normative References
+12.1.  Normative References
+
+   [ConEx]    Mathis, M. and B. Briscoe, "Congestion Exposure (ConEx)
+              Concepts, Abstract Mechanism, and Requirements", RFC 7713,
+              DOI 10.17487/RFC7713, December 2015,
+              <https://www.rfc-editor.org/info/rfc7713>.
+
+   [ConEx-IPv6]
+              Krishnan, S., Kuehlewind, M., Briscoe, B., and C. Ralli,
+              "IPv6 Destination Option for Congestion Exposure (ConEx)",
+              RFC 7837, DOI 10.17487/RFC7837, May 2016,
+              <https://www.rfc-editor.org/info/rfc7837>.
+
+   [ConEx-TCP]
+              Kuehlewind, M., Ed. and R. Scheffenegger, "TCP
+              Modifications for Congestion Exposure (ConEx)", RFC 7786,
+              DOI 10.17487/RFC7786, May 2016,
+              <https://www.rfc-editor.org/info/rfc7786>.
 
    [ECN]      Ramakrishnan, K., Floyd, S., and D. Black, "The Addition
               of Explicit Congestion Notification (ECN) to IP",
@@ -499,48 +552,51 @@ Internet-Draft                  loss-bits                  November 2019
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+   [RFC8321]  Fioccola, G., Ed., Capello, A., Cociglio, M., Castaldelli,
+              L., Chen, M., Zheng, L., Mirsky, G., and T. Mizrahi,
 
 
-Ferrieux, et al.           Expires May 5, 2020                  [Page 9]
+
+Ferrieux, et al.           Expires 8 June 2020                 [Page 10]
 
-Internet-Draft                  loss-bits                  November 2019
+Internet-Draft                  loss-bits                  December 2019
 
+
+              "Alternate-Marking Method for Passive and Hybrid
+              Performance Monitoring", RFC 8321, DOI 10.17487/RFC8321,
+              January 2018, <https://www.rfc-editor.org/info/rfc8321>.
 
    [RFC8558]  Hardie, T., Ed., "Transport Protocol Path Signals",
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/info/rfc8558>.
 
-13.2.  Informative References
+   [TCP]      Postel, J., "Transmission Control Protocol", STD 7,
+              RFC 793, DOI 10.17487/RFC0793, September 1981,
+              <https://www.rfc-editor.org/info/rfc793>.
 
-   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility",
-              draft-ietf-tls-grease-04 (work in progress), August 2019.
+12.2.  Informative References
+
+   [ACCURATE] Briscoe, B., Kuehlewind, M., and R. Scheffenegger, "More
+              Accurate ECN Feedback in TCP", Work in Progress, Internet-
+              Draft, draft-ietf-tcpm-accurate-ecn-09, 8 July 2019,
+              <http://www.ietf.org/internet-drafts/draft-ietf-tcpm-
+              accurate-ecn-09.txt>.
+
+   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility", Work
+              in Progress, Internet-Draft, draft-ietf-tls-grease-04, 22
+              August 2019, <http://www.ietf.org/internet-drafts/draft-
+              ietf-tls-grease-04.txt>.
 
    [QUIC-TRANSPORT]
               Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", draft-ietf-quic-transport-23 (work
-              in progress), September 2019.
+              and Secure Transport", Work in Progress, Internet-Draft,
+              draft-ietf-quic-transport-24, 3 November 2019,
+              <http://www.ietf.org/internet-drafts/draft-ietf-quic-
+              transport-24.txt>.
 
-   [RFC7285]  Alimi, R., Ed., Penno, R., Ed., Yang, Y., Ed., Kiesel, S.,
-              Previdi, S., Roome, W., Shalunov, S., and R. Woundy,
-              "Application-Layer Traffic Optimization (ALTO) Protocol",
-              RFC 7285, DOI 10.17487/RFC7285, September 2014,
-              <https://www.rfc-editor.org/info/rfc7285>.
-
-   [RFC7713]  Mathis, M. and B. Briscoe, "Congestion Exposure (ConEx)
-              Concepts, Abstract Mechanism, and Requirements", RFC 7713,
-              DOI 10.17487/RFC7713, December 2015,
-              <https://www.rfc-editor.org/info/rfc7713>.
-
-   [RFC7837]  Krishnan, S., Kuehlewind, M., Briscoe, B., and C. Ralli,
-              "IPv6 Destination Option for Congestion Exposure (ConEx)",
-              RFC 7837, DOI 10.17487/RFC7837, May 2016,
-              <https://www.rfc-editor.org/info/rfc7837>.
-
-   [RFC8321]  Fioccola, G., Ed., Capello, A., Cociglio, M., Castaldelli,
-              L., Chen, M., Zheng, L., Mirsky, G., and T. Mizrahi,
-              "Alternate-Marking Method for Passive and Hybrid
-              Performance Monitoring", RFC 8321, DOI 10.17487/RFC8321,
-              January 2018, <https://www.rfc-editor.org/info/rfc8321>.
+   [RFC7258]  Farrell, S. and H. Tschofenig, "Pervasive Monitoring Is an
+              Attack", BCP 188, RFC 7258, DOI 10.17487/RFC7258, May
+              2014, <https://www.rfc-editor.org/info/rfc7258>.
 
    [RFC8517]  Dolson, D., Ed., Snellman, J., Boucadair, M., Ed., and C.
               Jacquenet, "An Inventory of Transport-Centric Functions
@@ -549,50 +605,55 @@ Internet-Draft                  loss-bits                  November 2019
               <https://www.rfc-editor.org/info/rfc8517>.
 
    [TRANSPORT-ENCRYPT]
-              Fairhurst, G. and C. Perkins, "The Impact of Transport
-              Header Confidentiality on Network Operation and Evolution
-              of the Internet", draft-ietf-tsvwg-transport-encrypt-08
-              (work in progress), August 2019.
+              Fairhurst, G. and C. Perkins, "Considerations around
+              Transport Header Confidentiality, Network Operations, and
+              the Evolution of Internet Transport Protocols", Work in
+              Progress, Internet-Draft, draft-ietf-tsvwg-transport-
+              encrypt-09, 3 November 2019, <http://www.ietf.org/
 
 
 
-
-Ferrieux, et al.           Expires May 5, 2020                 [Page 10]
+Ferrieux, et al.           Expires 8 June 2020                 [Page 11]
 
-Internet-Draft                  loss-bits                  November 2019
+Internet-Draft                  loss-bits                  December 2019
 
+
+              internet-drafts/draft-ietf-tsvwg-transport-encrypt-
+              09.txt>.
 
    [UDP-OPTIONS]
-              Touch, J., "Transport Options for UDP", draft-ietf-tsvwg-
-              udp-options-08 (work in progress), September 2019.
+              Touch, J., "Transport Options for UDP", Work in Progress,
+              Internet-Draft, draft-ietf-tsvwg-udp-options-08, 12
+              September 2019, <http://www.ietf.org/internet-drafts/
+              draft-ietf-tsvwg-udp-options-08.txt>.
 
    [UDP-SURPLUS]
-              Herbert, T., "UDP Surplus Header", draft-herbert-udp-
-              space-hdr-01 (work in progress), July 2019.
+              Herbert, T., "UDP Surplus Header", Work in Progress,
+              Internet-Draft, draft-herbert-udp-space-hdr-01, 8 July
+              2019, <http://www.ietf.org/internet-drafts/draft-herbert-
+              udp-space-hdr-01.txt>.
 
 Authors' Addresses
 
    Alexandre Ferrieux
    Orange Labs
 
-   EMail: alexandre.ferrieux@orange.com
+   Email: alexandre.ferrieux@orange.com
 
 
    Isabelle Hamchaoui
    Orange Labs
 
-   EMail: isabelle.hamchaoui@orange.com
+   Email: isabelle.hamchaoui@orange.com
 
 
    Igor Lubashev
    Akamai Technologies
    150 Broadway
-   Cambridge, MA  1122
-   USA
+   Cambridge, MA 1122
+   United States of America
 
-   EMail: ilubashe@akamai.com
-
-
+   Email: ilubashe@akamai.com
 
 
 
@@ -608,9 +669,4 @@ Authors' Addresses
 
 
 
-
-
-
-
-
-Ferrieux, et al.           Expires May 5, 2020                 [Page 11]
+Ferrieux, et al.           Expires 8 June 2020                 [Page 12]
