@@ -5,9 +5,9 @@
 TSVWG                                                        A. Ferrieux
 Internet-Draft                                              I. Hamchaoui
 Intended status: Informational                               Orange Labs
-Expires: 8 June 2020                                         I. Lubashev
+Expires: June 8, 2020                                        I. Lubashev
                                                      Akamai Technologies
-                                                         6 December 2019
+                                                        December 6, 2019
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 June 2020.
+   This Internet-Draft will expire on June 8, 2020.
 
 Copyright Notice
 
@@ -46,21 +46,22 @@ Copyright Notice
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents (https://trustee.ietf.org/
-   license-info) in effect on the date of publication of this document.
-   Please review these documents carefully, as they describe your rights
-   and restrictions with respect to this document.  Code Components
+   Provisions Relating to IETF Documents
+   (https://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 1]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 1]
 
 Internet-Draft                  loss-bits                  December 2019
 
 
-   extracted from this document must include Simplified BSD License text
-   as described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Simplified BSD License.
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
 
 Table of Contents
 
@@ -108,8 +109,7 @@ Table of Contents
 
 
 
-
-Ferrieux, et al.           Expires 8 June 2020                  [Page 2]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 2]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -150,10 +150,10 @@ Internet-Draft                  loss-bits                  December 2019
    Whenever this specification refers to packets, it is referring only
    to packets capable of loss reporting.
 
-   *  Q: The "sQuare signal" bit is toggled every N outgoing packets as
+   -  Q: The "sQuare signal" bit is toggled every N outgoing packets as
       explained below in Section 3.1.
 
-   *  L: The "Loss event" bit is set to 0 or 1 according to the
+   -  L: The "Loss event" bit is set to 0 or 1 according to the
       Unreported Loss counter, as explained below in Section 3.2.
 
    Each endpoint maintains appropriate counters independently and
@@ -165,7 +165,7 @@ Internet-Draft                  loss-bits                  December 2019
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 3]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 3]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -221,7 +221,7 @@ Internet-Draft                  loss-bits                  December 2019
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 4]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 4]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -244,13 +244,13 @@ Internet-Draft                  loss-bits                  December 2019
 
    There are three sources of observable loss:
 
-   *  _upstream loss_ - loss between the sender and the observation
+   -  _upstream loss_ - loss between the sender and the observation
       point (Section 4.2)
 
-   *  _downstream loss_ - loss between the observation point and the
+   -  _downstream loss_ - loss between the observation point and the
       destination (Section 4.4)
 
-   *  _observer loss_ - loss by the observer itself that does not cause
+   -  _observer loss_ - loss by the observer itself that does not cause
       downstream loss (Section 4.5)
 
    The upstream and downstream loss together constitute _end-to-end
@@ -277,7 +277,7 @@ Internet-Draft                  loss-bits                  December 2019
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 5]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 5]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -333,7 +333,7 @@ Internet-Draft                  loss-bits                  December 2019
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 6]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 6]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -383,13 +383,13 @@ Internet-Draft                  loss-bits                  December 2019
    If downstream congestion information is desired, this information can
    be signaled with an additinal bit.
 
-   *  E: The "ECN-Echo Event" bit is set to 0 or 1 according to the
+   -  E: The "ECN-Echo Event" bit is set to 0 or 1 according to the
       Unreported ECN Echo counter, as explained below in Section 5.1.
 
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 7]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 7]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -445,7 +445,7 @@ Internet-Draft                  loss-bits                  December 2019
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 8]
+Ferrieux, et al.          Expires June 8, 2020                  [Page 8]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -482,26 +482,26 @@ Internet-Draft                  loss-bits                  December 2019
 
 10.1.  Since version 01
 
-   *  Clarified Q Period selection
+   -  Clarified Q Period selection
 
-   *  Added an optional E (ECN-Echo Event) bit
+   -  Added an optional E (ECN-Echo Event) bit
 
-   *  Clarified L bit calculation for protocols that allow partial data
+   -  Clarified L bit calculation for protocols that allow partial data
       loss due to a change in segmentation (such as TCP)
 
 10.2.  Since version 00
 
-   *  Addressed review comments
+   -  Addressed review comments
 
-   *  Improved guidelines for privacy protections for QIUC
-
-
+   -  Improved guidelines for privacy protections for QIUC
 
 
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                  [Page 9]
+
+
+Ferrieux, et al.          Expires June 8, 2020                  [Page 9]
 
 Internet-Draft                  loss-bits                  December 2019
 
@@ -552,16 +552,18 @@ Internet-Draft                  loss-bits                  December 2019
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
-   [RFC8321]  Fioccola, G., Ed., Capello, A., Cociglio, M., Castaldelli,
-              L., Chen, M., Zheng, L., Mirsky, G., and T. Mizrahi,
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                 [Page 10]
+
+
+Ferrieux, et al.          Expires June 8, 2020                 [Page 10]
 
 Internet-Draft                  loss-bits                  December 2019
 
 
+   [RFC8321]  Fioccola, G., Ed., Capello, A., Cociglio, M., Castaldelli,
+              L., Chen, M., Zheng, L., Mirsky, G., and T. Mizrahi,
               "Alternate-Marking Method for Passive and Hybrid
               Performance Monitoring", RFC 8321, DOI 10.17487/RFC8321,
               January 2018, <https://www.rfc-editor.org/info/rfc8321>.
@@ -576,23 +578,18 @@ Internet-Draft                  loss-bits                  December 2019
 
 12.2.  Informative References
 
-   [ACCURATE] Briscoe, B., Kuehlewind, M., and R. Scheffenegger, "More
-              Accurate ECN Feedback in TCP", Work in Progress, Internet-
-              Draft, draft-ietf-tcpm-accurate-ecn-09, 8 July 2019,
-              <http://www.ietf.org/internet-drafts/draft-ietf-tcpm-
-              accurate-ecn-09.txt>.
+   [ACCURATE]
+              Briscoe, B., Kuehlewind, M., and R. Scheffenegger, "More
+              Accurate ECN Feedback in TCP", draft-ietf-tcpm-accurate-
+              ecn-09 (work in progress), July 2019.
 
-   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility", Work
-              in Progress, Internet-Draft, draft-ietf-tls-grease-04, 22
-              August 2019, <http://www.ietf.org/internet-drafts/draft-
-              ietf-tls-grease-04.txt>.
+   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility",
+              draft-ietf-tls-grease-04 (work in progress), August 2019.
 
    [QUIC-TRANSPORT]
               Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", Work in Progress, Internet-Draft,
-              draft-ietf-quic-transport-24, 3 November 2019,
-              <http://www.ietf.org/internet-drafts/draft-ietf-quic-
-              transport-24.txt>.
+              and Secure Transport", draft-ietf-quic-transport-24 (work
+              in progress), November 2019.
 
    [RFC7258]  Farrell, S. and H. Tschofenig, "Pervasive Monitoring Is an
               Attack", BCP 188, RFC 7258, DOI 10.17487/RFC7258, May
@@ -607,55 +604,49 @@ Internet-Draft                  loss-bits                  December 2019
    [TRANSPORT-ENCRYPT]
               Fairhurst, G. and C. Perkins, "Considerations around
               Transport Header Confidentiality, Network Operations, and
-              the Evolution of Internet Transport Protocols", Work in
-              Progress, Internet-Draft, draft-ietf-tsvwg-transport-
-              encrypt-09, 3 November 2019, <http://www.ietf.org/
+              the Evolution of Internet Transport Protocols", draft-
+              ietf-tsvwg-transport-encrypt-09 (work in progress),
+              November 2019.
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                 [Page 11]
+
+
+
+Ferrieux, et al.          Expires June 8, 2020                 [Page 11]
 
 Internet-Draft                  loss-bits                  December 2019
 
 
-              internet-drafts/draft-ietf-tsvwg-transport-encrypt-
-              09.txt>.
-
    [UDP-OPTIONS]
-              Touch, J., "Transport Options for UDP", Work in Progress,
-              Internet-Draft, draft-ietf-tsvwg-udp-options-08, 12
-              September 2019, <http://www.ietf.org/internet-drafts/
-              draft-ietf-tsvwg-udp-options-08.txt>.
+              Touch, J., "Transport Options for UDP", draft-ietf-tsvwg-
+              udp-options-08 (work in progress), September 2019.
 
    [UDP-SURPLUS]
-              Herbert, T., "UDP Surplus Header", Work in Progress,
-              Internet-Draft, draft-herbert-udp-space-hdr-01, 8 July
-              2019, <http://www.ietf.org/internet-drafts/draft-herbert-
-              udp-space-hdr-01.txt>.
+              Herbert, T., "UDP Surplus Header", draft-herbert-udp-
+              space-hdr-01 (work in progress), July 2019.
 
 Authors' Addresses
 
    Alexandre Ferrieux
    Orange Labs
 
-   Email: alexandre.ferrieux@orange.com
+   EMail: alexandre.ferrieux@orange.com
 
 
    Isabelle Hamchaoui
    Orange Labs
 
-   Email: isabelle.hamchaoui@orange.com
+   EMail: isabelle.hamchaoui@orange.com
 
 
    Igor Lubashev
    Akamai Technologies
    150 Broadway
-   Cambridge, MA 1122
-   United States of America
+   Cambridge, MA  1122
+   USA
 
-   Email: ilubashe@akamai.com
-
-
+   EMail: ilubashe@akamai.com
 
 
 
@@ -669,4 +660,13 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.           Expires 8 June 2020                 [Page 12]
+
+
+
+
+
+
+
+
+
+Ferrieux, et al.          Expires June 8, 2020                 [Page 12]
