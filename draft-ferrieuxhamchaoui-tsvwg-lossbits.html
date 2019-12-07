@@ -1124,8 +1124,9 @@ counter is positive, and L=0 otherwise).  The value of the Unreported Loss
 counter is decremented every time a packet with L=1 is sent.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The value of the Unreported Loss counter is incremented for every packet that
 the protocol declares lost, using whatever loss detection machinery the protocol
-employs. If the protocol is able to rescind the loss determination later, the
-Unreported Loss counter SHOULD NOT be decremented due to the rescission.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+employs. If the protocol is able to rescind the loss determination later, a
+positive Unreported Loss counter MAY be decremented due to the rescission, but
+it SHOULD NOT become negative.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">This loss signaling is similar to loss signaling in <span>[<a href="#ConEx" class="xref">ConEx</a>]</span>, except the Loss
 Event bit is reporting the exact number of lost packets, whereas Echo Loss bit
 in <span>[<a href="#ConEx" class="xref">ConEx</a>]</span> is reporting an approximate number of lost bytes.<a href="#section-3.2-3" class="pilcrow">¶</a></p>

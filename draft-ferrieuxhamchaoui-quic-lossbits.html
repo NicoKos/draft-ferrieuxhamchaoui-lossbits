@@ -10,10 +10,12 @@
 <meta content="Igor Lubashev" name="author">
 <meta content="
        This draft adapts the general technique described in
-draft-ferrieuxhamchaoui-tsvwg-lossbits draft-ferrieuxhamchaoui-tsvwg-lossbits
-for QUIC using reserved bits in QUIC v1 header.  It describes a method that
-employs two bits to allow endpoints to signal packet loss in a way that can be
-used by network devices to measure and locate the source of the loss. 
+draft-ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC v1
+short header.  It describes a method that employs two bits to allow endpoints to
+signal packet loss in a way that can be used by network devices to measure and
+locate the source of the loss. A companion draft,
+draft-ferrieuxhamchaoui-tsvwg-lossbits-extension, describes negotiating this
+functionality as an extension in QUIC v1. 
     " name="description">
 <meta content="xml2rfc 2.36.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -833,7 +835,7 @@ table.left {
 <div id="internal-metadata" class="document-information">
 <dl id="identifiers">
 <dt class="label-workgroup">Workgroup:</dt>
-<dd class="workgroup">TSVWG</dd>
+<dd class="workgroup">QUIC</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
 <dd class="internet-draft">draft-ferrieuxhamchaoui-quic-lossbits-latest</dd>
 <dt class="label-published">Published:</dt>
@@ -868,10 +870,12 @@ table.left {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">This draft adapts the general technique described in
-draft-ferrieuxhamchaoui-tsvwg-lossbits draft-ferrieuxhamchaoui-tsvwg-lossbits
-for QUIC using reserved bits in QUIC v1 header.  It describes a method that
-employs two bits to allow endpoints to signal packet loss in a way that can be
-used by network devices to measure and locate the source of the loss.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+draft-ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC v1
+short header.  It describes a method that employs two bits to allow endpoints to
+signal packet loss in a way that can be used by network devices to measure and
+locate the source of the loss. A companion draft,
+draft-ferrieuxhamchaoui-tsvwg-lossbits-extension, describes negotiating this
+functionality as an extension in QUIC v1.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -934,7 +938,7 @@ used by network devices to measure and locate the source of the loss.<a href="#s
                 <p id="section-toc.1-1.3.2.1.1"><a href="#section-3.1" class="xref">3.1</a>.  <a href="#name-setting-the-square-bit-on-o" class="xref">Setting the sQuare Bit on Outgoing Packets</a><a href="#section-toc.1-1.3.2.1.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.3.2.1.2.1">
-                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-q-period-selection" class="xref">Q Period Selection</a><a href="#section-toc.1-1.3.2.1.2.1.1" class="pilcrow">¶</a></p>
+                    <p id="section-toc.1-1.3.2.1.2.1.1"><a href="#section-3.1.1" class="xref">3.1.1</a>.  <a href="#name-q-run-length-selection" class="xref">Q Run Length Selection</a><a href="#section-toc.1-1.3.2.1.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 </ul>
 </li>
@@ -1024,9 +1028,9 @@ loss observation is not possible, as described in <span>[<a href="#TRANSPORT-ENC
 traffic delivered using QUIC is increasing every year. Therefore, is it
 imperative to measure packet loss experienced by QUIC users directly instead of
 relying on measuring TCP loss between similar endpoints.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">Since explicit path signals are preferred by <span>[<a href="#RFC8558" class="xref">RFC8558</a>]</span>, this document
-proposes adding two explicit loss bits to the clear portion of short headers to
-restore network operators' ability to maintain high QoS for QUIC users.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">Since explicit path signals are preferred by <span>[<a href="#RFC8558" class="xref">RFC8558</a>]</span>, two explicit loss
+bits in the clear portion of short headers are used to signal packet loss to
+on-path network devices.<a href="#section-1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions">
@@ -1064,24 +1068,27 @@ each connection 4-tuple and destination Connection ID.<a href="#section-3-3" cla
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-setting-the-square-bit-on-o" class="section-name selfRef">Setting the sQuare Bit on Outgoing Packets</a>
         </h3>
 <p id="section-3.1-1">The sQuare Value is initialized to the Initial Q Value (0 or 1) and is reflected
-in the Q bit of every outgoing packet.  The sQuare value is inverted after
-sending every N packets (Q Period is 2*N), where N is a parameter of the method,
-discussed below.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+in the Q bit of every outgoing packet. The sQuare value is inverted after
+sending every N packets (a Q run). Hence, Q Period is 2*N. The Q bit represents
+"packet color" as defined by <span>[<a href="#RFC8321" class="xref">RFC8321</a>]</span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">Observation points can estimate the upstream losses by counting the number of
 packets during a half period of the square signal, as described in <a href="#usage" class="xref">Section 4</a>.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
-<div id="q-period-selection">
+<div id="q-run-length-selection">
 <section id="section-3.1.1">
-          <h4 id="name-q-period-selection">
-<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-q-period-selection" class="section-name selfRef">Q Period Selection</a>
+          <h4 id="name-q-run-length-selection">
+<a href="#section-3.1.1" class="section-number selfRef">3.1.1. </a><a href="#name-q-run-length-selection" class="section-name selfRef">Q Run Length Selection</a>
           </h4>
-<p id="section-3.1.1-1">The sender is expected to choose Q Period based on the expected amount of loss
-and reordering on the path (see <a href="#upstreamloss" class="xref">Section 4.2</a>). The Q Period value MUST be at
-least 128 and be a power of 2. This requirement allows an Observer to infer the
-Q Period by obsering one period of the square signal. It also allows the
+<p id="section-3.1.1-1">The sender is expected to choose Q run length based on the expected amount of
+loss and reordering on the path (see <a href="#upstreamloss" class="xref">Section 4.2</a>). The Q run length MUST be
+at least 64 and be a power of 2. This requirement allows an Observer to infer
+the Q run length by obsering one period of the square signal. It also allows the
 Observer to identify flows that set the loss bits to arbitrary values (see
 <a href="#ossification" class="xref">Section 5</a>).<a href="#section-3.1.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1.1-2">If the sender does not have sufficient information to make an informed decision
-about Q Period, the sender SHOULD use Q Period of 128.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
+about Q run length, the sender SHOULD use Q run of 64 packets. Alternatively,
+the sender MAY also choose a random Q run length for each connection, increasing
+the chances of using a Q run length that gives the best signal for some
+connections.<a href="#section-3.1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1096,10 +1103,13 @@ packet indicates whether the Unreported Loss counter is positive (L=1 if the
 counter is positive, and L=0 otherwise).  The value of the Unreported Loss
 counter is decremented every time a packet with L=1 is sent.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">The value of the Unreported Loss counter is incremented for every packet that
-the protocol declares lost, using QUIC's existing loss detection machinery.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+the protocol declares lost, using QUIC's existing loss detection machinery. If
+the implementation is able to rescind the loss determination later, a positive
+Unreported Loss counter MAY be decremented due to the rescission, but it SHOULD
+NOT become negative.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">This loss signaling is similar to loss signaling in <span>[<a href="#RFC7713" class="xref">RFC7713</a>]</span>, except the
-Loss Event bit is reporting the exact number of lost packets, whereas
-Echo Loss bit in <span>[<a href="#RFC7713" class="xref">RFC7713</a>]</span> is reporting an approximate number of lost bytes.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+Loss Event bit is reporting the exact number of lost packets, whereas Echo Loss
+bit in <span>[<a href="#RFC7713" class="xref">RFC7713</a>]</span> is reporting an approximate number of lost bytes.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Observation points can estimate the end-to-end loss, as determined by the
 upstream endpoint's loss detection machinery, by counting packets in this
 direction with a L bit equal to 1, as described in <a href="#usage" class="xref">Section 4</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
