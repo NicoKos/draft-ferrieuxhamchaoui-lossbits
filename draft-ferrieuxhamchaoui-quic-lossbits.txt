@@ -180,7 +180,7 @@ Internet-Draft                  loss-bits                   January 2020
    N is too large (see Section 4.2).
 
    The value of N MUST be at least 64 and be a power of 2.  This
-   requirement allows an Observer to infer the Q run length by obsering
+   requirement allows an Observer to infer the Q run length by observing
    one period of the square signal.  It also allows the Observer to
    identify flows that set the loss bits to arbitrary values (see
    Section 6).
@@ -380,7 +380,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 7.1.  Optimistic ACK Attack
 
-   A defence against an Opportunistic ACK Attack [QUIC-TRANSPORT]
+   A defense against an Opportunistic ACK Attack [QUIC-TRANSPORT]
    involves a sender randomly skipping packet numbers to detect a
    receiver acknowledging packet numbers that have never been sent.
    Q-bit signal may inform the attacker which packet numbers were
@@ -419,13 +419,14 @@ Internet-Draft                  loss-bits                   January 2020
    Unreported Loss counter for loss of packets sent with a different
    Connection ID.
 
-   Accorate loss information allows identification and correlation of
+   Accurate loss information allows identification and correlation of
    network conditions upstream and downstream of the observer.  This
    could be a powerful tool to identify connections that attempt to hide
-   their orign networks, if the adversary is able to affect network
+   their origin networks, if the adversary is able to affect network
    conditions in those origin networks.  Similar information can be
-   obtained by packet timing and infering congestion controller response
-   to network events, but loss information provides a clearer signal.
+   obtained by packet timing and inferring congestion controller
+   response to network events, but loss information provides a clearer
+   signal.
 
    Implementations MUST allow administrators of clients and servers to
    disable loss reporting either globally or on a per-connection basis.
@@ -441,7 +442,6 @@ Internet-Draft                  loss-bits                   January 2020
 
    Parameter Name: loss_bits
 
-   Specification: ..............
 
 
 
@@ -449,6 +449,8 @@ Ferrieux, et al.           Expires 9 July 2020                  [Page 8]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   Specification: ..............
 
 10.  Acknowledgments
 
@@ -496,8 +498,6 @@ Internet-Draft                  loss-bits                   January 2020
               <http://www.ietf.org/internet-drafts/draft-pauly-quic-
               datagram-05.txt>.
 
-   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility", Work
-              in Progress, Internet-Draft, draft-ietf-tls-grease-04, 22
 
 
 
@@ -506,14 +506,10 @@ Ferrieux, et al.           Expires 9 July 2020                  [Page 9]
 Internet-Draft                  loss-bits                   January 2020
 
 
+   [GREASE]   Benjamin, D., "Applying GREASE to TLS Extensibility", Work
+              in Progress, Internet-Draft, draft-ietf-tls-grease-04, 22
               August 2019, <http://www.ietf.org/internet-drafts/draft-
               ietf-tls-grease-04.txt>.
-
-   [LOSSBITS] Ferrieux, A., Hamchaoui, I., and I. Lubashev, "Packet Loss
-              Signaling for Encrypted Protocols", Work in Progress,
-              Internet-Draft, draft-ferrieuxhamchaoui-tsvwg-lossbits-02,
-              4 November 2019, <http://www.ietf.org/internet-drafts/
-              draft-ferrieuxhamchaoui-tsvwg-lossbits-02.txt>.
 
    [RFC7713]  Mathis, M. and B. Briscoe, "Congestion Exposure (ConEx)
               Concepts, Abstract Mechanism, and Requirements", RFC 7713,
@@ -547,6 +543,10 @@ Authors' Addresses
    United States of America
 
    Email: ilubashe@akamai.com
+
+
+
+
 
 
 
