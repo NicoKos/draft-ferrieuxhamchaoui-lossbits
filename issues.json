@@ -1,6 +1,222 @@
 [
 
   {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/5",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/5/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/5/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/5/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/5",
+    "id": 547045154,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYwNjA3MjUx",
+    "number": 5,
+    "title": "Cleanup of transport param and related QUIC v1 mechanics text",
+    "user": {
+      "login": "igorlord",
+      "id": 25256216,
+      "node_id": "MDQ6VXNlcjI1MjU2MjE2",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/25256216?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/igorlord",
+      "html_url": "https://github.com/igorlord",
+      "followers_url": "https://api.github.com/users/igorlord/followers",
+      "following_url": "https://api.github.com/users/igorlord/following{/other_user}",
+      "gists_url": "https://api.github.com/users/igorlord/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/igorlord/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/igorlord/subscriptions",
+      "organizations_url": "https://api.github.com/users/igorlord/orgs",
+      "repos_url": "https://api.github.com/users/igorlord/repos",
+      "events_url": "https://api.github.com/users/igorlord/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/igorlord/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-08T19:00:49Z",
+    "updated_at": "2020-01-08T23:48:58Z",
+    "closed_at": "2020-01-08T23:48:57Z",
+    "author_association": "OWNER",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/5",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/5",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/5.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/5.patch"
+    },
+    "body": "Minor cleanup of transport param text."
+  },
+  {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/4",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/4/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/4/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/4/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/4",
+    "id": 546909790,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYwNDk1NTUy",
+    "number": 4,
+    "title": "Add introductory sentence to loss_bits parameter specification",
+    "user": {
+      "login": "dtikhonov",
+      "id": 4528576,
+      "node_id": "MDQ6VXNlcjQ1Mjg1NzY=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4528576?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dtikhonov",
+      "html_url": "https://github.com/dtikhonov",
+      "followers_url": "https://api.github.com/users/dtikhonov/followers",
+      "following_url": "https://api.github.com/users/dtikhonov/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dtikhonov/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dtikhonov/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dtikhonov/subscriptions",
+      "organizations_url": "https://api.github.com/users/dtikhonov/orgs",
+      "repos_url": "https://api.github.com/users/dtikhonov/repos",
+      "events_url": "https://api.github.com/users/dtikhonov/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dtikhonov/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-08T14:49:17Z",
+    "updated_at": "2020-01-08T14:49:17Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/4",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/4",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/4.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/4.patch"
+    },
+    "body": "As suggested by @ferrieux in PR #1."
+  },
+  {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/3",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/3/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/3/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/3/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/3",
+    "id": 546906075,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYwNDkyNTMw",
+    "number": 3,
+    "title": "Specify where QL bits go and how they are (not) protected",
+    "user": {
+      "login": "dtikhonov",
+      "id": 4528576,
+      "node_id": "MDQ6VXNlcjQ1Mjg1NzY=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4528576?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dtikhonov",
+      "html_url": "https://github.com/dtikhonov",
+      "followers_url": "https://api.github.com/users/dtikhonov/followers",
+      "following_url": "https://api.github.com/users/dtikhonov/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dtikhonov/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dtikhonov/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dtikhonov/subscriptions",
+      "organizations_url": "https://api.github.com/users/dtikhonov/orgs",
+      "repos_url": "https://api.github.com/users/dtikhonov/repos",
+      "events_url": "https://api.github.com/users/dtikhonov/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dtikhonov/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 1,
+    "created_at": "2020-01-08T14:42:58Z",
+    "updated_at": "2020-01-08T15:06:10Z",
+    "closed_at": "2020-01-08T15:06:09Z",
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/3",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/3",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/3.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/3.patch"
+    },
+    "body": ""
+  },
+  {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/2",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/2/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/2/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/2/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/2",
+    "id": 546866801,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYwNDYzNzY3",
+    "number": 2,
+    "title": "Add myself to the list of editors",
+    "user": {
+      "login": "dtikhonov",
+      "id": 4528576,
+      "node_id": "MDQ6VXNlcjQ1Mjg1NzY=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4528576?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dtikhonov",
+      "html_url": "https://github.com/dtikhonov",
+      "followers_url": "https://api.github.com/users/dtikhonov/followers",
+      "following_url": "https://api.github.com/users/dtikhonov/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dtikhonov/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dtikhonov/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dtikhonov/subscriptions",
+      "organizations_url": "https://api.github.com/users/dtikhonov/orgs",
+      "repos_url": "https://api.github.com/users/dtikhonov/repos",
+      "events_url": "https://api.github.com/users/dtikhonov/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dtikhonov/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-08T13:39:43Z",
+    "updated_at": "2020-01-08T15:06:56Z",
+    "closed_at": "2020-01-08T15:06:55Z",
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/2",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/2",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/2.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/2.patch"
+    },
+    "body": ""
+  },
+  {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/1",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
     "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/1/labels{/name}",
@@ -34,7 +250,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -43,8 +259,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2020-01-07T19:30:34Z",
-    "updated_at": "2020-01-08T13:33:21Z",
-    "closed_at": null,
+    "updated_at": "2020-01-08T14:06:28Z",
+    "closed_at": "2020-01-08T13:48:54Z",
     "author_association": "COLLABORATOR",
     "pull_request": {
       "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/1",
