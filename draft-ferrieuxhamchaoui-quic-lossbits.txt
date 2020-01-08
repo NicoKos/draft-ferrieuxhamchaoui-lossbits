@@ -462,15 +462,15 @@ Internet-Draft                  loss-bits                   January 2020
 
 8.1.  Optimistic ACK Attack
 
-   A defense against an Opportunistic ACK Attack [QUIC-TRANSPORT]
-   involves a sender randomly skipping packet numbers to detect a
-   receiver acknowledging packet numbers that have never been sent.
-   Q-bit signal may inform the attacker which packet numbers were
-   skipped on purpose and which had been actually lost (and are,
-   therefore, safe for the attacker to acknowledge).  To use Q-bit for
-   this purpose, the attacker must first receive at least an entire Q
-   run of packets, which renders the attack ineffective against a delay-
-   sensitive congestion controller.
+   A defense against an Optimistic ACK Attack [QUIC-TRANSPORT] involves
+   a sender randomly skipping packet numbers to detect a receiver
+   acknowledging packet numbers that have never been sent.  Q-bit signal
+   may inform the attacker which packet numbers were skipped on purpose
+   and which had been actually lost (and are, therefore, safe for the
+   attacker to acknowledge).  To use Q-bit for this purpose, the
+   attacker must first receive at least an entire Q run of packets,
+   which renders the attack ineffective against a delay-sensitive
+   congestion controller.
 
    For QUIC v1 connections, the attacker can examine offsets in STREAM
    frames to determine whether packet number skips are deliberate, so
