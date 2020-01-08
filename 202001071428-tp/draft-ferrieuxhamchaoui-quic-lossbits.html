@@ -1251,8 +1251,9 @@ upstream paths with different latency characteristics.<a href="#section-4.5-3" c
 <dl class="dlParallel" id="section-5-2">
         <dt id="section-5-2.1">loss_bits (0x1055):</dt>
 <dd id="section-5-2.2">
-  The loss bits transport parameter is an integer value that can be set
-to 0 or 1 indicating the level of QL bits support.<a href="#section-5-2.2" class="pilcrow">¶</a>
+  Presence of the loss bits transport parameter indicates that the sender
+supports the loss bits extension.  This parameter is an integer value that
+can be set to 0 or 1 indicating the level of QL bits support.<a href="#section-5-2.2" class="pilcrow">¶</a>
 </dd>
 </dl>
 <p id="section-5-3">When loss_bits is set to 0, the peer is allowed to change R-bits in the
