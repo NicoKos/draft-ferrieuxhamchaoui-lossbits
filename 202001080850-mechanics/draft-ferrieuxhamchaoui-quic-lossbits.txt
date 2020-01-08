@@ -81,7 +81,7 @@ Table of Contents
      6.1.  Short Packet Header . . . . . . . . . . . . . . . . . . .   8
      6.2.  Header Protection . . . . . . . . . . . . . . . . . . . .   8
    7.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
      8.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   9
    9.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
    10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
@@ -397,8 +397,18 @@ Internet-Draft                  loss-bits                   January 2020
 6.1.  Short Packet Header
 
    The QL-bits replace the R-bits in the short packet header (see
-   Section 17.3 of [QUIC-TRANSPORT]).  The Q bit is placed in bit
-   position 4 and the L bit is placed in position 3.
+   Section 17.3 of [QUIC-TRANSPORT]).
+
+       0 1 2 3 4 5 6 7
+      +-+-+-+-+-+-+-+-+
+      |0|1|S|Q|L|K|P P|
+      +-+-+-+-+-+-+-+-+
+
+   sQuare Bit (Q):  The fourth most significant bit (0x10) is the sQuare
+      bit, set as described in Section 3.1.
+
+   Loss Bit (L):  The fifth most significant bit (0x08) is the loss
+      event bit, set as described in Section 3.2.
 
 6.2.  Header Protection
 
@@ -426,16 +436,6 @@ Internet-Draft                  loss-bits                   January 2020
    with a certain likelihood, such that on average loss reporting is
    disabled for at least one eighth of connections (see Section 5).
 
-8.  Security Considerations
-
-   The Q-bit signal does not provide any information that cannot be
-   observed by simply counting packets transiting a network path.  The
-   L-bit signal discloses internal state of the protocol loss detection
-   machinery, but this signal can also be gleamed by timing packets and
-   observing congestion controller response.  Hence, loss bits do not
-   provide a viable new mechanism to attack QUIC data integrity and
-   secrecy.
-
 
 
 
@@ -449,6 +449,16 @@ Ferrieux, et al.          Expires 11 July 2020                  [Page 8]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+8.  Security Considerations
+
+   The Q-bit signal does not provide any information that cannot be
+   observed by simply counting packets transiting a network path.  The
+   L-bit signal discloses internal state of the protocol loss detection
+   machinery, but this signal can also be gleamed by timing packets and
+   observing congestion controller response.  Hence, loss bits do not
+   provide a viable new mechanism to attack QUIC data integrity and
+   secrecy.
 
 8.1.  Optimistic ACK Attack
 
@@ -488,6 +498,14 @@ Internet-Draft                  loss-bits                   January 2020
    could be a powerful tool to identify connections that attempt to hide
    their origin networks, if the adversary is able to affect network
    conditions in those origin networks.  Similar information can be
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                  [Page 9]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    obtained by packet timing and inferring congestion controller
    response to network events, but loss information provides a clearer
    signal.
@@ -496,15 +514,6 @@ Internet-Draft                  loss-bits                   January 2020
    disable loss reporting either globally or on a per-connection basis.
    Additionally, as described in Section 7, loss reporting MUST be
    disabled for a certain fraction of all connections.
-
-
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                  [Page 9]
-
-Internet-Draft                  loss-bits                   January 2020
-
 
 10.  IANA Considerations
 
@@ -544,6 +553,15 @@ Internet-Draft                  loss-bits                   January 2020
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
+
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                 [Page 10]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
@@ -554,14 +572,6 @@ Internet-Draft                  loss-bits                   January 2020
    [TRANSPORT-ENCRYPT]
               Fairhurst, G. and C. Perkins, "Considerations around
               Transport Header Confidentiality, Network Operations, and
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                 [Page 10]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
               the Evolution of Internet Transport Protocols", Work in
               Progress, Internet-Draft, draft-ietf-tsvwg-transport-
               encrypt-09, 3 November 2019, <http://www.ietf.org/
@@ -600,6 +610,14 @@ Authors' Addresses
    Email: alexandre.ferrieux@orange.com
 
 
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                 [Page 11]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    Isabelle Hamchaoui (editor)
    Orange Labs
 
@@ -610,27 +628,9 @@ Authors' Addresses
    Akamai Technologies
    150 Broadway
    Cambridge, MA 1122
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                 [Page 11]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    United States of America
 
    Email: ilubashe@akamai.com
-
-
-
-
-
-
-
-
-
-
 
 
 
