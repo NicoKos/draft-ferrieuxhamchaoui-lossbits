@@ -626,9 +626,6 @@ Internet-Draft                  loss-bits                   January 2020
 
    Igor Lubashev (editor)
    Akamai Technologies
-   150 Broadway
-   Cambridge, MA 1122
-   United States of America
 
    Email: ilubashe@akamai.com
 
@@ -637,6 +634,9 @@ Internet-Draft                  loss-bits                   January 2020
    LiteSpeed Technologies
 
    Email: dtikhonov@litespeedtech.com
+
+
+
 
 
 
