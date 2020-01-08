@@ -69,7 +69,7 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
    2.  Notational Conventions  . . . . . . . . . . . . . . . . . . .   3
    3.  Loss Bits . . . . . . . . . . . . . . . . . . . . . . . . . .   3
-     3.1.  Setting the sQuare Bit on Outgoing Packets  . . . . . . .   3
+     3.1.  Setting the sQuare Signal Bit on Outgoing Packets . . . .   3
        3.1.1.  Q Run Length Selection  . . . . . . . . . . . . . . .   4
      3.2.  Setting the Loss Event Bit on Outgoing Packets  . . . . .   4
    4.  Using the Loss Bits for Passive Loss Measurement  . . . . . .   5
@@ -77,20 +77,19 @@ Table of Contents
      4.2.  Upstream Loss . . . . . . . . . . . . . . . . . . . . . .   5
      4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   6
      4.4.  Downstream Loss . . . . . . . . . . . . . . . . . . . . .   6
-     4.5.  Observer Loss . . . . . . . . . . . . . . . . . . . . . .   7
+     4.5.  Observer Loss . . . . . . . . . . . . . . . . . . . . . .   6
    5.  Transport Parameter . . . . . . . . . . . . . . . . . . . . .   7
-   6.  Mechanics . . . . . . . . . . . . . . . . . . . . . . . . . .   7
-     6.1.  Short Packet Header . . . . . . . . . . . . . . . . . . .   8
-     6.2.  Header Protection . . . . . . . . . . . . . . . . . . . .   8
-   7.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
-     8.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   9
-   9.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
-   10. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
-   11. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
-   12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  10
-     12.2.  Informative References . . . . . . . . . . . . . . . . .  11
+   6.  Short Packet Header . . . . . . . . . . . . . . . . . . . . .   7
+   7.  Header Protection . . . . . . . . . . . . . . . . . . . . . .   8
+   8.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
+     9.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   8
+   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
+   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   12. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
+   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     13.1.  Normative References . . . . . . . . . . . . . . . . . .  10
+     13.2.  Informative References . . . . . . . . . . . . . . . . .  10
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
@@ -106,6 +105,7 @@ Table of Contents
    Additionally, the lossy segment (upstream or downstream from the
    observation point) can be quickly identified by moving the passive
    observer around.
+
 
 
 
@@ -142,26 +142,26 @@ Internet-Draft                  loss-bits                   January 2020
    packets, it is referring only to packets with short headers.
 
    *  Q: The "sQuare signal" bit is toggled every N outgoing packets as
-      explained below in Section 3.1.  This is a previously-reserved
-      short header bit 0x10.
+      explained below in Section 3.1.
 
    *  L: The "Loss event" bit is set to 0 or 1 according to the
-      Unreported Loss counter, as explained below in Section 3.2.  This
-      is a previously-reserved short header bit 0x08.
+      Unreported Loss counter, as explained below in Section 3.2.
 
    Each endpoint maintains appropriate counters independently and
    separately for each connection 4-tuple and destination Connection ID.
    Whenever this specification refers to connections, it is referring to
    packets sharing the same 4-tuple and destination Connection ID.
 
-3.1.  Setting the sQuare Bit on Outgoing Packets
+3.1.  Setting the sQuare Signal Bit on Outgoing Packets
 
    The sQuare Value is initialized to the Initial Q Value (0 or 1) and
    is reflected in the Q bit of every outgoing packet.  The sQuare value
    is inverted after sending every N packets (a Q run).  Hence, Q Period
    is 2*N.  The Q bit represents "packet color" as defined by [RFC8321].
 
-
+   Observation points can estimate the upstream losses by counting the
+   number of packets during one period of the square signal, as
+   described in Section 4.
 
 
 
@@ -169,10 +169,6 @@ Ferrieux, et al.          Expires 11 July 2020                  [Page 3]
 
 Internet-Draft                  loss-bits                   January 2020
 
-
-   Observation points can estimate the upstream losses by counting the
-   number of packets during one period of the square signal, as
-   described in Section 4.
 
 3.1.1.  Q Run Length Selection
 
@@ -187,7 +183,7 @@ Internet-Draft                  loss-bits                   January 2020
    requirement allows an Observer to infer the Q run length by observing
    one period of the square signal.  It also allows the Observer to
    identify flows that set the loss bits to arbitrary values (see
-   Section 7).
+   Section 8).
 
    If the sender does not have sufficient information to make an
    informed decision about Q run length, the sender SHOULD use N=64,
@@ -217,6 +213,10 @@ Internet-Draft                  loss-bits                   January 2020
    whereas Echo Loss bit in [RFC7713] is reporting an approximate number
    of lost bytes.
 
+   Observation points can estimate the end-to-end loss, as determined by
+   the upstream endpoint's loss detection machinery, by counting packets
+   in this direction with a L bit equal to 1, as described in Section 4.
+
 
 
 
@@ -225,10 +225,6 @@ Ferrieux, et al.          Expires 11 July 2020                  [Page 4]
 
 Internet-Draft                  loss-bits                   January 2020
 
-
-   Observation points can estimate the end-to-end loss, as determined by
-   the upstream endpoint's loss detection machinery, by counting packets
-   in this direction with a L bit equal to 1, as described in Section 4.
 
 4.  Using the Loss Bits for Passive Loss Measurement
 
@@ -273,7 +269,11 @@ Internet-Draft                  loss-bits                   January 2020
    average number of packets in a block of packets with the same Q value
    ("p") divided by N ("u=1-avg(p)/N").
 
+   The observer needs to be able to tolerate packet reordering that can
+   blur the edges of the square signal.
 
+   The observer needs to differentiate packets as belonging to different
+   connections, since they use independent counters.
 
 
 
@@ -281,12 +281,6 @@ Ferrieux, et al.          Expires 11 July 2020                  [Page 5]
 
 Internet-Draft                  loss-bits                   January 2020
 
-
-   The observer needs to be able to tolerate packet reordering that can
-   blur the edges of the square signal.
-
-   The observer needs to differentiate packets as belonging to different
-   connections, since they use independent counters.
 
 4.3.  Correlating End-to-End and Upstream Loss
 
@@ -324,20 +318,6 @@ Internet-Draft                  loss-bits                   January 2020
    upstream loss rate ("u") and downstream loss rate ("d") as
    "(1-u)(1-d)=1-e".  Hence, "d=(e-u)/(1-u)".
 
-
-
-
-
-
-
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                  [Page 6]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
 4.5.  Observer Loss
 
    A typical deployment of a passive observation system includes a
@@ -350,6 +330,14 @@ Internet-Draft                  loss-bits                   January 2020
    the observer to account for fewer packets in a block of identical Q
    bit values (see {{upstreamloss)}).  The end-to-end loss rate
    measurement, however, is unaffected by the observer loss, since it is
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                  [Page 6]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    a measurement of the fraction of packets with the set L bit value,
    and the observer loss would affect all packets equally (see
    Section 4.1).
@@ -368,23 +356,35 @@ Internet-Draft                  loss-bits                   January 2020
    The use of the loss bits is negotiated using a transport parameter:
 
    loss_bits (0x1055):  The loss bits transport parameter is an integer
-      value that can be set to 0 or 1 indicating the level of QL bits
-      support.
+      value, encoded as a variable-length integer, that can be set to 0
+      or 1 indicating the level of QL-bits support.
 
-   When loss_bits is set to 0, the peer is allowed to change R-bits in
-   the short packet header to QL-bits if the peer sends loss_bits=1.
+   When loss_bits parameter is present, the peer is allowed to change
+   R-bits in the short packet header to QL-bits if the peer sends
+   loss_bits=1.
 
    When loss_bits is set to 1, the sender will change R-bits to QL-bits
-   if the peer sends the loss_bits transport parameter set to either 0
-   or 1.
+   if the peer includes the loss_bits transport parameter.
 
    A client MUST NOT use remembered value of loss_bits for 0-RTT
    connection.
 
-6.  Mechanics
+6.  Short Packet Header
 
+   When sending loss bits has been negotiated, the QL-bits replace the
+   R-bits in the short packet header (see Section 17.3 of
+   [QUIC-TRANSPORT]).
 
+       0 1 2 3 4 5 6 7
+      +-+-+-+-+-+-+-+-+
+      |0|1|S|Q|L|K|P P|
+      +-+-+-+-+-+-+-+-+
 
+   sQuare Signal Bit (Q):  The fourth most significant bit (0x10) is the
+      sQuare signal bit, set as described in Section 3.1.
+
+   Loss Event Bit (L):  The fifth most significant bit (0x08) is the
+      Loss event bit, set as described in Section 3.2.
 
 
 
@@ -394,27 +394,12 @@ Ferrieux, et al.          Expires 11 July 2020                  [Page 7]
 Internet-Draft                  loss-bits                   January 2020
 
 
-6.1.  Short Packet Header
+7.  Header Protection
 
-   The QL-bits replace the R-bits in the short packet header (see
-   Section 17.3 of [QUIC-TRANSPORT]).
-
-       0 1 2 3 4 5 6 7
-      +-+-+-+-+-+-+-+-+
-      |0|1|S|Q|L|K|P P|
-      +-+-+-+-+-+-+-+-+
-
-   sQuare Bit (Q):  The fourth most significant bit (0x10) is the sQuare
-      bit, set as described in Section 3.1.
-
-   Loss Bit (L):  The fifth most significant bit (0x08) is the loss
-      event bit, set as described in Section 3.2.
-
-6.2.  Header Protection
-
-   Unlike the R-bits, the QL-bits are not protected.  The first byte of
-   the header protection mask used to protect short packet headers has
-   its five most significant bits masked out instead of three.
+   Unlike the R-bits, the QL-bits are not protected.  When sending loss
+   bits has been negotiated, the first byte of the header protection
+   mask used to protect short packet headers has its five most
+   significant bits masked out instead of three.
 
    The algorithm specified in Section 5.4.1 of [QUIC-TLS] changes as
    follows:
@@ -423,7 +408,7 @@ Internet-Draft                  loss-bits                   January 2020
          # Short header: 3 bits masked
          packet[0] ^= mask[0] & 0x07
 
-7.  Ossification Considerations
+8.  Ossification Considerations
 
    Accurate loss reporting signal is not critical for the operation QUIC
    protocol, though its presence in a sufficient number of connections
@@ -432,25 +417,10 @@ Internet-Draft                  loss-bits                   January 2020
    The loss bits are amenable to "greasing" described in [GREASE] and
    MUST be greased.  The greasing should be accomplished similarly to
    the Latency Spin bit greasing in [QUIC-TRANSPORT].  Namely,
-   implementations MUST disable loss reporting for a given connection
-   with a certain likelihood, such that on average loss reporting is
-   disabled for at least one eighth of connections (see Section 5).
+   implementations MUST NOT include loss_bits transport parameter for a
+   random selection of at least one in every 16 connections.
 
-
-
-
-
-
-
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                  [Page 8]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
-8.  Security Considerations
+9.  Security Considerations
 
    The Q-bit signal does not provide any information that cannot be
    observed by simply counting packets transiting a network path.  The
@@ -460,7 +430,7 @@ Internet-Draft                  loss-bits                   January 2020
    provide a viable new mechanism to attack QUIC data integrity and
    secrecy.
 
-8.1.  Optimistic ACK Attack
+9.1.  Optimistic ACK Attack
 
    A defense against an Optimistic ACK Attack [QUIC-TRANSPORT] involves
    a sender randomly skipping packet numbers to detect a receiver
@@ -472,6 +442,14 @@ Internet-Draft                  loss-bits                   January 2020
    which renders the attack ineffective against a delay-sensitive
    congestion controller.
 
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                  [Page 8]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    For QUIC v1 connections, the attacker can examine offsets in STREAM
    frames to determine whether packet number skips are deliberate, so
    Q-bit signal provides little new information.  However, an endpoint
@@ -479,7 +457,7 @@ Internet-Draft                  loss-bits                   January 2020
    controller MAY include deliberately skipped packet numbers in the
    current Q run.
 
-9.  Privacy Considerations
+10.  Privacy Considerations
 
    To minimize unintentional exposure of information, loss bits provide
    an explicit loss signal - a preferred way to share information per
@@ -498,24 +476,16 @@ Internet-Draft                  loss-bits                   January 2020
    could be a powerful tool to identify connections that attempt to hide
    their origin networks, if the adversary is able to affect network
    conditions in those origin networks.  Similar information can be
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                  [Page 9]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    obtained by packet timing and inferring congestion controller
    response to network events, but loss information provides a clearer
    signal.
 
    Implementations MUST allow administrators of clients and servers to
    disable loss reporting either globally or on a per-connection basis.
-   Additionally, as described in Section 7, loss reporting MUST be
+   Additionally, as described in Section 8, loss reporting MUST be
    disabled for a certain fraction of all connections.
 
-10.  IANA Considerations
+11.  IANA Considerations
 
    This document registers a new value in the QUIC Transport Parameter
    Registry:
@@ -526,18 +496,28 @@ Internet-Draft                  loss-bits                   January 2020
 
    Specification: ..............
 
-11.  Acknowledgments
 
-   The sQuare Bit was originally specified by Kazuho Oku in early
+
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                  [Page 9]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
+12.  Acknowledgments
+
+   The sQuare signal bit was originally specified by Kazuho Oku in early
    proposals for loss measurement and is an instance of the "alternate
    marking" as defined in [RFC8321].
 
    Many thanks to Christian Huitema for pointing out the interaction of
    Q-bit and Optimistic ACK Attack defence.
 
-12.  References
+13.  References
 
-12.1.  Normative References
+13.1.  Normative References
 
    [QUIC-TLS] Thomson, M. and S. Turner, "Using TLS to Secure QUIC",
               Work in Progress, Internet-Draft, draft-ietf-quic-tls-24,
@@ -553,15 +533,6 @@ Internet-Draft                  loss-bits                   January 2020
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
-
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                 [Page 10]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
@@ -578,11 +549,19 @@ Internet-Draft                  loss-bits                   January 2020
               internet-drafts/draft-ietf-tsvwg-transport-encrypt-
               09.txt>.
 
-12.2.  Informative References
+13.2.  Informative References
 
    [DATAGRAM] Pauly, T., Kinnear, E., and D. Schinazi, "An Unreliable
               Datagram Extension to QUIC", Work in Progress, Internet-
               Draft, draft-pauly-quic-datagram-05, 4 November 2019,
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                 [Page 10]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
               <http://www.ietf.org/internet-drafts/draft-pauly-quic-
               datagram-05.txt>.
 
@@ -610,14 +589,6 @@ Authors' Addresses
    Email: alexandre.ferrieux@orange.com
 
 
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                 [Page 11]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    Isabelle Hamchaoui (editor)
    Orange Labs
 
@@ -642,31 +613,4 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                 [Page 12]
+Ferrieux, et al.          Expires 11 July 2020                 [Page 11]
