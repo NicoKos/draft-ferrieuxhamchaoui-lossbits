@@ -5,9 +5,9 @@
 QUIC                                                    A. Ferrieux, Ed.
 Internet-Draft                                         I. Hamchaoui, Ed.
 Intended status: Informational                               Orange Labs
-Expires: 10 July 2020                                   I. Lubashev, Ed.
+Expires: 11 July 2020                                   I. Lubashev, Ed.
                                                      Akamai Technologies
-                                                          7 January 2020
+                                                          8 January 2020
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 July 2020.
+   This Internet-Draft will expire on 11 July 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                  [Page 1]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 1]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                  [Page 2]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 2]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -165,7 +165,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                  [Page 3]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 3]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -221,7 +221,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                  [Page 4]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 4]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -277,7 +277,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                  [Page 5]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 5]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -333,7 +333,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                  [Page 6]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 6]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -355,13 +355,16 @@ Internet-Draft                  loss-bits                   January 2020
 
    The use of the loss bits is negotiated using a transport parameter:
 
-   loss_bits (0x1055):  Presence of the loss_bits transport parameter
-      indicates that the sender supports the loss bits extension.  This
-      parameter has a zero-length value.
+   loss_bits (0x1055):  The loss bits transport parameter is an integer
+      value that can be set to 0 or 1 indicating the level of QL bits
+      support.
 
-   When both peers send the loss_bits transport parameter, they both
-   MUST change the way short packets are encrypted and decrypted to
-   allow for loss bits to be sent.
+   When loss_bits is set to 0, the peer is allowed to change R-bits in
+   the short packet header to QL-bits if the peer sends loss_bits=1.
+
+   When loss_bits is set to 1, the sender will change R-bits to QL-bits
+   if the peer sends the loss_bits transport parameter set to either 0
+   or 1.
 
 6.  Ossification Considerations
 
@@ -383,16 +386,16 @@ Internet-Draft                  loss-bits                   January 2020
    L-bit signal discloses internal state of the protocol loss detection
    machinery, but this signal can also be gleamed by timing packets and
    observing congestion controller response.  Hence, loss bits do not
-   provide a viable new mechanism to attack QUIC data integrity and
-   secrecy.
 
 
 
-
-Ferrieux, et al.          Expires 10 July 2020                  [Page 7]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 7]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   provide a viable new mechanism to attack QUIC data integrity and
+   secrecy.
 
 7.1.  Optimistic ACK Attack
 
@@ -438,17 +441,17 @@ Internet-Draft                  loss-bits                   January 2020
 
    Implementations MUST allow administrators of clients and servers to
    disable loss reporting either globally or on a per-connection basis.
-   Additionally, as described in Section 6, loss reporting MUST be
-   disabled for a certain fraction of all connections.
 
 
 
 
-
-Ferrieux, et al.          Expires 10 July 2020                  [Page 8]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 8]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   Additionally, as described in Section 6, loss reporting MUST be
+   disabled for a certain fraction of all connections.
 
 9.  IANA Considerations
 
@@ -495,16 +498,17 @@ Internet-Draft                  loss-bits                   January 2020
               Transport Header Confidentiality, Network Operations, and
               the Evolution of Internet Transport Protocols", Work in
               Progress, Internet-Draft, draft-ietf-tsvwg-transport-
-              encrypt-09, 3 November 2019, <http://www.ietf.org/
-              internet-drafts/draft-ietf-tsvwg-transport-encrypt-
-              09.txt>.
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                  [Page 9]
+Ferrieux, et al.          Expires 11 July 2020                  [Page 9]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+              encrypt-09, 3 November 2019, <http://www.ietf.org/
+              internet-drafts/draft-ietf-tsvwg-transport-encrypt-
+              09.txt>.
 
 11.2.  Informative References
 
@@ -550,6 +554,14 @@ Authors' Addresses
    Cambridge, MA 1122
    United States of America
 
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                 [Page 10]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    Email: ilubashe@akamai.com
 
 
@@ -557,4 +569,48 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.          Expires 10 July 2020                 [Page 10]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ferrieux, et al.          Expires 11 July 2020                 [Page 11]
