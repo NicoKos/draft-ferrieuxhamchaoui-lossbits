@@ -5,11 +5,11 @@
 QUIC                                                    A. Ferrieux, Ed.
 Internet-Draft                                         I. Hamchaoui, Ed.
 Intended status: Informational                               Orange Labs
-Expires: 11 July 2020                                   I. Lubashev, Ed.
+Expires: 12 July 2020                                   I. Lubashev, Ed.
                                                      Akamai Technologies
                                                         D. Tikhonov, Ed.
                                                   LiteSpeed Technologies
-                                                          8 January 2020
+                                                          9 January 2020
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 July 2020.
+   This Internet-Draft will expire on 12 July 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                  [Page 1]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 1]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -78,18 +78,19 @@ Table of Contents
      4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   6
      4.4.  Downstream Loss . . . . . . . . . . . . . . . . . . . . .   6
      4.5.  Observer Loss . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  Transport Parameter . . . . . . . . . . . . . . . . . . . . .   7
-   6.  Short Packet Header . . . . . . . . . . . . . . . . . . . . .   7
-   7.  Header Protection . . . . . . . . . . . . . . . . . . . . . .   8
-   8.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-     9.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   8
-   10. Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
-   11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
-   12. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
-   13. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
-     13.1.  Normative References . . . . . . . . . . . . . . . . . .  10
-     13.2.  Informative References . . . . . . . . . . . . . . . . .  10
+   5.  Implementation  . . . . . . . . . . . . . . . . . . . . . . .   7
+     5.1.  Transport Parameter . . . . . . . . . . . . . . . . . . .   7
+     5.2.  Short Packet Header . . . . . . . . . . . . . . . . . . .   7
+     5.3.  Header Protection . . . . . . . . . . . . . . . . . . . .   8
+   6.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
+   7.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
+     7.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   8
+   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  10
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  10
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
@@ -108,8 +109,7 @@ Table of Contents
 
 
 
-
-Ferrieux, et al.          Expires 11 July 2020                  [Page 2]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 2]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -165,7 +165,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                  [Page 3]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 3]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -183,7 +183,7 @@ Internet-Draft                  loss-bits                   January 2020
    requirement allows an Observer to infer the Q run length by observing
    one period of the square signal.  It also allows the Observer to
    identify flows that set the loss bits to arbitrary values (see
-   Section 8).
+   Section 6).
 
    If the sender does not have sufficient information to make an
    informed decision about Q run length, the sender SHOULD use N=64,
@@ -221,7 +221,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                  [Page 4]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 4]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -277,7 +277,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                  [Page 5]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 5]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -333,7 +333,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                  [Page 6]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 6]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -351,7 +351,9 @@ Internet-Draft                  loss-bits                   January 2020
    belonging to a single connection being multiplexed over several
    upstream paths with different latency characteristics.
 
-5.  Transport Parameter
+5.  Implementation
+
+5.1.  Transport Parameter
 
    The use of the loss bits is negotiated using a transport parameter:
 
@@ -369,7 +371,7 @@ Internet-Draft                  loss-bits                   January 2020
    A client MUST NOT use remembered value of loss_bits for 0-RTT
    connection.
 
-6.  Short Packet Header
+5.2.  Short Packet Header
 
    When sending loss bits has been negotiated, the QL-bits replace the
    R-bits in the short packet header (see Section 17.3 of
@@ -383,18 +385,19 @@ Internet-Draft                  loss-bits                   January 2020
    sQuare Signal Bit (Q):  The fourth most significant bit (0x10) is the
       sQuare signal bit, set as described in Section 3.1.
 
-   Loss Event Bit (L):  The fifth most significant bit (0x08) is the
-      Loss event bit, set as described in Section 3.2.
 
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                  [Page 7]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 7]
 
 Internet-Draft                  loss-bits                   January 2020
 
 
-7.  Header Protection
+   Loss Event Bit (L):  The fifth most significant bit (0x08) is the
+      Loss event bit, set as described in Section 3.2.
+
+5.3.  Header Protection
 
    Unlike the R-bits, the QL-bits are not protected.  When sending loss
    bits has been negotiated, the first byte of the header protection
@@ -408,7 +411,7 @@ Internet-Draft                  loss-bits                   January 2020
          # Short header: 3 bits masked
          packet[0] ^= mask[0] & 0x07
 
-8.  Ossification Considerations
+6.  Ossification Considerations
 
    Accurate loss reporting signal is not critical for the operation QUIC
    protocol, though its presence in a sufficient number of connections
@@ -420,7 +423,7 @@ Internet-Draft                  loss-bits                   January 2020
    implementations MUST NOT include loss_bits transport parameter for a
    random selection of at least one in every 16 connections.
 
-9.  Security Considerations
+7.  Security Considerations
 
    The Q-bit signal does not provide any information that cannot be
    observed by simply counting packets transiting a network path.  The
@@ -430,7 +433,7 @@ Internet-Draft                  loss-bits                   January 2020
    provide a viable new mechanism to attack QUIC data integrity and
    secrecy.
 
-9.1.  Optimistic ACK Attack
+7.1.  Optimistic ACK Attack
 
    A defense against an Optimistic ACK Attack [QUIC-TRANSPORT] involves
    a sender randomly skipping packet numbers to detect a receiver
@@ -439,16 +442,16 @@ Internet-Draft                  loss-bits                   January 2020
    and which had been actually lost (and are, therefore, safe for the
    attacker to acknowledge).  To use Q-bit for this purpose, the
    attacker must first receive at least an entire Q run of packets,
-   which renders the attack ineffective against a delay-sensitive
-   congestion controller.
 
 
 
-
-Ferrieux, et al.          Expires 11 July 2020                  [Page 8]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 8]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   which renders the attack ineffective against a delay-sensitive
+   congestion controller.
 
    For QUIC v1 connections, the attacker can examine offsets in STREAM
    frames to determine whether packet number skips are deliberate, so
@@ -457,7 +460,7 @@ Internet-Draft                  loss-bits                   January 2020
    controller MAY include deliberately skipped packet numbers in the
    current Q run.
 
-10.  Privacy Considerations
+8.  Privacy Considerations
 
    To minimize unintentional exposure of information, loss bits provide
    an explicit loss signal - a preferred way to share information per
@@ -482,10 +485,10 @@ Internet-Draft                  loss-bits                   January 2020
 
    Implementations MUST allow administrators of clients and servers to
    disable loss reporting either globally or on a per-connection basis.
-   Additionally, as described in Section 8, loss reporting MUST be
+   Additionally, as described in Section 6, loss reporting MUST be
    disabled for a certain fraction of all connections.
 
-11.  IANA Considerations
+9.  IANA Considerations
 
    This document registers a new value in the QUIC Transport Parameter
    Registry:
@@ -498,15 +501,12 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-
-
-
-Ferrieux, et al.          Expires 11 July 2020                  [Page 9]
+Ferrieux, et al.          Expires 12 July 2020                  [Page 9]
 
 Internet-Draft                  loss-bits                   January 2020
 
 
-12.  Acknowledgments
+10.  Acknowledgments
 
    The sQuare signal bit was originally specified by Kazuho Oku in early
    proposals for loss measurement and is an instance of the "alternate
@@ -515,9 +515,9 @@ Internet-Draft                  loss-bits                   January 2020
    Many thanks to Christian Huitema for pointing out the interaction of
    Q-bit and Optimistic ACK Attack defence.
 
-13.  References
+11.  References
 
-13.1.  Normative References
+11.1.  Normative References
 
    [QUIC-TLS] Thomson, M. and S. Turner, "Using TLS to Secure QUIC",
               Work in Progress, Internet-Draft, draft-ietf-quic-tls-24,
@@ -549,7 +549,7 @@ Internet-Draft                  loss-bits                   January 2020
               internet-drafts/draft-ietf-tsvwg-transport-encrypt-
               09.txt>.
 
-13.2.  Informative References
+11.2.  Informative References
 
    [DATAGRAM] Pauly, T., Kinnear, E., and D. Schinazi, "An Unreliable
               Datagram Extension to QUIC", Work in Progress, Internet-
@@ -557,7 +557,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                 [Page 10]
+Ferrieux, et al.          Expires 12 July 2020                 [Page 10]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -613,4 +613,4 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.          Expires 11 July 2020                 [Page 11]
+Ferrieux, et al.          Expires 12 July 2020                 [Page 11]
