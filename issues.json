@@ -1,6 +1,108 @@
 [
 
   {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/15",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/15/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/15/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/15/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/15",
+    "id": 547861862,
+    "node_id": "MDU6SXNzdWU1NDc4NjE4NjI=",
+    "number": 15,
+    "title": "0x1055 is not a valid TP number",
+    "user": {
+      "login": "igorlord",
+      "id": 25256216,
+      "node_id": "MDQ6VXNlcjI1MjU2MjE2",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/25256216?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/igorlord",
+      "html_url": "https://github.com/igorlord",
+      "followers_url": "https://api.github.com/users/igorlord/followers",
+      "following_url": "https://api.github.com/users/igorlord/following{/other_user}",
+      "gists_url": "https://api.github.com/users/igorlord/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/igorlord/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/igorlord/subscriptions",
+      "organizations_url": "https://api.github.com/users/igorlord/orgs",
+      "repos_url": "https://api.github.com/users/igorlord/repos",
+      "events_url": "https://api.github.com/users/igorlord/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/igorlord/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 4,
+    "created_at": "2020-01-10T04:42:01Z",
+    "updated_at": "2020-01-10T20:56:21Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "body": "Not valid per \"QUIC Transport Parameter Registry\" in the transport draft, since 0x1055 == 134*31+27.  Damn, there was a 26/27 chance, and we blew it!"
+  },
+  {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/14",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/14/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/14/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/14/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/14",
+    "id": 547856923,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYxMjY4NTM5",
+    "number": 14,
+    "title": "Add middle boxes using Q bit signal for reordering fixup as a concern.",
+    "user": {
+      "login": "igorlord",
+      "id": 25256216,
+      "node_id": "MDQ6VXNlcjI1MjU2MjE2",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/25256216?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/igorlord",
+      "html_url": "https://github.com/igorlord",
+      "followers_url": "https://api.github.com/users/igorlord/followers",
+      "following_url": "https://api.github.com/users/igorlord/following{/other_user}",
+      "gists_url": "https://api.github.com/users/igorlord/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/igorlord/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/igorlord/subscriptions",
+      "organizations_url": "https://api.github.com/users/igorlord/orgs",
+      "repos_url": "https://api.github.com/users/igorlord/repos",
+      "events_url": "https://api.github.com/users/igorlord/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/igorlord/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-10T04:21:24Z",
+    "updated_at": "2020-01-10T21:05:01Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/14",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/14",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/14.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/14.patch"
+    },
+    "body": "Adding this as an ossification concern for now.  Happy to find a different place it, if needed."
+  },
+  {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/13",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
     "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/13/labels{/name}",
@@ -34,7 +136,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -43,8 +145,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2020-01-09T19:28:15Z",
-    "updated_at": "2020-01-09T19:31:59Z",
-    "closed_at": null,
+    "updated_at": "2020-01-10T03:24:36Z",
+    "closed_at": "2020-01-10T03:24:35Z",
     "author_association": "COLLABORATOR",
     "pull_request": {
       "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/13",
@@ -97,7 +199,7 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2020-01-09T19:26:47Z",
-    "updated_at": "2020-01-10T03:19:50Z",
+    "updated_at": "2020-01-10T13:35:23Z",
     "closed_at": null,
     "author_association": "OWNER",
     "pull_request": {
@@ -203,9 +305,9 @@
 
     ],
     "milestone": null,
-    "comments": 2,
+    "comments": 3,
     "created_at": "2020-01-09T15:44:05Z",
-    "updated_at": "2020-01-09T18:47:42Z",
+    "updated_at": "2020-01-10T03:28:44Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "body": "Let's settle on one way and make the draft consistent in this regard.\r\n\r\nMy preference would be _not_ to use the dash."
@@ -244,17 +346,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 2,
+    "comments": 3,
     "created_at": "2020-01-09T15:38:48Z",
-    "updated_at": "2020-01-09T18:50:27Z",
-    "closed_at": null,
+    "updated_at": "2020-01-10T04:04:29Z",
+    "closed_at": "2020-01-10T04:04:29Z",
     "author_association": "COLLABORATOR",
     "body": "Sometimes the draft uses the definite article when taking about the Q and L bits (e.g. \"The Q-bit signal does not provide...\") and sometimes it does not (e.g \"To use Q-bit for this purpose\").\r\n\r\nWe should pick one way of doing it and stick with it.\r\n\r\nI am not a native speaker.  That being said, I believe in most places where \"the\" is omitted, it should be used."
   },
@@ -347,9 +449,9 @@
 
     ],
     "milestone": null,
-    "comments": 4,
+    "comments": 5,
     "created_at": "2020-01-09T15:24:36Z",
-    "updated_at": "2020-01-09T20:23:14Z",
+    "updated_at": "2020-01-10T03:56:53Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "body": "> For QUIC v1 connections, the attacker can examine offsets in STREAM frames to determine whether packet number skips are deliberate, so Q-bit signal provides little new information.\r\n\r\nWhy \"little\" instead of \"no?\"  AFAICT, the Q-bit provides no new information."
