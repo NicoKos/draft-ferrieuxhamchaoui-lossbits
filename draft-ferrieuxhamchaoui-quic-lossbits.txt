@@ -84,13 +84,13 @@ Table of Contents
      5.3.  Header Protection . . . . . . . . . . . . . . . . . . . .   8
    6.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-     7.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   8
+     7.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   9
    8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
    10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  10
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  10
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  11
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
@@ -423,6 +423,12 @@ Internet-Draft                  loss-bits                   January 2020
    implementations MUST NOT include loss_bits transport parameter for a
    random selection of at least one in every 16 connections.
 
+   It is possible to observe packet reordering near the edge of the
+   square signal.  A middle box might observe the signal and try to fix
+   packet reordering that it can identify, though only a small fraction
+   of reordering can be fixed using this method.  Latency spin bit
+   signal edge can be used for the same purpose.
+
 7.  Security Considerations
 
    The Q-bit signal does not provide any information that cannot be
@@ -433,6 +439,17 @@ Internet-Draft                  loss-bits                   January 2020
    provide a viable new mechanism to attack QUIC data integrity and
    secrecy.
 
+
+
+
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                  [Page 8]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
 7.1.  Optimistic ACK Attack
 
    A defense against an Optimistic ACK Attack [QUIC-TRANSPORT] involves
@@ -442,14 +459,6 @@ Internet-Draft                  loss-bits                   January 2020
    purpose and which had been actually lost (and are, therefore, safe
    for the attacker to acknowledge).  To use the Q-bit for this purpose,
    the attacker must first receive at least an entire Q run of packets,
-
-
-
-Ferrieux, et al.          Expires 13 July 2020                  [Page 8]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    which renders the attack ineffective against a delay-sensitive
    congestion controller.
 
@@ -488,6 +497,15 @@ Internet-Draft                  loss-bits                   January 2020
    Additionally, as described in Section 6, loss reporting MUST be
    disabled for a certain fraction of all connections.
 
+
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                  [Page 9]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
 9.  IANA Considerations
 
    This document registers a new value in the QUIC Transport Parameter
@@ -498,13 +516,6 @@ Internet-Draft                  loss-bits                   January 2020
    Parameter Name: loss_bits
 
    Specification: ..............
-
-
-
-Ferrieux, et al.          Expires 13 July 2020                  [Page 9]
-
-Internet-Draft                  loss-bits                   January 2020
-
 
 10.  Acknowledgments
 
@@ -543,6 +554,14 @@ Internet-Draft                  loss-bits                   January 2020
    [TRANSPORT-ENCRYPT]
               Fairhurst, G. and C. Perkins, "Considerations around
               Transport Header Confidentiality, Network Operations, and
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                 [Page 10]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
               the Evolution of Internet Transport Protocols", Work in
               Progress, Internet-Draft, draft-ietf-tsvwg-transport-
               encrypt-09, 3 November 2019, <http://www.ietf.org/
@@ -554,14 +573,6 @@ Internet-Draft                  loss-bits                   January 2020
    [DATAGRAM] Pauly, T., Kinnear, E., and D. Schinazi, "An Unreliable
               Datagram Extension to QUIC", Work in Progress, Internet-
               Draft, draft-pauly-quic-datagram-05, 4 November 2019,
-
-
-
-Ferrieux, et al.          Expires 13 July 2020                 [Page 10]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
               <http://www.ietf.org/internet-drafts/draft-pauly-quic-
               datagram-05.txt>.
 
@@ -601,6 +612,12 @@ Authors' Addresses
    Email: ilubashe@akamai.com
 
 
+
+Ferrieux, et al.          Expires 13 July 2020                 [Page 11]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    Dmitri Tikhonov (editor)
    LiteSpeed Technologies
 
@@ -613,4 +630,43 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.          Expires 13 July 2020                 [Page 11]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                 [Page 12]

@@ -1348,6 +1348,10 @@ greased.  The greasing should be accomplished similarly to the Latency Spin bit
 greasing in <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>.  Namely, implementations MUST NOT include
 loss_bits transport parameter for a random selection of at least one in every 16
 connections.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">It is possible to observe packet reordering near the edge of the square signal.
+A middle box might observe the signal and try to fix packet reordering that it
+can identify, though only a small fraction of reordering can be fixed using this
+method.  Latency spin bit signal edge can be used for the same purpose.<a href="#section-6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
