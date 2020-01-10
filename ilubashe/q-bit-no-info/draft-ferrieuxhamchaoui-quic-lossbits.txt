@@ -78,19 +78,19 @@ Table of Contents
      4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   6
      4.4.  Downstream Loss . . . . . . . . . . . . . . . . . . . . .   6
      4.5.  Observer Loss . . . . . . . . . . . . . . . . . . . . . .   6
-   5.  Implementation  . . . . . . . . . . . . . . . . . . . . . . .   7
+   5.  QUIC v1 Implementation  . . . . . . . . . . . . . . . . . . .   7
      5.1.  Transport Parameter . . . . . . . . . . . . . . . . . . .   7
      5.2.  Short Packet Header . . . . . . . . . . . . . . . . . . .   7
      5.3.  Header Protection . . . . . . . . . . . . . . . . . . . .   8
    6.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   8
-     7.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   8
+     7.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   9
    8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
-   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   9
+   9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
    10. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  10
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  10
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  10
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  11
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
 
 1.  Introduction
@@ -210,13 +210,13 @@ Internet-Draft                  loss-bits                   January 2020
 
    This loss signaling is similar to loss signaling in [RFC7713], except
    the Loss Event bit is reporting the exact number of lost packets,
-   whereas Echo Loss bit in [RFC7713] is reporting an approximate number
-   of lost bytes.
+   whereas the Echo Loss bit in [RFC7713] is reporting an approximate
+   number of lost bytes.
 
    Observation points can estimate the end-to-end loss, as determined by
    the upstream endpoint's loss detection machinery, by counting packets
-   in this direction with a L bit equal to 1, as described in Section 4.
-
+   in this direction with the L bit equal to 1, as described in
+   Section 4.
 
 
 
@@ -248,9 +248,9 @@ Internet-Draft                  loss-bits                   January 2020
 4.1.  End-To-End Loss
 
    The Loss Event bit allows an observer to calculate the end-to-end
-   loss rate by counting packets with L bit value of 0 and 1 for a given
-   connection.  The end-to-end loss rate is the fraction of packets with
-   L=1.
+   loss rate by counting packets with the L bit value of 0 and 1 for a
+   given connection.  The end-to-end loss rate is the fraction of
+   packets with L=1.
 
    The simplifying assumption here is that upstream loss affects packets
    with L=0 and L=1 equally.  This may be a simplification, if some loss
@@ -351,7 +351,7 @@ Internet-Draft                  loss-bits                   January 2020
    belonging to a single connection being multiplexed over several
    upstream paths with different latency characteristics.
 
-5.  Implementation
+5.  QUIC v1 Implementation
 
 5.1.  Transport Parameter
 
@@ -423,6 +423,12 @@ Internet-Draft                  loss-bits                   January 2020
    implementations MUST NOT include loss_bits transport parameter for a
    random selection of at least one in every 16 connections.
 
+   It is possible to observe packet reordering near the edge of the
+   square signal.  A middle box might observe the signal and try to fix
+   packet reordering that it can identify, though only a small fraction
+   of reordering can be fixed using this method.  Latency spin bit
+   signal edge can be used for the same purpose.
+
 7.  Security Considerations
 
    In the absence of packet loss, the Q-bit signal does not provide any
@@ -433,15 +439,9 @@ Internet-Draft                  loss-bits                   January 2020
    response.  Hence, loss bits do not provide a viable new mechanism to
    attack QUIC data integrity and secrecy.
 
-7.1.  Optimistic ACK Attack
 
-   A defense against an Optimistic ACK Attack [QUIC-TRANSPORT] involves
-   a sender randomly skipping packet numbers to detect a receiver
-   acknowledging packet numbers that have never been sent.  Q-bit signal
-   may inform the attacker which packet numbers were skipped on purpose
-   and which had been actually lost (and are, therefore, safe for the
-   attacker to acknowledge).  To use Q-bit for this purpose, the
-   attacker must first receive at least an entire Q run of packets,
+
+
 
 
 
@@ -450,18 +450,27 @@ Ferrieux, et al.          Expires 13 July 2020                  [Page 8]
 Internet-Draft                  loss-bits                   January 2020
 
 
+7.1.  Optimistic ACK Attack
+
+   A defense against an Optimistic ACK Attack [QUIC-TRANSPORT] involves
+   a sender randomly skipping packet numbers to detect a receiver
+   acknowledging packet numbers that have never been sent.  The Q-bit
+   signal may inform the attacker which packet numbers were skipped on
+   purpose and which had been actually lost (and are, therefore, safe
+   for the attacker to acknowledge).  To use the Q-bit for this purpose,
+   the attacker must first receive at least an entire Q run of packets,
    which renders the attack ineffective against a delay-sensitive
    congestion controller.
 
    For QUIC v1 connections, if the attacker can make its peer transmit
    data using a single large stream, examining offsets in STREAM frames
    can determine whether packet number skips are deliberate.  In that
-   case, Q-bit signal provides no new information (but it does save the
-   attacker the need to remove packet protection).  However, an endpoint
-   that communicates using [DATAGRAM] and uses a loss-based congestion
-   controller MAY shorten the current Q run by the number of skipped
-   packets.  For example, skipping a single packet number will invert
-   the sQuare signal one outgoing packet sooner.
+   case, the Q-bit signal provides no new information (but it does save
+   the attacker the need to remove packet protection).  However, an
+   endpoint that communicates using [DATAGRAM] and uses a loss-based
+   congestion controller MAY shorten the current Q run by the number of
+   skipped packets.  For example, skipping a single packet number will
+   invert the sQuare signal one outgoing packet sooner.
 
 8.  Privacy Considerations
 
@@ -488,6 +497,15 @@ Internet-Draft                  loss-bits                   January 2020
 
    Implementations MUST allow administrators of clients and servers to
    disable loss reporting either globally or on a per-connection basis.
+
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                  [Page 9]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    Additionally, as described in Section 6, loss reporting MUST be
    disabled for a certain fraction of all connections.
 
@@ -497,14 +515,6 @@ Internet-Draft                  loss-bits                   January 2020
    Registry:
 
    Value: 0x1055 (if this document is approved)
-
-
-
-
-Ferrieux, et al.          Expires 13 July 2020                  [Page 9]
-
-Internet-Draft                  loss-bits                   January 2020
-
 
    Parameter Name: loss_bits
 
@@ -544,6 +554,14 @@ Internet-Draft                  loss-bits                   January 2020
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/info/rfc8558>.
 
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                 [Page 10]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    [TRANSPORT-ENCRYPT]
               Fairhurst, G. and C. Perkins, "Considerations around
               Transport Header Confidentiality, Network Operations, and
@@ -554,13 +572,6 @@ Internet-Draft                  loss-bits                   January 2020
               09.txt>.
 
 11.2.  Informative References
-
-
-
-Ferrieux, et al.          Expires 13 July 2020                 [Page 10]
-
-Internet-Draft                  loss-bits                   January 2020
-
 
    [DATAGRAM] Pauly, T., Kinnear, E., and D. Schinazi, "An Unreliable
               Datagram Extension to QUIC", Work in Progress, Internet-
@@ -598,6 +609,15 @@ Authors' Addresses
    Email: isabelle.hamchaoui@orange.com
 
 
+
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                 [Page 11]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    Igor Lubashev (editor)
    Akamai Technologies
 
@@ -613,4 +633,40 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.          Expires 13 July 2020                 [Page 11]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ferrieux, et al.          Expires 13 July 2020                 [Page 12]

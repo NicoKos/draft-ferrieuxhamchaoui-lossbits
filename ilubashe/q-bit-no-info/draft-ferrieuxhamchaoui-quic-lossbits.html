@@ -972,7 +972,7 @@ functionality as an extension in QUIC v1.<a href="#section-abstract-1" class="pi
 </ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.5">
-            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-implementation" class="xref">Implementation</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.5.1"><a href="#section-5" class="xref">5</a>.  <a href="#name-quic-v1-implementation" class="xref">QUIC v1 Implementation</a><a href="#section-toc.1-1.5.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.5.2.1">
                 <p id="section-toc.1-1.5.2.1.1"><a href="#section-5.1" class="xref">5.1</a>.  <a href="#name-transport-parameter" class="xref">Transport Parameter</a><a href="#section-toc.1-1.5.2.1.1" class="pilcrow">¶</a></p>
@@ -1130,11 +1130,11 @@ the implementation is able to rescind the loss determination later, a positive
 Unreported Loss counter MAY be decremented due to the rescission, but it SHOULD
 NOT become negative.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">This loss signaling is similar to loss signaling in <span>[<a href="#RFC7713" class="xref">RFC7713</a>]</span>, except the
-Loss Event bit is reporting the exact number of lost packets, whereas Echo Loss
-bit in <span>[<a href="#RFC7713" class="xref">RFC7713</a>]</span> is reporting an approximate number of lost bytes.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+Loss Event bit is reporting the exact number of lost packets, whereas the Echo
+Loss bit in <span>[<a href="#RFC7713" class="xref">RFC7713</a>]</span> is reporting an approximate number of lost bytes.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
 <p id="section-3.2-4">Observation points can estimate the end-to-end loss, as determined by the
 upstream endpoint's loss detection machinery, by counting packets in this
-direction with a L bit equal to 1, as described in <a href="#usage" class="xref">Section 4</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+direction with the L bit equal to 1, as described in <a href="#usage" class="xref">Section 4</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1169,7 +1169,7 @@ above.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <a href="#section-4.1" class="section-number selfRef">4.1. </a><a href="#name-end-to-end-loss" class="section-name selfRef">End-To-End Loss</a>
         </h3>
 <p id="section-4.1-1">The Loss Event bit allows an observer to calculate the end-to-end loss rate by
-counting packets with L bit value of 0 and 1 for a given connection. The
+counting packets with the L bit value of 0 and 1 for a given connection. The
 end-to-end loss rate is the fraction of packets with L=1.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.1-2">The simplifying assumption here is that upstream loss affects packets with L=0
 and L=1 equally. This may be a simplification, if some loss is caused by
@@ -1258,10 +1258,10 @@ upstream paths with different latency characteristics.<a href="#section-4.5-3" c
 </div>
 </section>
 </div>
-<div id="implementation">
+<div id="quic-v1-implementation">
 <section id="section-5">
-      <h2 id="name-implementation">
-<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-implementation" class="section-name selfRef">Implementation</a>
+      <h2 id="name-quic-v1-implementation">
+<a href="#section-5" class="section-number selfRef">5. </a><a href="#name-quic-v1-implementation" class="section-name selfRef">QUIC v1 Implementation</a>
       </h2>
 <div id="tp">
 <section id="section-5.1">
@@ -1348,6 +1348,10 @@ greased.  The greasing should be accomplished similarly to the Latency Spin bit
 greasing in <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>.  Namely, implementations MUST NOT include
 loss_bits transport parameter for a random selection of at least one in every 16
 connections.<a href="#section-6-2" class="pilcrow">¶</a></p>
+<p id="section-6-3">It is possible to observe packet reordering near the edge of the square signal.
+A middle box might observe the signal and try to fix packet reordering that it
+can identify, though only a small fraction of reordering can be fixed using this
+method.  Latency spin bit signal edge can be used for the same purpose.<a href="#section-6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="security-considerations">
@@ -1368,16 +1372,16 @@ mechanism to attack QUIC data integrity and secrecy.<a href="#section-7-1" class
         </h3>
 <p id="section-7.1-1">A defense against an Optimistic ACK Attack <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span> involves a
 sender randomly skipping packet numbers to detect a receiver acknowledging
-packet numbers that have never been sent. Q-bit signal may inform the attacker
-which packet numbers were skipped on purpose and which had been actually lost
-(and are, therefore, safe for the attacker to acknowledge). To use Q-bit for
-this purpose, the attacker must first receive at least an entire Q run of
-packets, which renders the attack ineffective against a delay-sensitive
-congestion controller.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+packet numbers that have never been sent. The Q-bit signal may inform the
+attacker which packet numbers were skipped on purpose and which had
+been actually lost (and are, therefore, safe for the attacker to
+acknowledge). To use the Q-bit for this purpose, the attacker must first
+receive at least an entire Q run of packets, which renders the attack
+ineffective against a delay-sensitive congestion controller.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">For QUIC v1 connections, if the attacker can make its peer transmit data using a
 single large stream, examining offsets in STREAM frames can determine whether
-packet number skips are deliberate. In that case, Q-bit signal provides no new
-information (but it does save the attacker the need to remove packet
+packet number skips are deliberate. In that case, the Q-bit signal provides no
+new information (but it does save the attacker the need to remove packet
 protection). However, an endpoint that communicates using <span>[<a href="#DATAGRAM" class="xref">DATAGRAM</a>]</span> and uses
 a loss-based congestion controller MAY shorten the current Q run by the number
 of skipped packets. For example, skipping a single packet number will invert the
