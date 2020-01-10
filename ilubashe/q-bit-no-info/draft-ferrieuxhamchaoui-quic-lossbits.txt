@@ -5,11 +5,11 @@
 QUIC                                                    A. Ferrieux, Ed.
 Internet-Draft                                         I. Hamchaoui, Ed.
 Intended status: Informational                               Orange Labs
-Expires: 12 July 2020                                   I. Lubashev, Ed.
+Expires: 13 July 2020                                   I. Lubashev, Ed.
                                                      Akamai Technologies
                                                         D. Tikhonov, Ed.
                                                   LiteSpeed Technologies
-                                                          9 January 2020
+                                                         10 January 2020
 
 
              Packet Loss Signaling for Encrypted Protocols
@@ -40,7 +40,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 July 2020.
+   This Internet-Draft will expire on 13 July 2020.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 1]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 1]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 2]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 2]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -165,7 +165,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 3]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 3]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -221,7 +221,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 4]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 4]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -277,7 +277,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 5]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 5]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -333,7 +333,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 6]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 6]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -389,7 +389,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 7]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 7]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -425,13 +425,13 @@ Internet-Draft                  loss-bits                   January 2020
 
 7.  Security Considerations
 
-   The Q-bit signal does not provide any information that cannot be
-   observed by simply counting packets transiting a network path.  The
-   L-bit signal discloses internal state of the protocol loss detection
-   machinery, but this signal can also be gleamed by timing packets and
-   observing congestion controller response.  Hence, loss bits do not
-   provide a viable new mechanism to attack QUIC data integrity and
-   secrecy.
+   In the absence of packet loss, the Q-bit signal does not provide any
+   information that cannot be observed by simply counting packets
+   transiting a network path.  The L-bit signal discloses internal state
+   of the protocol's loss detection machinery, but this signal can often
+   be gleamed by timing packets and observing congestion controller
+   response.  Hence, loss bits do not provide a viable new mechanism to
+   attack QUIC data integrity and secrecy.
 
 7.1.  Optimistic ACK Attack
 
@@ -445,7 +445,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 8]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 8]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -453,11 +453,12 @@ Internet-Draft                  loss-bits                   January 2020
    which renders the attack ineffective against a delay-sensitive
    congestion controller.
 
-   For QUIC v1 connections, the attacker can examine offsets in STREAM
-   frames to determine whether packet number skips are deliberate, so
-   Q-bit signal provides no new information (but it does save the
+   For QUIC v1 connections, if the attacker can make its peer transmit
+   data using a single large stream, examining offsets in STREAM frames
+   can determine whether packet number skips are deliberate.  In that
+   case, Q-bit signal provides no new information (but it does save the
    attacker the need to remove packet protection).  However, an endpoint
-   that implements [DATAGRAM] and uses a loss-based congestion
+   that communicates using [DATAGRAM] and uses a loss-based congestion
    controller MAY shorten the current Q run by the number of skipped
    packets.  For example, skipping a single packet number will invert
    the sQuare signal one outgoing packet sooner.
@@ -497,14 +498,15 @@ Internet-Draft                  loss-bits                   January 2020
 
    Value: 0x1055 (if this document is approved)
 
-   Parameter Name: loss_bits
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                  [Page 9]
+Ferrieux, et al.          Expires 13 July 2020                  [Page 9]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   Parameter Name: loss_bits
 
    Specification: ..............
 
@@ -555,9 +557,7 @@ Internet-Draft                  loss-bits                   January 2020
 
 
 
-
-
-Ferrieux, et al.          Expires 12 July 2020                 [Page 10]
+Ferrieux, et al.          Expires 13 July 2020                 [Page 10]
 
 Internet-Draft                  loss-bits                   January 2020
 
@@ -613,4 +613,4 @@ Authors' Addresses
 
 
 
-Ferrieux, et al.          Expires 12 July 2020                 [Page 11]
+Ferrieux, et al.          Expires 13 July 2020                 [Page 11]
