@@ -431,13 +431,13 @@ Internet-Draft                  loss-bits                   January 2020
 
 7.  Security Considerations
 
-   The Q-bit signal does not provide any information that cannot be
-   observed by simply counting packets transiting a network path.  The
-   L-bit signal discloses internal state of the protocol loss detection
-   machinery, but this signal can also be gleamed by timing packets and
-   observing congestion controller response.  Hence, loss bits do not
-   provide a viable new mechanism to attack QUIC data integrity and
-   secrecy.
+   In the absence of packet loss, the Q-bit signal does not provide any
+   information that cannot be observed by simply counting packets
+   transiting a network path.  The L-bit signal discloses internal state
+   of the protocol's loss detection machinery, but this signal can often
+   be gleamed by timing packets and observing congestion controller
+   response.  Hence, loss bits do not provide a viable new mechanism to
+   attack QUIC data integrity and secrecy.
 
 
 
@@ -462,12 +462,15 @@ Internet-Draft                  loss-bits                   January 2020
    which renders the attack ineffective against a delay-sensitive
    congestion controller.
 
-   For QUIC v1 connections, the attacker can examine offsets in STREAM
-   frames to determine whether packet number skips are deliberate, so
-   the Q-bit signal provides little new information.  However, an
-   endpoint that implements [DATAGRAM] and uses a loss-based congestion
-   controller MAY include deliberately skipped packet numbers in the
-   current Q run.
+   For QUIC v1 connections, if the attacker can make its peer transmit
+   data using a single large stream, examining offsets in STREAM frames
+   can determine whether packet number skips are deliberate.  In that
+   case, the Q-bit signal provides no new information (but it does save
+   the attacker the need to remove packet protection).  However, an
+   endpoint that communicates using [DATAGRAM] and uses a loss-based
+   congestion controller MAY shorten the current Q run by the number of
+   skipped packets.  For example, skipping a single packet number will
+   invert the sQuare signal one outgoing packet sooner.
 
 8.  Privacy Considerations
 
@@ -494,9 +497,6 @@ Internet-Draft                  loss-bits                   January 2020
 
    Implementations MUST allow administrators of clients and servers to
    disable loss reporting either globally or on a per-connection basis.
-   Additionally, as described in Section 6, loss reporting MUST be
-   disabled for a certain fraction of all connections.
-
 
 
 
@@ -505,6 +505,9 @@ Ferrieux, et al.          Expires 13 July 2020                  [Page 9]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   Additionally, as described in Section 6, loss reporting MUST be
+   disabled for a certain fraction of all connections.
 
 9.  IANA Considerations
 
@@ -551,9 +554,6 @@ Internet-Draft                  loss-bits                   January 2020
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/info/rfc8558>.
 
-   [TRANSPORT-ENCRYPT]
-              Fairhurst, G. and C. Perkins, "Considerations around
-              Transport Header Confidentiality, Network Operations, and
 
 
 
@@ -562,6 +562,9 @@ Ferrieux, et al.          Expires 13 July 2020                 [Page 10]
 Internet-Draft                  loss-bits                   January 2020
 
 
+   [TRANSPORT-ENCRYPT]
+              Fairhurst, G. and C. Perkins, "Considerations around
+              Transport Header Confidentiality, Network Operations, and
               the Evolution of Internet Transport Protocols", Work in
               Progress, Internet-Draft, draft-ietf-tsvwg-transport-
               encrypt-09, 3 November 2019, <http://www.ietf.org/
@@ -606,10 +609,7 @@ Authors' Addresses
    Email: isabelle.hamchaoui@orange.com
 
 
-   Igor Lubashev (editor)
-   Akamai Technologies
 
-   Email: ilubashe@akamai.com
 
 
 
@@ -618,16 +618,16 @@ Ferrieux, et al.          Expires 13 July 2020                 [Page 11]
 Internet-Draft                  loss-bits                   January 2020
 
 
+   Igor Lubashev (editor)
+   Akamai Technologies
+
+   Email: ilubashe@akamai.com
+
+
    Dmitri Tikhonov (editor)
    LiteSpeed Technologies
 
    Email: dtikhonov@litespeedtech.com
-
-
-
-
-
-
 
 
 
