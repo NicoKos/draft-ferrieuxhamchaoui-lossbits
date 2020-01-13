@@ -1274,13 +1274,13 @@ upstream paths with different latency characteristics.<a href="#section-4.5-3" c
 <dd id="section-5.1-2.2">
   The loss bits transport parameter is an integer value, encoded as a
 variable-length integer, that can be set to 0 or 1 indicating the level of
-QL-bits support.<a href="#section-5.1-2.2" class="pilcrow">¶</a>
+loss bits support.<a href="#section-5.1-2.2" class="pilcrow">¶</a>
 </dd>
 </dl>
-<p id="section-5.1-3">When loss_bits parameter is present, the peer is allowed to change R-bits in the
-short packet header to QL-bits if the peer sends loss_bits=1.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
-<p id="section-5.1-4">When loss_bits is set to 1, the sender will change R-bits to QL-bits if the peer
-includes the loss_bits transport parameter.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
+<p id="section-5.1-3">When loss_bits parameter is present, the peer is allowed to use reserved bits in
+the short packet header as loss bits if the peer sends loss_bits=1.<a href="#section-5.1-3" class="pilcrow">¶</a></p>
+<p id="section-5.1-4">When loss_bits is set to 1, the sender will use reserved bits as loss bits if
+the peer includes the loss_bits transport parameter.<a href="#section-5.1-4" class="pilcrow">¶</a></p>
 <p id="section-5.1-5">A client MUST NOT use remembered value of loss_bits for 0-RTT connection.<a href="#section-5.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1289,8 +1289,9 @@ includes the loss_bits transport parameter.<a href="#section-5.1-4" class="pilcr
         <h3 id="name-short-packet-header">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-short-packet-header" class="section-name selfRef">Short Packet Header</a>
         </h3>
-<p id="section-5.2-1">When sending loss bits has been negotiated, the QL-bits replace the R-bits in
-the short packet header (see Section 17.3 of <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>).<a href="#section-5.2-1" class="pilcrow">¶</a></p>
+<p id="section-5.2-1">When sending loss bits has been negotiated, the reserved (R) bits are replaced
+by the loss (Q and L) bits in the short packet header (see Section 17.3 of
+<span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span>).<a href="#section-5.2-1" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft" id="section-5.2-2">
 <pre>
     0 1 2 3 4 5 6 7
@@ -1318,10 +1319,10 @@ described in <a href="#lossbit" class="xref">Section 3.2</a>.<a href="#section-5
         <h3 id="name-header-protection">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-header-protection" class="section-name selfRef">Header Protection</a>
         </h3>
-<p id="section-5.3-1">Unlike the R-bits, the QL-bits are not protected.  When sending loss bits has
-been negotiated, the first byte of the header protection mask used to protect
-short packet headers has its five most significant bits masked out instead of
-three.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
+<p id="section-5.3-1">Unlike the reserved (R) bits, the loss (Q and L) bits are not protected.  When
+sending loss bits has been negotiated, the first byte of the header protection
+mask used to protect short packet headers has its five most significant bits
+masked out instead of three.<a href="#section-5.3-1" class="pilcrow">¶</a></p>
 <p id="section-5.3-2">The algorithm specified in Section 5.4.1 of <span>[<a href="#QUIC-TLS" class="xref">QUIC-TLS</a>]</span> changes as
 follows:<a href="#section-5.3-2" class="pilcrow">¶</a></p>
 <div class="artwork art-text alignLeft" id="section-5.3-3">
@@ -1359,9 +1360,9 @@ method.  Latency spin bit signal edge can be used for the same purpose.<a href="
       <h2 id="name-security-considerations">
 <a href="#section-7" class="section-number selfRef">7. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-7-1">In the absence of packet loss, the Q-bit signal does not provide any information
+<p id="section-7-1">In the absence of packet loss, the Q bit signal does not provide any information
 that cannot be observed by simply counting packets transiting a network
-path. The L-bit signal discloses internal state of the protocol's loss detection
+path. The L bit signal discloses internal state of the protocol's loss detection
 machinery, but this signal can often be gleamed by timing packets and observing
 congestion controller response. Hence, loss bits do not provide a viable new
 mechanism to attack QUIC data integrity and secrecy.<a href="#section-7-1" class="pilcrow">¶</a></p>
@@ -1372,15 +1373,15 @@ mechanism to attack QUIC data integrity and secrecy.<a href="#section-7-1" class
         </h3>
 <p id="section-7.1-1">A defense against an Optimistic ACK Attack <span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span> involves a
 sender randomly skipping packet numbers to detect a receiver acknowledging
-packet numbers that have never been received. The Q-bit signal may inform the
+packet numbers that have never been received. The Q bit signal may inform the
 attacker which packet numbers were skipped on purpose and which had
 been actually lost (and are, therefore, safe for the attacker to
-acknowledge). To use the Q-bit for this purpose, the attacker must first
+acknowledge). To use the Q bit for this purpose, the attacker must first
 receive at least an entire Q run of packets, which renders the attack
 ineffective against a delay-sensitive congestion controller.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">For QUIC v1 connections, if the attacker can make its peer transmit data using a
 single large stream, examining offsets in STREAM frames can determine whether
-packet number skips are deliberate. In that case, the Q-bit signal provides no
+packet number skips are deliberate. In that case, the Q bit signal provides no
 new information (but it does save the attacker the need to remove packet
 protection). However, an endpoint that communicates using <span>[<a href="#DATAGRAM" class="xref">DATAGRAM</a>]</span> and uses
 a loss-based congestion controller MAY shorten the current Q run by the number
@@ -1435,7 +1436,7 @@ fraction of all connections.<a href="#section-8-4" class="pilcrow">¶</a></p>
 <p id="section-10-1">The sQuare signal bit was originally specified by Kazuho Oku in early proposals
 for loss measurement and is an instance of the "alternate marking" as defined in
 <span>[<a href="#RFC8321" class="xref">RFC8321</a>]</span>.<a href="#section-10-1" class="pilcrow">¶</a></p>
-<p id="section-10-2">Many thanks to Christian Huitema for pointing out the interaction of Q-bit and
+<p id="section-10-2">Many thanks to Christian Huitema for pointing out the interaction of Q bit and
 Optimistic ACK Attack defence.<a href="#section-10-2" class="pilcrow">¶</a></p>
 </section>
 </div>
