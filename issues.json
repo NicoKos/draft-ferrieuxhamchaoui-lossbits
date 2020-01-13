@@ -1,6 +1,162 @@
 [
 
   {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/18",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/18/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/18/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/18/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/18",
+    "id": 548459786,
+    "node_id": "MDU6SXNzdWU1NDg0NTk3ODY=",
+    "number": 18,
+    "title": "What happens to L in DATAGRAM mode ?",
+    "user": {
+      "login": "ferrieux",
+      "id": 614725,
+      "node_id": "MDQ6VXNlcjYxNDcyNQ==",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/614725?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/ferrieux",
+      "html_url": "https://github.com/ferrieux",
+      "followers_url": "https://api.github.com/users/ferrieux/followers",
+      "following_url": "https://api.github.com/users/ferrieux/following{/other_user}",
+      "gists_url": "https://api.github.com/users/ferrieux/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/ferrieux/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/ferrieux/subscriptions",
+      "organizations_url": "https://api.github.com/users/ferrieux/orgs",
+      "repos_url": "https://api.github.com/users/ferrieux/repos",
+      "events_url": "https://api.github.com/users/ferrieux/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/ferrieux/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 3,
+    "created_at": "2020-01-11T17:52:58Z",
+    "updated_at": "2020-01-13T08:12:09Z",
+    "closed_at": null,
+    "author_association": "COLLABORATOR",
+    "body": "While considering opt-ack mitigation and the possible associated noise on Q, the distinction between normal (STREAM) and DATAGRAM modes came up. As it turns out, an \"unpolluted\" Q is of concern only for DATAGRAM (since for stream, stream progression gives the same info).\r\n\r\nNow, how would the L bit be computed in the DATAGRAM case ? L is supposed to be low-hanging fruit for a \"loss detection machinery\", which is the algorithm driving the lifecycle of packets in the retrans queue. But DATAGRAMs don't have a retrans queue, right ?\r\n\r\nIf it turns out that L cannot be defined for DATAGRAM, we may be better off disabling lossbits altogether in that case. Ipso facto, in the STREAM case, noisy-Q (decrement when mitigating opt-ack) is unneeded. \r\n\r\nAm I missing something ?"
+  },
+  {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/17",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/17/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/17/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/17/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/17",
+    "id": 548323422,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYxNjQ4ODQx",
+    "number": 17,
+    "title": "Add IANA Considerations",
+    "user": {
+      "login": "igorlord",
+      "id": 25256216,
+      "node_id": "MDQ6VXNlcjI1MjU2MjE2",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/25256216?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/igorlord",
+      "html_url": "https://github.com/igorlord",
+      "followers_url": "https://api.github.com/users/igorlord/followers",
+      "following_url": "https://api.github.com/users/igorlord/following{/other_user}",
+      "gists_url": "https://api.github.com/users/igorlord/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/igorlord/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/igorlord/subscriptions",
+      "organizations_url": "https://api.github.com/users/igorlord/orgs",
+      "repos_url": "https://api.github.com/users/igorlord/repos",
+      "events_url": "https://api.github.com/users/igorlord/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/igorlord/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-10T22:34:56Z",
+    "updated_at": "2020-01-10T22:39:00Z",
+    "closed_at": null,
+    "author_association": "OWNER",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/17",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/17",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/17.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/17.patch"
+    },
+    "body": ""
+  },
+  {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/16",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/16/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/16/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/16/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/16",
+    "id": 548300074,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYxNjI5Nzg0",
+    "number": 16,
+    "title": "Use 0x1057 for TP number, as 0x1055 is illegal.",
+    "user": {
+      "login": "dtikhonov",
+      "id": 4528576,
+      "node_id": "MDQ6VXNlcjQ1Mjg1NzY=",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4528576?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/dtikhonov",
+      "html_url": "https://github.com/dtikhonov",
+      "followers_url": "https://api.github.com/users/dtikhonov/followers",
+      "following_url": "https://api.github.com/users/dtikhonov/following{/other_user}",
+      "gists_url": "https://api.github.com/users/dtikhonov/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/dtikhonov/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/dtikhonov/subscriptions",
+      "organizations_url": "https://api.github.com/users/dtikhonov/orgs",
+      "repos_url": "https://api.github.com/users/dtikhonov/repos",
+      "events_url": "https://api.github.com/users/dtikhonov/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/dtikhonov/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-10T21:30:26Z",
+    "updated_at": "2020-01-10T22:36:17Z",
+    "closed_at": "2020-01-10T22:36:16Z",
+    "author_association": "COLLABORATOR",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/16",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/16",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/16.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/16.patch"
+    },
+    "body": "Fixes bug #15"
+  },
+  {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/15",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
     "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/15/labels{/name}",
@@ -34,17 +190,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 4,
+    "comments": 5,
     "created_at": "2020-01-10T04:42:01Z",
-    "updated_at": "2020-01-10T20:56:21Z",
-    "closed_at": null,
+    "updated_at": "2020-01-10T22:37:05Z",
+    "closed_at": "2020-01-10T22:37:05Z",
     "author_association": "OWNER",
     "body": "Not valid per \"QUIC Transport Parameter Registry\" in the transport draft, since 0x1055 == 134*31+27.  Damn, there was a 26/27 chance, and we blew it!"
   },
@@ -82,17 +238,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 0,
+    "comments": 1,
     "created_at": "2020-01-10T04:21:24Z",
-    "updated_at": "2020-01-10T21:05:01Z",
-    "closed_at": null,
+    "updated_at": "2020-01-10T21:19:36Z",
+    "closed_at": "2020-01-10T21:19:35Z",
     "author_association": "OWNER",
     "pull_request": {
       "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/14",
@@ -190,7 +346,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -199,8 +355,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2020-01-09T19:26:47Z",
-    "updated_at": "2020-01-10T13:35:23Z",
-    "closed_at": null,
+    "updated_at": "2020-01-10T21:52:52Z",
+    "closed_at": "2020-01-10T21:52:50Z",
     "author_association": "OWNER",
     "pull_request": {
       "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/12",
@@ -305,9 +461,9 @@
 
     ],
     "milestone": null,
-    "comments": 3,
+    "comments": 4,
     "created_at": "2020-01-09T15:44:05Z",
-    "updated_at": "2020-01-10T03:28:44Z",
+    "updated_at": "2020-01-10T21:53:22Z",
     "closed_at": null,
     "author_association": "COLLABORATOR",
     "body": "Let's settle on one way and make the draft consistent in this regard.\r\n\r\nMy preference would be _not_ to use the dash."
@@ -394,17 +550,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 5,
+    "comments": 6,
     "created_at": "2020-01-09T15:33:53Z",
-    "updated_at": "2020-01-09T20:07:30Z",
-    "closed_at": null,
+    "updated_at": "2020-01-10T21:53:49Z",
+    "closed_at": "2020-01-10T21:53:49Z",
     "author_association": "COLLABORATOR",
     "body": "> However, an endpoint that implements {{DATAGRAM}} and uses a loss-based congestion controller MAY include deliberately skipped packet numbers in the current Q run.\r\n\r\nThis is confusing.  What does it mean to include skipped packet numbers in the Q run?\r\n\r\nI suggest using a more explicit recommendation.  For example:\r\n\r\n> To make skipped packet numbers indistinguishable from packet loss, a sender MAY shorten the current Q run by the number of skipped packets.  For example, skipping a single packet number will invert the sQuare wave one outgoing packet sooner."
   },
@@ -442,17 +598,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 5,
+    "comments": 6,
     "created_at": "2020-01-09T15:24:36Z",
-    "updated_at": "2020-01-10T03:56:53Z",
-    "closed_at": null,
+    "updated_at": "2020-01-10T21:53:40Z",
+    "closed_at": "2020-01-10T21:53:40Z",
     "author_association": "COLLABORATOR",
     "body": "> For QUIC v1 connections, the attacker can examine offsets in STREAM frames to determine whether packet number skips are deliberate, so Q-bit signal provides little new information.\r\n\r\nWhy \"little\" instead of \"no?\"  AFAICT, the Q-bit provides no new information."
   },
