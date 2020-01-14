@@ -242,8 +242,8 @@ Internet-Draft                  loss-bits                   January 2020
    The upstream and downstream loss together constitute _end-to-end
    loss_ (Section 4.1).
 
-   The Q and L bits allow detection and measurement of the types of loss
-   listed above.
+   The Q and L bits allow detection and measurement of all these types
+   of loss.
 
 4.1.  End-To-End Loss
 
