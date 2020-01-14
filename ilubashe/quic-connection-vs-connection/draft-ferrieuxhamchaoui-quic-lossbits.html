@@ -1402,7 +1402,7 @@ loss signal - a preferred way to share information per <span>[<a href="#RFC8558"
 <p id="section-8-2"><span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span> allows changing Connection IDs in the middle of a QUIC
 connection to reduce the likelihood of a passive observer linking old and new
 subflows to the same device. Hence, a QUIC implementation would need to reset
-all counters when it changes a Connection ID used for outgoing packets.  It would
+all counters when it changes Connection ID used for outgoing packets.  It would
 also need to avoid incrementing Unreported Loss counter for loss of packets sent
 with a different Connection ID.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">Accurate loss information allows identification and correlation of network
