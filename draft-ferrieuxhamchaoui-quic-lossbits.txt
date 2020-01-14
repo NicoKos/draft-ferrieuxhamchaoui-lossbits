@@ -197,8 +197,6 @@ Internet-Draft                  loss-bits                   January 2020
    using a Q run length that gives the best signal for some connections.
 
    The sender MUST keep the value of N constant for a given connection.
-   The sender can change the value of N during a QUIC connection by
-   switching to a new destination Connection ID, if one is available.
 
 3.2.  Setting the Loss Event Bit on Outgoing Packets
 
@@ -218,6 +216,8 @@ Internet-Draft                  loss-bits                   January 2020
    the Loss Event bit is reporting the exact number of lost packets,
    whereas the Echo Loss bit in [RFC7713] is reporting an approximate
    number of lost bytes.
+
+
 
 
 
