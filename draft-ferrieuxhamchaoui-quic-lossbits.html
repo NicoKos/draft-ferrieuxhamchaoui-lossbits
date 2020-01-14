@@ -952,7 +952,7 @@ functionality as an extension in QUIC v1.<a href="#section-abstract-1" class="pi
 </ul>
 </li>
 <li class="toc ulEmpty" id="section-toc.1-1.4">
-            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-using-the-loss-bits-for-pas" class="xref">Using the Loss Bits for Passive Loss Measurement</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
+            <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-using-loss-bits-for-passive" class="xref">Using Loss Bits for Passive Loss Measurement</a><a href="#section-toc.1-1.4.1" class="pilcrow">¶</a></p>
 <ul class="toc ulEmpty">
 <li class="toc ulEmpty" id="section-toc.1-1.4.2.1">
                 <p id="section-toc.1-1.4.2.1.1"><a href="#section-4.1" class="xref">4.1</a>.  <a href="#name-end-to-end-loss" class="xref">End-To-End Loss</a><a href="#section-toc.1-1.4.2.1.1" class="pilcrow">¶</a></p>
@@ -1088,7 +1088,7 @@ specification refers to connections, it is referring to packets sharing the same
 in the Q bit of every outgoing packet. The sQuare value is inverted after
 sending every N packets (a Q run). Hence, Q Period is 2*N. The Q bit represents
 "packet color" as defined by <span>[<a href="#RFC8321" class="xref">RFC8321</a>]</span>.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
-<p id="section-3.1-2">Observation points can estimate the upstream losses by counting the number of
+<p id="section-3.1-2">Observation points can estimate upstream losses by counting the number of
 packets during one period of the square signal, as described in <a href="#usage" class="xref">Section 4</a>.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 <div id="q-run-length-selection">
 <section id="section-3.1.1">
@@ -1141,8 +1141,8 @@ to 1, as described in <a href="#usage" class="xref">Section 4</a>.<a href="#sect
 </div>
 <div id="usage">
 <section id="section-4">
-      <h2 id="name-using-the-loss-bits-for-pas">
-<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-using-the-loss-bits-for-pas" class="section-name selfRef">Using the Loss Bits for Passive Loss Measurement</a>
+      <h2 id="name-using-loss-bits-for-passive">
+<a href="#section-4" class="section-number selfRef">4. </a><a href="#name-using-loss-bits-for-passive" class="section-name selfRef">Using Loss Bits for Passive Loss Measurement</a>
       </h2>
 <p id="section-4-1">There are three sources of observable loss:<a href="#section-4-1" class="pilcrow">¶</a></p>
 <ul>

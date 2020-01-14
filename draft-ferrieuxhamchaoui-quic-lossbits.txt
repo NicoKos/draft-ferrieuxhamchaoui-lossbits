@@ -72,7 +72,7 @@ Table of Contents
      3.1.  Setting the sQuare Signal Bit on Outgoing Packets . . . .   3
        3.1.1.  Q Run Length Selection  . . . . . . . . . . . . . . .   4
      3.2.  Setting the Loss Event Bit on Outgoing Packets  . . . . .   4
-   4.  Using the Loss Bits for Passive Loss Measurement  . . . . . .   5
+   4.  Using Loss Bits for Passive Loss Measurement  . . . . . . . .   5
      4.1.  End-To-End Loss . . . . . . . . . . . . . . . . . . . . .   5
      4.2.  Upstream Loss . . . . . . . . . . . . . . . . . . . . . .   5
      4.3.  Correlating End-to-End and Upstream Loss  . . . . . . . .   6
@@ -159,7 +159,7 @@ Internet-Draft                  loss-bits                   January 2020
    is inverted after sending every N packets (a Q run).  Hence, Q Period
    is 2*N.  The Q bit represents "packet color" as defined by [RFC8321].
 
-   Observation points can estimate the upstream losses by counting the
+   Observation points can estimate upstream losses by counting the
    number of packets during one period of the square signal, as
    described in Section 4.
 
@@ -226,7 +226,7 @@ Ferrieux, et al.          Expires 17 July 2020                  [Page 4]
 Internet-Draft                  loss-bits                   January 2020
 
 
-4.  Using the Loss Bits for Passive Loss Measurement
+4.  Using Loss Bits for Passive Loss Measurement
 
    There are three sources of observable loss:
 
