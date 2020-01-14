@@ -1039,10 +1039,11 @@ packet loss by passive on-path observation. Additionally, the lossy segment
 moving the passive observer around.<a href="#section-1-1" class="pilcrow">¶</a></p>
 <p id="section-1-2">With QUIC, the equivalent transport headers are encrypted and passive packet
 loss observation is not possible, as described in <span>[<a href="#TRANSPORT-ENCRYPT" class="xref">TRANSPORT-ENCRYPT</a>]</span>.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">QUIC could be routed by the network differently and the fraction of Internet
-traffic delivered using QUIC is increasing every year. Therefore, is it
-imperative to measure packet loss experienced by QUIC users directly instead of
-relying on measuring TCP loss between similar endpoints.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-3">Measuring TCP loss between similar endpoints cannot be relied upon to
+evaluate QUIC loss.  QUIC could be routed by the network differently and
+the fraction of Internet traffic delivered using QUIC is increasing every
+year.  It is imperative to measure packet loss experienced by QUIC users
+directly.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Since explicit path signals are preferred by <span>[<a href="#RFC8558" class="xref">RFC8558</a>]</span>, two explicit loss
 bits in the clear portion of short headers are used to signal packet loss to
 on-path network devices.<a href="#section-1-4" class="pilcrow">¶</a></p>
