@@ -214,9 +214,9 @@ Internet-Draft                  loss-bits                   January 2020
    number of lost bytes.
 
    Observation points can estimate the end-to-end loss, as determined by
-   the upstream endpoint's loss detection machinery, by counting packets
-   in this direction with the L bit equal to 1, as described in
-   Section 4.
+   the upstream endpoint, by counting packets in this direction with the
+   L bit equal to 1, as described in Section 4.
+
 
 
 
