@@ -1380,7 +1380,7 @@ acknowledge). To use the Q bit for this purpose, the attacker must first
 receive at least an entire Q run of packets, which renders the attack
 ineffective against a delay-sensitive congestion controller.<a href="#section-7.1-1" class="pilcrow">¶</a></p>
 <p id="section-7.1-2">For QUIC v1 connections, if the attacker can make its peer transmit data using a
-single large stream, examining offsets in STREAM frames can determine whether
+single large stream, examining offsets in STREAM frames can reveal whether
 packet number skips are deliberate. In that case, the Q bit signal provides no
 new information (but it does save the attacker the need to remove packet
 protection). However, an endpoint that communicates using <span>[<a href="#DATAGRAM" class="xref">DATAGRAM</a>]</span> and uses
