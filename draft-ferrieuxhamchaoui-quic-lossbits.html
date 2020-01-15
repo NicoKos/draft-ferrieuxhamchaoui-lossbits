@@ -827,7 +827,7 @@ table.left {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Ferrieux, et al.</td>
-<td class="center">Expires 17 July 2020</td>
+<td class="center">Expires 18 July 2020</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -840,12 +840,12 @@ table.left {
 <dd class="internet-draft">draft-ferrieuxhamchaoui-quic-lossbits-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2020-01-14" class="published">14 January 2020</time>
+<time datetime="2020-01-15" class="published">15 January 2020</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2020-07-17">17 July 2020</time></dd>
+<dd class="expires"><time datetime="2020-07-18">18 July 2020</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -900,7 +900,7 @@ functionality as an extension in QUIC v1.<a href="#section-abstract-1" class="pi
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 17 July 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 18 July 2020.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1077,9 +1077,9 @@ counter, as explained below in <a href="#lossbit" class="xref">Section 3.2</a>.<
 </li>
 </ul>
 <p id="section-3-3">Each endpoint maintains appropriate counters independently and separately for
-each connection 4-tuple and destination Connection ID.  Whenever this
+each connection 4-tuple and Destination Connection ID.  Whenever this
 specification refers to connections, it is referring to packets sharing the same
-4-tuple and destination Connection ID.  A "QUIC connection", however, refers to
+4-tuple and Destination Connection ID.  A "QUIC connection", however, refers to
 connections in the traditional QUIC sense.<a href="#section-3-3" class="pilcrow">¶</a></p>
 <div id="squarebit">
 <section id="section-3.1">
@@ -1112,7 +1112,9 @@ extensively tried in large-scale field tests and yielded good results.
 Alternatively, the sender MAY also choose a random N for each connection,
 increasing the chances of using a Q run length that gives the best signal for
 some connections.<a href="#section-3.1.1-3" class="pilcrow">¶</a></p>
-<p id="section-3.1.1-4">The sender MUST keep the value of N constant for a given connection.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
+<p id="section-3.1.1-4">The sender MUST keep the value of N constant for a given connection.  The sender
+can change the value of N during a QUIC connection by switching to a new
+Destination Connection ID, if one is available.<a href="#section-3.1.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1399,12 +1401,12 @@ sQuare signal one outgoing packet sooner.<a href="#section-7.1-2" class="pilcrow
       </h2>
 <p id="section-8-1">To minimize unintentional exposure of information, loss bits provide an explicit
 loss signal - a preferred way to share information per <span>[<a href="#RFC8558" class="xref">RFC8558</a>]</span>.<a href="#section-8-1" class="pilcrow">¶</a></p>
-<p id="section-8-2"><span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span> allows changing Connection IDs in the middle of a QUIC
+<p id="section-8-2"><span>[<a href="#QUIC-TRANSPORT" class="xref">QUIC-TRANSPORT</a>]</span> allows changing connection IDs in the middle of a QUIC
 connection to reduce the likelihood of a passive observer linking old and new
 subflows to the same device. Hence, a QUIC implementation would need to reset
-all counters when it changes Connection ID used for outgoing packets.  It would
+all counters when it changes connection ID used for outgoing packets.  It would
 also need to avoid incrementing Unreported Loss counter for loss of packets sent
-with a different Connection ID.<a href="#section-8-2" class="pilcrow">¶</a></p>
+with a different connection ID.<a href="#section-8-2" class="pilcrow">¶</a></p>
 <p id="section-8-3">Accurate loss information allows identification and correlation of network
 conditions upstream and downstream of the observer. This could be a powerful
 tool to identify connections that attempt to hide their origin networks, if the
