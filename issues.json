@@ -1,6 +1,60 @@
 [
 
   {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/31",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/31/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/31/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/31/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/31",
+    "id": 549868646,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYyODc5Njk0",
+    "number": 31,
+    "title": "Change capitalization of connection id as per transport draft",
+    "user": {
+      "login": "igorlord",
+      "id": 25256216,
+      "node_id": "MDQ6VXNlcjI1MjU2MjE2",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/25256216?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/igorlord",
+      "html_url": "https://github.com/igorlord",
+      "followers_url": "https://api.github.com/users/igorlord/followers",
+      "following_url": "https://api.github.com/users/igorlord/following{/other_user}",
+      "gists_url": "https://api.github.com/users/igorlord/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/igorlord/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/igorlord/subscriptions",
+      "organizations_url": "https://api.github.com/users/igorlord/orgs",
+      "repos_url": "https://api.github.com/users/igorlord/repos",
+      "events_url": "https://api.github.com/users/igorlord/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/igorlord/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 0,
+    "created_at": "2020-01-14T23:03:02Z",
+    "updated_at": "2020-01-15T17:25:38Z",
+    "closed_at": "2020-01-15T17:25:37Z",
+    "author_association": "OWNER",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/31",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/31",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/31.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/31.patch"
+    },
+    "body": "Caps when it refers to a field, lower case otherwise."
+  },
+  {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/30",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
     "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/30/labels{/name}",
@@ -34,7 +88,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -43,8 +97,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2020-01-14T18:42:27Z",
-    "updated_at": "2020-01-14T19:07:58Z",
-    "closed_at": null,
+    "updated_at": "2020-01-14T22:57:39Z",
+    "closed_at": "2020-01-14T22:57:38Z",
     "author_association": "OWNER",
     "pull_request": {
       "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/30",
@@ -88,7 +142,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -97,8 +151,8 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2020-01-14T18:28:49Z",
-    "updated_at": "2020-01-14T22:56:40Z",
-    "closed_at": null,
+    "updated_at": "2020-01-14T22:57:31Z",
+    "closed_at": "2020-01-14T22:57:30Z",
     "author_association": "OWNER",
     "pull_request": {
       "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/29",
@@ -739,7 +793,7 @@
     "milestone": null,
     "comments": 1,
     "created_at": "2020-01-10T22:34:56Z",
-    "updated_at": "2020-01-14T22:49:39Z",
+    "updated_at": "2020-01-15T17:24:29Z",
     "closed_at": null,
     "author_association": "OWNER",
     "pull_request": {
@@ -1529,7 +1583,10 @@
       "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/2.patch"
     },
     "body": ""
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/1",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
