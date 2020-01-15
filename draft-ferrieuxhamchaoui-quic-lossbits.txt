@@ -91,7 +91,7 @@ Table of Contents
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  10
      11.2.  Informative References . . . . . . . . . . . . . . . . .  11
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  11
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
 
 1.  Introduction
 
@@ -529,7 +529,10 @@ Internet-Draft                  loss-bits                   January 2020
 
    Parameter Name: loss_bits
 
-   Specification: ..............
+   Specification: Indicates that the endpoint supports loss bits.  An
+   endpoint that advertises this transport parameter can receive loss
+   bits.  An endpoint that advertises this transport parameter with
+   value 1 can also send loss bits.
 
 10.  Acknowledgments
 
@@ -551,9 +554,6 @@ Internet-Draft                  loss-bits                   January 2020
 
    [QUIC-TRANSPORT]
               Iyengar, J. and M. Thomson, "QUIC: A UDP-Based Multiplexed
-              and Secure Transport", Work in Progress, Internet-Draft,
-              draft-ietf-quic-transport-24, 3 November 2019,
-
 
 
 
@@ -562,6 +562,8 @@ Ferrieux, et al.          Expires 18 July 2020                 [Page 10]
 Internet-Draft                  loss-bits                   January 2020
 
 
+              and Secure Transport", Work in Progress, Internet-Draft,
+              draft-ietf-quic-transport-24, 3 November 2019,
               <http://www.ietf.org/internet-drafts/draft-ietf-quic-
               transport-24.txt>.
 
@@ -607,8 +609,6 @@ Internet-Draft                  loss-bits                   January 2020
               Performance Monitoring", RFC 8321, DOI 10.17487/RFC8321,
               January 2018, <https://www.rfc-editor.org/info/rfc8321>.
 
-Authors' Addresses
-
 
 
 
@@ -617,6 +617,8 @@ Ferrieux, et al.          Expires 18 July 2020                 [Page 11]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+Authors' Addresses
 
    Alexandre Ferrieux (editor)
    Orange Labs
@@ -640,8 +642,6 @@ Internet-Draft                  loss-bits                   January 2020
    LiteSpeed Technologies
 
    Email: dtikhonov@litespeedtech.com
-
-
 
 
 
