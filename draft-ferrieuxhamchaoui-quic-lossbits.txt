@@ -17,13 +17,15 @@ Expires: 19 July 2020                                   I. Lubashev, Ed.
 
 Abstract
 
-   This draft adapts the general technique described in draft-
-   ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC
-   v1 short header.  It describes a method that employs two bits to
+   This document defines an extension to the QUIC transport protocol to
    allow endpoints to signal packet loss in a way that can be used by
-   network devices to measure and locate the source of the loss.  It
-   further describes a way to negotiate this functionality as an
-   extension in QUIC v1.
+   network devices to measure and locate the source of the loss.
+
+   Discussion of this work is encouraged to happen on the QUIC IETF
+   mailing list quic@ietf.org (mailto:quic@ietf.org) or on the GitHub
+   repository which contains the draft: https://github.com/igorlord/
+   draft-ferrieuxhamchaoui-lossbits (https://github.com/igorlord/draft-
+   ferrieuxhamchaoui-lossbits).
 
 Status of This Memo
 
@@ -47,9 +49,7 @@ Copyright Notice
    Copyright (c) 2020 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
-   This document is subject to BCP 78 and the IETF Trust's Legal
-   Provisions Relating to IETF Documents (https://trustee.ietf.org/
-   license-info) in effect on the date of publication of this document.
+
 
 
 
@@ -58,6 +58,9 @@ Ferrieux, et al.          Expires 19 July 2020                  [Page 1]
 Internet-Draft                  loss-bits                   January 2020
 
 
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents (https://trustee.ietf.org/
+   license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
    and restrictions with respect to this document.  Code Components
    extracted from this document must include Simplified BSD License text
@@ -66,12 +69,12 @@ Internet-Draft                  loss-bits                   January 2020
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
    2.  Notational Conventions  . . . . . . . . . . . . . . . . . . .   3
    3.  Loss Bits . . . . . . . . . . . . . . . . . . . . . . . . . .   3
      3.1.  Setting the sQuare Signal Bit on Outgoing Packets . . . .   4
        3.1.1.  Q Run Length Selection  . . . . . . . . . . . . . . .   4
-     3.2.  Setting the Loss Event Bit on Outgoing Packets  . . . . .   4
+     3.2.  Setting the Loss Event Bit on Outgoing Packets  . . . . .   5
    4.  Using Loss Bits for Passive Loss Measurement  . . . . . . . .   5
      4.1.  End-To-End Loss . . . . . . . . . . . . . . . . . . . . .   5
      4.2.  Upstream Loss . . . . . . . . . . . . . . . . . . . . . .   6
@@ -85,17 +88,31 @@ Table of Contents
    6.  Ossification Considerations . . . . . . . . . . . . . . . . .   8
    7.  Security Considerations . . . . . . . . . . . . . . . . . . .   9
      7.1.  Optimistic ACK Attack . . . . . . . . . . . . . . . . . .   9
-   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   9
+   8.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .  10
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  10
    10. Change Log  . . . . . . . . . . . . . . . . . . . . . . . . .  10
      10.1.  Since version 02 . . . . . . . . . . . . . . . . . . . .  10
-     10.2.  Since version 01 . . . . . . . . . . . . . . . . . . . .  10
+     10.2.  Since version 01 . . . . . . . . . . . . . . . . . . . .  11
      10.3.  Since version 00 . . . . . . . . . . . . . . . . . . . .  11
    11. Acknowledgments . . . . . . . . . . . . . . . . . . . . . . .  11
    12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  11
      12.1.  Normative References . . . . . . . . . . . . . . . . . .  11
      12.2.  Informative References . . . . . . . . . . . . . . . . .  12
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  12
+
+
+
+
+
+
+
+
+
+
+Ferrieux, et al.          Expires 19 July 2020                  [Page 2]
+
+Internet-Draft                  loss-bits                   January 2020
+
 
 1.  Introduction
 
@@ -106,14 +123,6 @@ Table of Contents
    world, network operators have been heavily relying on information
    present in the clear in TCP headers: sequence and acknowledgment
    numbers, and SACK when enabled.  These allow for quantitative
-
-
-
-Ferrieux, et al.          Expires 19 July 2020                  [Page 2]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    estimation of packet loss by passive on-path observation.
    Additionally, the lossy segment (upstream or downstream from the
    observation point) can be quickly identified by moving the passive
@@ -133,6 +142,9 @@ Internet-Draft                  loss-bits                   January 2020
    loss bits in the clear portion of short headers are used to signal
    packet loss to on-path network devices.
 
+   This draft adapts the general technique described in [LOSSBITS] for
+   QUIC using reserved bits in QUIC v1 short header.
+
 2.  Notational Conventions
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -149,6 +161,15 @@ Internet-Draft                  loss-bits                   January 2020
    *  Q: The "sQuare signal" bit is toggled every N outgoing packets as
       explained below in Section 3.1.
 
+
+
+
+
+Ferrieux, et al.          Expires 19 July 2020                  [Page 3]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    *  L: The "Loss event" bit is set to 0 or 1 according to the
       Unreported Loss counter, as explained below in Section 3.2.
 
@@ -158,17 +179,6 @@ Internet-Draft                  loss-bits                   January 2020
    packets sharing the same 4-tuple and Destination Connection ID.  A
    "QUIC connection", however, refers to connections in the traditional
    QUIC sense.
-
-
-
-
-
-
-
-Ferrieux, et al.          Expires 19 July 2020                  [Page 3]
-
-Internet-Draft                  loss-bits                   January 2020
-
 
 3.1.  Setting the sQuare Signal Bit on Outgoing Packets
 
@@ -207,6 +217,15 @@ Internet-Draft                  loss-bits                   January 2020
    The sender can change the value of N during a QUIC connection by
    switching to a new Destination Connection ID, if one is available.
 
+
+
+
+
+Ferrieux, et al.          Expires 19 July 2020                  [Page 4]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
 3.2.  Setting the Loss Event Bit on Outgoing Packets
 
    The Unreported Loss counter is initialized to 0, and the L bit of
@@ -218,14 +237,6 @@ Internet-Draft                  loss-bits                   January 2020
    The value of the Unreported Loss counter is incremented for every
    packet that the protocol declares lost, using QUIC's existing loss
    detection machinery.  If the implementation is able to rescind the
-
-
-
-Ferrieux, et al.          Expires 19 July 2020                  [Page 4]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    loss determination later, a positive Unreported Loss counter MAY be
    decremented due to the rescission, but it SHOULD NOT become negative.
 
@@ -264,23 +275,19 @@ Internet-Draft                  loss-bits                   January 2020
    given connection.  The end-to-end loss rate is the fraction of
    packets with L=1.
 
-   The assumption here is that upstream loss affects packets with L=0
-   and L=1 equally.  If some loss is caused by tail-drop in a network
-   device, this may be a simplification.  If the sender congestion
-   controller reduces the packet send rate after loss, there may be a
-   sufficient delay before sending packets with L=1 that they have a
-   greater chance of arriving at the observer.
-
-
-
-
-
 
 
 Ferrieux, et al.          Expires 19 July 2020                  [Page 5]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   The assumption here is that upstream loss affects packets with L=0
+   and L=1 equally.  If some loss is caused by tail-drop in a network
+   device, this may be a simplification.  If the sender congestion
+   controller reduces the packet send rate after loss, there may be a
+   sufficient delay before sending packets with L=1 that they have a
+   greater chance of arriving at the observer.
 
 4.2.  Upstream Loss
 
@@ -323,13 +330,6 @@ Internet-Draft                  loss-bits                   January 2020
    If the calculated upstream loss rate exceeds the end-to-end loss rate
    calculated in Section 4.1, then either the Q run length is too short
    for the amount of packet reordering or there is observer loss,
-   described in Section 4.5.  If this happens, the observer SHOULD
-   adjust the calculated upstream loss rate to match end-to-end loss
-   rate.
-
-
-
-
 
 
 
@@ -337,6 +337,10 @@ Ferrieux, et al.          Expires 19 July 2020                  [Page 6]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   described in Section 4.5.  If this happens, the observer SHOULD
+   adjust the calculated upstream loss rate to match end-to-end loss
+   rate.
 
 4.4.  Downstream Loss
 
@@ -381,11 +385,7 @@ Internet-Draft                  loss-bits                   January 2020
       or 1 indicating the level of loss bits support.
 
    When loss_bits parameter is present, the peer is allowed to use
-   reserved bits in the short packet header as loss bits if the peer
-   sends loss_bits=1.
 
-   When loss_bits is set to 1, the sender will use reserved bits as loss
-   bits if the peer includes the loss_bits transport parameter.
 
 
 
@@ -393,6 +393,12 @@ Ferrieux, et al.          Expires 19 July 2020                  [Page 7]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   reserved bits in the short packet header as loss bits if the peer
+   sends loss_bits=1.
+
+   When loss_bits is set to 1, the sender will use reserved bits as loss
+   bits if the peer includes the loss_bits transport parameter.
 
    A client MUST NOT use remembered value of loss_bits for 0-RTT
    connections.
@@ -435,12 +441,6 @@ Internet-Draft                  loss-bits                   January 2020
    protocol, though its presence in a sufficient number of connections
    is important for the operation of networks.
 
-   The loss bits are amenable to "greasing" described in [GREASE] and
-   MUST be greased.  The greasing should be accomplished similarly to
-   the Latency Spin bit greasing in [QUIC-TRANSPORT].  Namely,
-   implementations MUST NOT include loss_bits transport parameter for a
-   random selection of at least one in every 16 QUIC connections.
-
 
 
 
@@ -449,6 +449,12 @@ Ferrieux, et al.          Expires 19 July 2020                  [Page 8]
 
 Internet-Draft                  loss-bits                   January 2020
 
+
+   The loss bits are amenable to "greasing" described in [GREASE] and
+   MUST be greased.  The greasing should be accomplished similarly to
+   the Latency Spin bit greasing in [QUIC-TRANSPORT].  Namely,
+   implementations MUST NOT include loss_bits transport parameter for a
+   random selection of at least one in every 16 QUIC connections.
 
    It is possible to observe packet reordering near the edge of the
    square signal.  A middle box might observe the signal and try to fix
@@ -488,6 +494,18 @@ Internet-Draft                  loss-bits                   January 2020
    packets.  For example, skipping a single packet number will invert
    the sQuare signal one outgoing packet sooner.
 
+
+
+
+
+
+
+
+Ferrieux, et al.          Expires 19 July 2020                  [Page 9]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
 8.  Privacy Considerations
 
    To minimize unintentional exposure of information, loss bits provide
@@ -498,14 +516,6 @@ Internet-Draft                  loss-bits                   January 2020
    QUIC connection to reduce the likelihood of a passive observer
    linking old and new subflows to the same device.  Hence, a QUIC
    implementation would need to reset all counters when it changes
-
-
-
-Ferrieux, et al.          Expires 19 July 2020                  [Page 9]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    connection ID used for outgoing packets.  It would also need to avoid
    incrementing Unreported Loss counter for loss of packets sent with a
    different connection ID.
@@ -543,6 +553,15 @@ Internet-Draft                  loss-bits                   January 2020
 10.1.  Since version 02
 
    *  Add QUIC v1 negotiation using transport parameter, use short
+
+
+
+
+Ferrieux, et al.          Expires 19 July 2020                 [Page 10]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
       header reserved bits as loss bits, header protection change, IANA
       Considerations
 
@@ -553,14 +572,6 @@ Internet-Draft                  loss-bits                   January 2020
    *  Clarify Q run length selection
 
 10.2.  Since version 01
-
-
-
-
-Ferrieux, et al.          Expires 19 July 2020                 [Page 10]
-
-Internet-Draft                  loss-bits                   January 2020
-
 
    *  Add reference to RFC7713
 
@@ -598,6 +609,15 @@ Internet-Draft                  loss-bits                   January 2020
               DOI 10.17487/RFC2119, March 1997,
               <https://www.rfc-editor.org/info/rfc2119>.
 
+
+
+
+
+Ferrieux, et al.          Expires 19 July 2020                 [Page 11]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    [RFC8558]  Hardie, T., Ed., "Transport Protocol Path Signals",
               RFC 8558, DOI 10.17487/RFC8558, April 2019,
               <https://www.rfc-editor.org/info/rfc8558>.
@@ -610,13 +630,6 @@ Internet-Draft                  loss-bits                   January 2020
               encrypt-09, 3 November 2019, <http://www.ietf.org/
               internet-drafts/draft-ietf-tsvwg-transport-encrypt-
               09.txt>.
-
-
-
-Ferrieux, et al.          Expires 19 July 2020                 [Page 11]
-
-Internet-Draft                  loss-bits                   January 2020
-
 
 12.2.  Informative References
 
@@ -653,6 +666,14 @@ Authors' Addresses
    Alexandre Ferrieux (editor)
    Orange Labs
 
+
+
+
+Ferrieux, et al.          Expires 19 July 2020                 [Page 12]
+
+Internet-Draft                  loss-bits                   January 2020
+
+
    Email: alexandre.ferrieux@orange.com
 
 
@@ -668,31 +689,10 @@ Authors' Addresses
    Email: ilubashe@akamai.com
 
 
-
-Ferrieux, et al.          Expires 19 July 2020                 [Page 12]
-
-Internet-Draft                  loss-bits                   January 2020
-
-
    Dmitri Tikhonov (editor)
    LiteSpeed Technologies
 
    Email: dtikhonov@litespeedtech.com
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -10,12 +10,12 @@
 <meta content="Igor Lubashev" name="author">
 <meta content="Dmitri Tikhonov" name="author">
 <meta content="
-       This draft adapts the general technique described in
-draft-ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC v1
-short header.  It describes a method that employs two bits to allow endpoints to
-signal packet loss in a way that can be used by network devices to measure and
-locate the source of the loss. It further describes a way to negotiate this
-functionality as an extension in QUIC v1. 
+       This document defines an extension to the QUIC transport protocol to allow
+endpoints to signal packet loss in a way that can be used by network devices to
+measure and locate the source of the loss. 
+       Discussion of this work is encouraged to happen on the QUIC IETF mailing list
+ quic@ietf.org  or on the GitHub repository which contains the draft:
+ https://github.com/igorlord/draft-ferrieuxhamchaoui-lossbits . 
     " name="description">
 <meta content="xml2rfc 2.37.3" name="generator">
 <meta content="Internet-Draft" name="keyword">
@@ -874,12 +874,12 @@ table.left {
 <h1 id="title">Packet Loss Signaling for Encrypted Protocols</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">This draft adapts the general technique described in
-draft-ferrieuxhamchaoui-tsvwg-lossbits for QUIC using reserved bits in QUIC v1
-short header.  It describes a method that employs two bits to allow endpoints to
-signal packet loss in a way that can be used by network devices to measure and
-locate the source of the loss. It further describes a way to negotiate this
-functionality as an extension in QUIC v1.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-1">This document defines an extension to the QUIC transport protocol to allow
+endpoints to signal packet loss in a way that can be used by network devices to
+measure and locate the source of the loss.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
+<p id="section-abstract-2">Discussion of this work is encouraged to happen on the QUIC IETF mailing list
+<a href="mailto:quic@ietf.org">quic@ietf.org</a> or on the GitHub repository which contains the draft:
+<a href="https://github.com/igorlord/draft-ferrieuxhamchaoui-lossbits">https://github.com/igorlord/draft-ferrieuxhamchaoui-lossbits</a>.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1061,6 +1061,8 @@ directly.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">Since explicit path signals are preferred by <span>[<a href="#RFC8558" class="xref">RFC8558</a>]</span>, two explicit loss
 bits in the clear portion of short headers are used to signal packet loss to
 on-path network devices.<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-5">This draft adapts the general technique described in <span>[<a href="#LOSSBITS" class="xref">LOSSBITS</a>]</span> for QUIC using
+reserved bits in QUIC v1 short header.<a href="#section-1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions">
