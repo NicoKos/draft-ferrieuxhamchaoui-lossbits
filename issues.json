@@ -1,6 +1,60 @@
 [
 
   {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/32",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/32/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/32/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/32/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/32",
+    "id": 550398779,
+    "node_id": "MDExOlB1bGxSZXF1ZXN0MzYzMzEyMDI3",
+    "number": 32,
+    "title": "Restore Change Log",
+    "user": {
+      "login": "igorlord",
+      "id": 25256216,
+      "node_id": "MDQ6VXNlcjI1MjU2MjE2",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/25256216?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/igorlord",
+      "html_url": "https://github.com/igorlord",
+      "followers_url": "https://api.github.com/users/igorlord/followers",
+      "following_url": "https://api.github.com/users/igorlord/following{/other_user}",
+      "gists_url": "https://api.github.com/users/igorlord/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/igorlord/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/igorlord/subscriptions",
+      "organizations_url": "https://api.github.com/users/igorlord/orgs",
+      "repos_url": "https://api.github.com/users/igorlord/repos",
+      "events_url": "https://api.github.com/users/igorlord/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/igorlord/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "closed",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 1,
+    "created_at": "2020-01-15T19:59:03Z",
+    "updated_at": "2020-01-15T21:16:34Z",
+    "closed_at": "2020-01-15T21:16:33Z",
+    "author_association": "OWNER",
+    "pull_request": {
+      "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/32",
+      "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/32",
+      "diff_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/32.diff",
+      "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/32.patch"
+    },
+    "body": ""
+  },
+  {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/31",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
     "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/31/labels{/name}",
@@ -736,17 +790,17 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
 
     ],
     "milestone": null,
-    "comments": 4,
+    "comments": 7,
     "created_at": "2020-01-11T17:52:58Z",
-    "updated_at": "2020-01-14T18:36:21Z",
-    "closed_at": null,
+    "updated_at": "2020-01-16T10:22:41Z",
+    "closed_at": "2020-01-16T10:22:41Z",
     "author_association": "COLLABORATOR",
     "body": "While considering opt-ack mitigation and the possible associated noise on Q, the distinction between normal (STREAM) and DATAGRAM modes came up. As it turns out, an \"unpolluted\" Q is of concern only for DATAGRAM (since for stream, stream progression gives the same info).\r\n\r\nNow, how would the L bit be computed in the DATAGRAM case ? L is supposed to be low-hanging fruit for a \"loss detection machinery\", which is the algorithm driving the lifecycle of packets in the retrans queue. But DATAGRAMs don't have a retrans queue, right ?\r\n\r\nIf it turns out that L cannot be defined for DATAGRAM, we may be better off disabling lossbits altogether in that case. Ipso facto, in the STREAM case, noisy-Q (decrement when mitigating opt-ack) is unneeded. \r\n\r\nAm I missing something ?"
   },
@@ -784,7 +838,7 @@
     "labels": [
 
     ],
-    "state": "open",
+    "state": "closed",
     "locked": false,
     "assignee": null,
     "assignees": [
@@ -793,8 +847,8 @@
     "milestone": null,
     "comments": 1,
     "created_at": "2020-01-10T22:34:56Z",
-    "updated_at": "2020-01-15T17:24:29Z",
-    "closed_at": null,
+    "updated_at": "2020-01-15T19:32:29Z",
+    "closed_at": "2020-01-15T19:32:28Z",
     "author_association": "OWNER",
     "pull_request": {
       "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pulls/17",
@@ -1465,7 +1519,7 @@
     "milestone": null,
     "comments": 0,
     "created_at": "2020-01-08T14:49:17Z",
-    "updated_at": "2020-01-09T18:28:25Z",
+    "updated_at": "2020-01-15T19:33:33Z",
     "closed_at": "2020-01-09T18:28:25Z",
     "author_association": "COLLABORATOR",
     "pull_request": {
@@ -1529,7 +1583,10 @@
       "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/3.patch"
     },
     "body": ""
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/2",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
@@ -1583,10 +1640,7 @@
       "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/pull/2.patch"
     },
     "body": ""
-  }
-
-,
-
+  },
   {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits/issues/1",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-tsvwg-lossbits",
