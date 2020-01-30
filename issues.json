@@ -1,6 +1,102 @@
 [
 
   {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/35",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/35/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/35/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/35/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/35",
+    "id": 554660659,
+    "node_id": "MDU6SXNzdWU1NTQ2NjA2NTk=",
+    "number": 35,
+    "title": "Simple questions for the security section ?",
+    "user": {
+      "login": "NicoKos",
+      "id": 19574661,
+      "node_id": "MDQ6VXNlcjE5NTc0NjYx",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/19574661?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/NicoKos",
+      "html_url": "https://github.com/NicoKos",
+      "followers_url": "https://api.github.com/users/NicoKos/followers",
+      "following_url": "https://api.github.com/users/NicoKos/following{/other_user}",
+      "gists_url": "https://api.github.com/users/NicoKos/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/NicoKos/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/NicoKos/subscriptions",
+      "organizations_url": "https://api.github.com/users/NicoKos/orgs",
+      "repos_url": "https://api.github.com/users/NicoKos/repos",
+      "events_url": "https://api.github.com/users/NicoKos/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/NicoKos/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 1,
+    "created_at": "2020-01-24T10:38:16Z",
+    "updated_at": "2020-01-24T16:01:30Z",
+    "closed_at": null,
+    "author_association": "NONE",
+    "body": "Is it relevant to add simple questions in the security section ?\r\n\r\n\"What can the observer see?\"\r\n\"Is it possible that an observer correlate past/current connections?\"\r\n"
+  },
+  {
+    "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/34",
+    "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits",
+    "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/34/labels{/name}",
+    "comments_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/34/comments",
+    "events_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/34/events",
+    "html_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/34",
+    "id": 554660090,
+    "node_id": "MDU6SXNzdWU1NTQ2NjAwOTA=",
+    "number": 34,
+    "title": "organization of the document",
+    "user": {
+      "login": "NicoKos",
+      "id": 19574661,
+      "node_id": "MDQ6VXNlcjE5NTc0NjYx",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/19574661?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/NicoKos",
+      "html_url": "https://github.com/NicoKos",
+      "followers_url": "https://api.github.com/users/NicoKos/followers",
+      "following_url": "https://api.github.com/users/NicoKos/following{/other_user}",
+      "gists_url": "https://api.github.com/users/NicoKos/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/NicoKos/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/NicoKos/subscriptions",
+      "organizations_url": "https://api.github.com/users/NicoKos/orgs",
+      "repos_url": "https://api.github.com/users/NicoKos/repos",
+      "events_url": "https://api.github.com/users/NicoKos/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/NicoKos/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "labels": [
+
+    ],
+    "state": "open",
+    "locked": false,
+    "assignee": null,
+    "assignees": [
+
+    ],
+    "milestone": null,
+    "comments": 1,
+    "created_at": "2020-01-24T10:37:13Z",
+    "updated_at": "2020-01-24T16:05:20Z",
+    "closed_at": null,
+    "author_association": "NONE",
+    "body": "The document jumps from Introduction to the solution. A motivation section could help design the scope of the observer and what it can see and cannot. \r\n\r\nI think a motivation section could help identifying what is needed and the rationale behind the Q and I bits. \r\n\r\nThis would also help in detailing what is the rationale behind each of Q and I. \r\n"
+  },
+  {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/33",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits",
     "labels_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/33/labels{/name}",
@@ -1475,7 +1571,10 @@
       "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-lossbits/pull/6.patch"
     },
     "body": "This change is good for the following (perhaps subjective) reasons:\r\n1. The changes necessary to use the extension are now in a single section.\r\n1. There are now fewer top-level subsections, which makes ToC looks better.\r\n1. The number of top-level sections is no longer much larger than the number of pages.\r\n\r\nThe name of the new top-level section, _Implementation_, is better than _Mechanics_ that preceded it.  There may be better choices -- this is just the best I can come up with at the moment."
-  },
+  }
+
+,
+
   {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/5",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits",
@@ -1583,10 +1682,7 @@
       "patch_url": "https://github.com/igorlord/draft-ferrieuxhamchaoui-lossbits/pull/4.patch"
     },
     "body": "As suggested by @ferrieux in PR #1."
-  }
-
-,
-
+  },
   {
     "url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits/issues/3",
     "repository_url": "https://api.github.com/repos/igorlord/draft-ferrieuxhamchaoui-lossbits",
